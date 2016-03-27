@@ -42,6 +42,8 @@ setopt no_hup
 [ -x /etc/zsh_command_not_found ] && source /etc/zsh_command_not_found
 export WORDCHARS=''
 setopt complete_aliases
+setopt prompt_subst
+autoload -Uz vcs_info
 [ "${TERM}" != dumb ] && alias ls='ls --color=auto'
 [ "${TERM}" != dumb ] && alias grep='grep --color=auto'
 alias l='ls -FGlhp'
