@@ -4,7 +4,19 @@ set title
 set ruler
 set nowrap
 set whichwrap=h,l
-set mouse=a
+if has('mouse')
+	set mouse=a
+	set nomousehide
+endif
+set guioptions+=a
+set showcmd
+set laststatus=2
+set history=1000
+set wildmenu
+set wildmode=list:longest
+set modeline
+set modelines=5
+set backspace=indent,eol,start
 set hidden
 set ignorecase
 set smartcase
@@ -14,11 +26,10 @@ set smarttab
 set cindent
 map  :nohl
 set clipboard=unnamed,unnamedplus,autoselect
+set browsedir=buffer
 set list
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
-set history=1000
-set wildmenu
-set wildmode=list:longest
 filetype on
 filetype plugin on
 filetype indent on
+" colorscheme evening
