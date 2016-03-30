@@ -53,9 +53,7 @@ zstyle ':vcs_info:git:*' unstagedstr '%B%K{red}*%k%b'
 function _update_vcs_info()
 {
 	LANG=C vcs_info
-	if [ -n "${vcs_info_msg_0_}" ]; then
-		_vcs_info="${vcs_info_msg_0_}[${vcs_info_msg_1_:= }${vcs_info_msg_2_:= }]${vcs_info_msg_3_}${vcs_info_msg_4_} "
-	fi
+	[ -n "${vcs_info_msg_0_}" ] && _vcs_info="${vcs_info_msg_0_}[${vcs_info_msg_1_:= }${vcs_info_msg_2_:= }]${vcs_info_msg_3_}${vcs_info_msg_4_} " || _vcs_info=
 }
 add-zsh-hook precmd _update_vcs_info
 
