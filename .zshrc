@@ -9,7 +9,7 @@ autoload -Uz vcs_info
 # autoload -Uz history-search-end
 bindkey -e
 setopt prompt_subst
-PROMPT='%B%n@%8>..>%m%>>:%20<..<%~%<<%(!.#.$)%b '
+PROMPT='%B%n@%8>..>%m%>>:%20<..<%~%<<[%(?. .%F{red}!%f)]%(!.#.$)%b '
 PROMPT2='%_> '
 SPROMPT='zsh: correct %R to %r [nyae]?'
 RPROMPT='%(!.#.$)${_vcs_info}%B%D{%F %T}%b'
@@ -75,4 +75,6 @@ alias gcc='gcc         -std=c11   -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qua
 alias g++='g++         -std=c++11 -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings'
 alias clang='clang     -std=c11   -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings'
 alias clang++='clang++ -std=c++11 -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings -stdlib=libc++ -lc++abi'
+prepend-to-path(){ [ -d $1 ] || return 1; echo $PATH | grep -qe $1 || export PATH=$1:${PATH} }
+append-to-path() { [ -d $1 ] || return 1; echo $PATH | grep -qe $1 || export PATH=${PATH}:$1 }
 [ -f ${HOME}/.zshrc.local ] && . ${HOME}/.zshrc.local
