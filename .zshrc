@@ -9,10 +9,22 @@ autoload -Uz vcs_info
 # autoload -Uz history-search-end
 bindkey -e
 setopt prompt_subst
-PROMPT='%B%n@%8>..>%m%>>:%20<..<%~%<<[%(?. .%F{red}!%f)]%(!.#.$)%b '
+[ ${TERM} = linux ] &&  ok=ok ||  ok=$'\U1F197 '
+[ ${TERM} = linux ] &&  ng=ng ||  ng=$'\U1F196 '
+[ ${TERM} = linux ] && his=h  || his=$'\U1F4DD '
+[ ${TERM} = linux ] && job=j  || job=$'\U1F3C3 '
+[ ${TERM} = linux ] && lvl=l  || lvl=$'\U1F41A '
+[ ${TERM} = linux ] && cal=   || cal=$'\U1F4C6 '
+[ ${TERM} = linux ] && tim=' '|| tim=$'\U231A '
+[ ${TERM} = linux ] && mps=/  || mps=$'\U2199 '
+[ ${TERM} = linux ] &&  ps=$  ||  ps=$'\U1F449 '
+[ ${TERM} = linux ] && rps=?  || rps=$'\U1F4CA '
+PROMPT='%B%n@%8>..>%m%>>:%20<..<%~%<<[%(?.%F{green}${ok}%f.%F{red}${ng}%f)](%F{magenta}${his}%f:%h, %F{cyan}${job}%f:%j, %F{yellow}${lvl}%f:%L)${mps}
+%D{${cal}%F${tim}%T}%(!.#.${ps})%b '
 PROMPT2='%_> '
 SPROMPT='zsh: correct %R to %r [nyae]?'
-RPROMPT='%(!.#.$)${_vcs_info}%B%D{%F %T}%b'
+RPROMPT='${_vcs_info}'
+[ "${EMACS}" = t ] && unsetopt zle
 setopt auto_cd
 setopt auto_pushd
 setopt always_to_end
@@ -48,12 +60,14 @@ zstyle ':vcs_info:bzr:*' use-simple true
 zstyle ':vcs_info:git:*' formats       '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m'
 zstyle ':vcs_info:git:*' actionformats '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m' '%F{red}<<!%a>>%f'
 zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr   '%B%K{yellow}+%k%b'
-zstyle ':vcs_info:git:*' unstagedstr '%B%K{red}*%k%b'
+[ ${TERM} = linux ] &&   stagedstr=+ ||   stagedstr=$'\U1F199 '
+[ ${TERM} = linux ] && unstagedstr=* || unstagedstr=$'\U1F195 '
+zstyle ':vcs_info:git:*'   stagedstr "%B%K{cyan}${stagedstr}%k%b"
+zstyle ':vcs_info:git:*' unstagedstr "%B%K{red}${unstagedstr}%k%b"
 function _update_vcs_info()
 {
 	LANG=C vcs_info
-	[ -n "${vcs_info_msg_0_}" ] && _vcs_info="${vcs_info_msg_0_}[${vcs_info_msg_1_:= }${vcs_info_msg_2_:= }]${vcs_info_msg_3_}${vcs_info_msg_4_} " || _vcs_info=
+	[ -n "${vcs_info_msg_0_}" ] && _vcs_info="%B%(!.#.${rps})%b${vcs_info_msg_0_}[${vcs_info_msg_1_:= }${vcs_info_msg_2_:= }]${vcs_info_msg_3_}${vcs_info_msg_4_}" || _vcs_info=
 }
 add-zsh-hook precmd _update_vcs_info
 
