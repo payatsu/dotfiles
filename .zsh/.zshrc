@@ -2,8 +2,10 @@
 
 autoload -Uz compinit; compinit
 autoload -Uz add-zsh-hook
+autoload -Uz edit-command-line
 autoload -Uz chpwd_recent_dirs cdr
 autoload -Uz vcs_info
+autoload -Uz run-help run-help-git run-help-p4 run-help-svn run-help-openssl run-help-sudo
 # autoload -Uz predict-on; predict-on
 # autoload -Uz colors; colors
 # autoload -Uz history-search-end
@@ -20,7 +22,7 @@ setopt prompt_subst
 [ ${TERM} = linux ] &&  ps=$  ||  ps=$'\U1F449 '
 [ ${TERM} = linux ] && rps=?  || rps=$'\U1F4CA '
 PROMPT='%B%n@%8>..>%m%>>:%20<..<%~%<<[%(?.%F{green}${ok}%f.%F{red}${ng}%f)](%F{magenta}${his}%f:%h, %F{cyan}${job}%f:%j, %F{yellow}${lvl}%f:%L)${mps}
-%D{${cal}%F${tim}%T}%(!.#.${ps})%b '
+%D{${cal}%m/%d${tim}%T}%(!.#.${ps})%b '
 PROMPT2='%_> '
 SPROMPT='zsh: correct %R to %r [nyae]?'
 RPROMPT='${_vcs_info}'
@@ -30,17 +32,21 @@ setopt auto_pushd
 setopt always_to_end
 setopt complete_aliases
 zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' completer _complete _expand _match _prefix _approximate _list _history
+zstyle ':completion:*:processes' command "ps -u ${USER} -o pid,stat,%cpu,%mem,cputime,command"
 setopt nolistbeep
 setopt listpacked
 LISTMAX=0
 setopt hist_ignore_dups
 setopt hist_save_nodups
 setopt share_history
-HISTFILE=~/.zsh_history
+HISTFILE=${ZDOTDIR}/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt correct
 setopt nohup
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
 add-zsh-hook chpwd chpwd_recent_dirs
 zstyle ':completion:*:*:cdr:*:*' menu selection
 umask 022
@@ -50,7 +56,6 @@ export WORDCHARS=''
 # zle -N history-beginning-search-forward-end history-search-end
 # bindkey "" history-beginning-search-backward-end
 # bindkey "" history-beginning-search-forward-end
-
 zstyle ':vcs_info:*' max-exports 5
 zstyle ':vcs_info:*' enable bzr git hg p4 svn
 zstyle ':vcs_info:*' formats       '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m'
@@ -70,9 +75,10 @@ function _update_vcs_info()
 	[ -n "${vcs_info_msg_0_}" ] && _vcs_info="%B%(!.#.${rps})%b${vcs_info_msg_0_}[${vcs_info_msg_1_:= }${vcs_info_msg_2_:= }]${vcs_info_msg_3_}${vcs_info_msg_4_}" || _vcs_info=
 }
 add-zsh-hook precmd _update_vcs_info
-
-[ "${TERM}" = dumb ] && alias ls='ls -FGlhp' || alias ls='ls -FGlhp --color=auto'
-[ "${TERM}" = dumb ] && alias grep='grep -Hn --exclude-dir="*.svn"' || alias grep='grep -Hn --exclude-dir="*.svn" --color=auto'
+alias run-help > /dev/null 2>&1 && unalias run-help
+[ ${TERM} = dumb ] && color= || color=' --color=auto'
+alias ls="ls -FGlhp${color}"
+alias grep="grep -Hn --exclude-dir='*.svn'${color}"
 alias g='grep'
 alias l='ls'
 alias less='less -R'
@@ -91,4 +97,4 @@ alias clang='clang     -std=c11   -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qua
 alias clang++='clang++ -std=c++11 -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings -stdlib=libc++ -lc++abi'
 prepend-to-path(){ [ -d $1 ] || return 1; echo $PATH | grep -qe $1 || export PATH=$1:${PATH} }
 append-to-path() { [ -d $1 ] || return 1; echo $PATH | grep -qe $1 || export PATH=${PATH}:$1 }
-[ -f ${HOME}/.zshrc.local ] && . ${HOME}/.zshrc.local
+[ -f ${ZDOTDIR}/.zshrc.local ] && . ${ZDOTDIR}/.zshrc.local
