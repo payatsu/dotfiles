@@ -11,18 +11,18 @@ autoload -Uz run-help run-help-git run-help-p4 run-help-svn run-help-openssl run
 # autoload -Uz history-search-end
 bindkey -e
 setopt prompt_subst
-[ ${TERM} = linux ] &&  ok=ok ||  ok=$'\U1F197 '
-[ ${TERM} = linux ] &&  ng=ng ||  ng=$'\U1F196 '
-[ ${TERM} = linux ] && his=h  || his=$'\U1F4DD '
-[ ${TERM} = linux ] && job=j  || job=$'\U1F3C3 '
-[ ${TERM} = linux ] && lvl=l  || lvl=$'\U1F41A '
-[ ${TERM} = linux ] && cal=   || cal=$'\U1F4C6 '
-[ ${TERM} = linux ] && tim=' '|| tim=$'\U231A '
-[ ${TERM} = linux ] && mps=/  || mps=$'\U2199 '
-[ ${TERM} = linux ] &&  ps=$  ||  ps=$'\U1F449 '
-[ ${TERM} = linux ] && rps=?  || rps=$'\U1F4CA '
+[ ${TERM} = linux ] &&  ok=ok   ||  ok=$'\U1F197 '
+[ ${TERM} = linux ] &&  ng=ng   ||  ng=$'\U1F196 '
+[ ${TERM} = linux ] && his=h    || his=$'\U1F4DD '
+[ ${TERM} = linux ] && job=j    || job=$'\U1F3C3 '
+[ ${TERM} = linux ] && lvl=l    || lvl=$'\U1F41A '
+[ ${TERM} = linux ] && cal=     || cal=$'\U1F4C6 '
+[ ${TERM} = linux ] && tim=' '  || tim=$'\U231A '
+[ ${TERM} = linux ] && mps=/    || mps=$'\U2199 '
+[ ${TERM} = linux ] &&  ps='$ ' ||  ps=$'\U1F449 '
+[ ${TERM} = linux ] && rps=?    || rps=$'\U1F4CA '
 PROMPT='%B%n@%8>..>%m%>>:%20<..<%~%<<[%(?.%F{green}${ok}%f.%F{red}${ng}%f)](%F{magenta}${his}%f:%h, %F{cyan}${job}%f:%j, %F{yellow}${lvl}%f:%L)${mps}
-%D{${cal}%m/%d${tim}%T}%(!.#.${ps})%b '
+%D{${cal}%m/%d${tim}%T}%(!.#.${ps})%b'
 PROMPT2='%_> '
 SPROMPT='zsh: correct %R to %r [nyae]?'
 RPROMPT='${_vcs_info}'
@@ -77,24 +77,27 @@ function _update_vcs_info()
 add-zsh-hook precmd _update_vcs_info
 alias run-help > /dev/null 2>&1 && unalias run-help
 [ ${TERM} = dumb ] && color= || color=' --color=auto'
-alias ls="ls -FGlhp${color}"
-alias grep="grep -Hn --exclude-dir='*.svn'${color}"
+alias du='du -h'
+alias df='df -h'
+alias grep="grep --exclude-dir='*.svn'${color}"
 alias g='grep'
+alias ls="ls -FGlhp${color}"
 alias l='ls'
 alias less='less -R'
 alias lv='lv -c'
 alias tgif='tgif -geometry 960x1000'
 alias xdvi='xdvi -geometry 900x1100-0+0'
 alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l80 -lp -ncs -nfc1 -npcs -nprs -npsl -nsaf -nsai -nsaw -nss -sc -ts4'
+alias gcc='gcc         -std=c11   -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings'
+alias g++='g++         -std=c++11 -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings'
+alias clang='clang     -std=c11   -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings'
+alias clang++='clang++ -std=c++11 -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings -stdlib=libc++ -lc++abi'
+alias gtags='gtags -c'
 alias -s txt=view
 alias -s tar.gz='tar xzf'
 alias -s tgz='tar xzf'
 alias -s tar.bz2='tar xjf'
 alias -s tar.xz='tar xJf'
-alias gcc='gcc         -std=c11   -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings'
-alias g++='g++         -std=c++11 -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings'
-alias clang='clang     -std=c11   -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings'
-alias clang++='clang++ -std=c++11 -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings -stdlib=libc++ -lc++abi'
 prepend-to-path(){ [ -d $1 ] || return 1; echo $PATH | grep -qe $1 || export PATH=$1:${PATH} }
 append-to-path() { [ -d $1 ] || return 1; echo $PATH | grep -qe $1 || export PATH=${PATH}:$1 }
 [ -f ${ZDOTDIR}/.zshrc.local ] && . ${ZDOTDIR}/.zshrc.local

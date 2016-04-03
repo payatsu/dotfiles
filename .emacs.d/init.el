@@ -99,7 +99,7 @@
 (setq hi-lock-file-patterns-policy t)
 (defface grayout (list
 				  (list '((class color)(background dark)) (list ':foreground grayoutcolor))
-				  (list '((class color)(background light)) (list ':foreground "gray"))
+				  (list '((class color)(background light)) (list ':foreground grayoutcolor))
 				  '(t())) "Face for '前記'" :group 'highlight)
 (defface todo (list
 			   (list '((class color)(background dark)) (list ':weight 'ultra-bold ':foreground "deep sky blue" ':underline t))
@@ -290,9 +290,16 @@
 									(space-mark 160 [164] [95])
 									(newline-mark 10 [8595 10])
 									(tab-mark 9 [187 9] [92 9])))
+(set-face-attribute 'whitespace-empty nil
+					:background "none")
+(set-face-attribute 'whitespace-indentation nil
+					:foreground grayoutcolor
+					:background "none")
 (set-face-attribute 'whitespace-space nil
+					:foreground grayoutcolor
 					:background "none")
 (set-face-attribute 'whitespace-tab nil
+					:foreground grayoutcolor
 					:background "none")
 (set-face-attribute 'whitespace-newline nil
 					:foreground "SeaGreen1")
@@ -320,55 +327,62 @@
 (semantic-add-system-include "/toolchains/include")
 (semantic-add-system-include "/toolchains/include/c++/5.3.0" 'c++-mode)
 
+; *** undo-tree-mode ***
+(if (require 'undo-tree nil t) (global-undo-tree-mode 1))
+
 ; *** company-mode ***
-(autoload 'company-mode "company" nil t)
-(global-company-mode 1)
-(setq company-idle-delay 2)
-(setq company-minimum-prefix-length 2)
-(setq company-selection-wrap-around t)
-(add-to-list 'company-backends 'company-c-headers)
-(eval-after-load "company"
- '(lambda () (add-to-list 'company-c-headers-path-system "/usr/local/include/c++/5.3.0")))
-(global-set-key (kbd "C-M-i") 'company-complete)
-(define-key company-active-map (kbd "C-n") 'company-select-next)
-(define-key company-active-map (kbd "C-p") 'company-select-previous)
-(define-key company-search-map (kbd "C-n") 'company-select-next)
-(define-key company-search-map (kbd "C-p") 'company-select-previous)
-(define-key company-active-map (kbd "<tab>") 'company-complete-selection)
-(set-face-attribute 'company-tooltip nil
-					:foreground "black" :background "lightgrey")
-(set-face-attribute 'company-tooltip-common nil
-					:foreground "black" :background "lightgrey")
-(set-face-attribute 'company-tooltip-common-selection nil
-					:foreground "white" :background "steelblue")
-(set-face-attribute 'company-tooltip-selection nil
-					:foreground "black" :background "steelblue")
-(set-face-attribute 'company-preview-common nil
-					:background nil :foreground "lightgrey" :underline t)
-(set-face-attribute 'company-scrollbar-fg nil
-					:background "orange")
-(set-face-attribute 'company-scrollbar-bg nil
-					:background "gray40")
+(when (require 'company nil t)
+  (global-company-mode 1)
+  (setq company-idle-delay 2)
+  (setq company-minimum-prefix-length 2)
+  (setq company-selection-wrap-around t)
+  (add-to-list 'company-backends 'company-c-headers)
+  (with-eval-after-load "company"
+	'(lambda () (add-to-list 'company-c-headers-path-system "/usr/local/include/c++/5.3.0")))
+  (global-set-key (kbd "C-M-i") 'company-complete)
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous)
+  (define-key company-search-map (kbd "C-n") 'company-select-next)
+  (define-key company-search-map (kbd "C-p") 'company-select-previous)
+  (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
+  (set-face-attribute 'company-tooltip nil
+					  :foreground "black" :background "lightgrey")
+  (set-face-attribute 'company-tooltip-common nil
+					  :foreground "black" :background "lightgrey")
+  (set-face-attribute 'company-tooltip-common-selection nil
+					  :foreground "white" :background "steelblue")
+  (set-face-attribute 'company-tooltip-selection nil
+					  :foreground "black" :background "steelblue")
+  (set-face-attribute 'company-preview-common nil
+					  :background nil :foreground "lightgrey" :underline t)
+  (set-face-attribute 'company-scrollbar-fg nil
+					  :background "orange")
+  (set-face-attribute 'company-scrollbar-bg nil
+					  :background "gray40")
+)
 
 ; *** irony-mode ***
-(require 'irony)
-(eval-after-load "irony"
- '(progn
-	 (custom-set-variables '(irony-additional-clang-options '("-std=c++11")))
-	 (add-to-list 'company-backends 'company-irony)
-	 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-	 (add-hook 'c-mode-common-hook 'irony-mode)))
+(when (require 'irony nil t)
+  (with-eval-after-load "irony"
+	(custom-set-variables '(irony-additional-clang-options '("-std=c++11")))
+	(add-to-list 'company-backends 'company-irony)
+	(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+	(add-hook 'c-mode-common-hook 'irony-mode))
+)
 
 ; *** yasnippet-mode ***
-(yas-global-mode t)
-(eval-after-load "yasnippet"
- '(progn
-	 (define-key yas-keymap (kbd "<tab>") nil)
-	 (yas-global-mode 1)))
+(when (require 'yasnippet nil t)
+  (yas-global-mode t)
+  (with-eval-after-load "yasnippet"
+	(define-key yas-keymap (kbd "<tab>") nil)
+	(yas-global-mode 1))
+)
 
 ; *** flycheck-mode ***
-(global-flycheck-mode 1)
-(flycheck-irony-setup)
+(when (require 'flycheck nil t)
+	  (global-flycheck-mode 1)
+	  (flycheck-irony-setup)
+)
 
 ; *** ggtags-mode ***
 ;(define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
@@ -377,7 +391,7 @@
 ;(define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
 ;(define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
 ;(define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
-(add-hook 'c-mode-common-hook '(lambda ()(ggtags-mode 1)))
+(if (require 'ggtags nil t) (add-hook 'c-mode-common-hook '(lambda ()(ggtags-mode 1))))
 
 ; *** prog-mode-hook ***
 (add-hook 'prog-mode-hook
