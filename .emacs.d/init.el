@@ -385,13 +385,17 @@
 )
 
 ; *** ggtags-mode ***
-;(define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
-;(define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
-;(define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
-;(define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
-;(define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
-;(define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
-(if (require 'ggtags nil t) (add-hook 'c-mode-common-hook '(lambda ()(ggtags-mode 1))))
+(if (require 'ggtags nil t)
+	(add-hook 'c-mode-common-hook
+			  '(lambda ()
+				 (ggtags-mode 1)
+				 (local-set-key (kbd "C-c g s") 'ggtags-find-other-symbol)
+				 (local-set-key (kbd "C-c g h") 'ggtags-view-tag-history)
+				 (local-set-key (kbd "C-c g r") 'ggtags-find-reference)
+				 (local-set-key (kbd "C-c g f") 'ggtags-find-file)
+				 (local-set-key (kbd "C-c g c") 'ggtags-create-tags)
+				 (local-set-key (kbd "C-c g u") 'ggtags-update-tags)
+ )))
 
 ; *** prog-mode-hook ***
 (add-hook 'prog-mode-hook
