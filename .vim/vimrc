@@ -5,6 +5,7 @@ set ruler
 set nowrap
 set cursorline
 set whichwrap=h,l
+set noundofile
 if has('mouse')
 	set mouse=a
 	set nomousehide
