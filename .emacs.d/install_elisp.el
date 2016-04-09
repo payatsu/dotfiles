@@ -13,7 +13,11 @@
 (package-install 'company-irony)
 (package-install 'flycheck)
 (package-install 'flycheck-irony)
+(package-install 'helm)
+(package-install 'helm-company)
 (package-install 'irony)
+(package-install 'nyan-mode)
+(package-install 'popwin)
 
 ;emacs -Q --batch \
 ;--eval '(require '\''package)' \
