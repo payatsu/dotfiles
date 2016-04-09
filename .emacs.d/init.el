@@ -397,6 +397,20 @@
 				 (local-set-key (kbd "C-c g u") 'ggtags-update-tags)
  )))
 
+; *** Helm-mode ***
+(when (require 'helm-config nil t)
+  (helm-mode 1)
+  (define-key global-map (kbd "C-x C-f") 'helm-find-files)
+  (define-key global-map (kbd "M-x") 'helm-M-x)
+)
+
+; *** popwin ***
+;(when (require 'popwin nil t)
+;  (setq display-buffer-function 'popwin:display-buffer))
+
+; *** nyan-mode ***
+(if (require 'nyan-mode nil t) (nyan-mode 1))
+
 ; *** prog-mode-hook ***
 (add-hook 'prog-mode-hook
 		  '(lambda ()
