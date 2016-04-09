@@ -398,11 +398,11 @@
  )))
 
 ; *** Helm-mode ***
-(when (require 'helm-config nil t)
-  (helm-mode 1)
-  (define-key global-map (kbd "C-x C-f") 'helm-find-files)
-  (define-key global-map (kbd "M-x") 'helm-M-x)
-)
+;(when (require 'helm-config nil t)
+;  (helm-mode 1)
+;  (define-key global-map (kbd "C-x C-f") 'helm-find-files)
+;  (define-key global-map (kbd "M-x") 'helm-M-x)
+;)
 
 ; *** popwin ***
 ;(when (require 'popwin nil t)
@@ -465,3 +465,5 @@
 ; (setq default-input-method "japanese-anthy")
 ; (anthy-change-hiragana-map "," "，");句読点の設定．
 ; (anthy-change-hiragana-map "." "．")
+
+(load "${HOME}/.emacs.d/init.local" t)
