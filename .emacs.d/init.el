@@ -153,22 +153,23 @@
 					 (list '((class color)(background dark)) (list ':foreground "yellow" ':underline t))
 					 (list '((class color)(background light)) (list ':foreground "yellow" ':underline t))
 					 '(t())) "Face for over 40x3 chars" :group 'highlight)
-(add-hook 'find-file-hook (lambda ()
-							(highlight-phrase "前記\\|該" 'grayout)
-							(highlight-phrase "todo\\|TODO\\|ToDo" 'todo)
-							(highlight-phrase "fixme\\|FIXME" 'fixme)
-							(highlight-phrase "xxx\\|XXX" 'xxx)
-							(highlight-phrase "【[^】]*】\\|〈[^〉]*〉\\|《[^》]*》\\|＜[^＞]*＞\\|≪[^≫]*≫" 'caption)
-							(highlight-phrase "☆\\|★" 'star)
-							(highlight-phrase "○\\|●\\|◎" 'circle)
-							(highlight-phrase "□\\|■" 'square)
-							(highlight-phrase "◇\\|◆" 'diamond)
-							(highlight-phrase "△\\|▲" 'triangle)
-							(highlight-phrase "▽\\|▼" 'down-triangle)
-							(highlight-phrase "①\\|②\\|③\\|④\\|⑤\\|⑥\\|⑦\\|⑧\\|⑨" 'enclosed-number)
-							(highlight-phrase "※.*" 'note)
-							;(highlight-phrase "^.*\\Ca\\{120,\\}。" 'line3-rule)
-							) t)
+(add-hook 'find-file-hook
+		  '(lambda ()
+			 (highlight-phrase "前記\\|該" 'grayout)
+			 (highlight-phrase "todo\\|TODO\\|ToDo" 'todo)
+			 (highlight-phrase "fixme\\|FIXME" 'fixme)
+			 (highlight-phrase "xxx\\|XXX" 'xxx)
+			 (highlight-phrase "【[^】]*】\\|〈[^〉]*〉\\|《[^》]*》\\|＜[^＞]*＞\\|≪[^≫]*≫" 'caption)
+			 (highlight-phrase "☆\\|★" 'star)
+			 (highlight-phrase "○\\|●\\|◎" 'circle)
+			 (highlight-phrase "□\\|■" 'square)
+			 (highlight-phrase "◇\\|◆" 'diamond)
+			 (highlight-phrase "△\\|▲" 'triangle)
+			 (highlight-phrase "▽\\|▼" 'down-triangle)
+			 (highlight-phrase "①\\|②\\|③\\|④\\|⑤\\|⑥\\|⑦\\|⑧\\|⑨" 'enclosed-number)
+			 (highlight-phrase "※.*" 'note)
+			;(highlight-phrase "^.*\\Ca\\{120,\\}。" 'line3-rule)
+			 ) t)
 (defface hi01 (list
 			   (list '((class color)(background light)) (list ':foreground "firebrick1"))
 			   (list '((class color)(background dark)) (list ':foreground "firebrick1"))
@@ -326,6 +327,7 @@
 (semantic-add-system-include "/usr/local/include/c++/5.3.0" 'c++-mode)
 (semantic-add-system-include "/toolchains/include")
 (semantic-add-system-include "/toolchains/include/c++/5.3.0" 'c++-mode)
+(add-hook 'prog-mode-hook '(lambda () (semantic-mode 1)))
 
 ; *** undo-tree-mode ***
 (if (require 'undo-tree nil t) (global-undo-tree-mode 1))
@@ -380,29 +382,26 @@
 
 ; *** flycheck-mode ***
 (when (require 'flycheck nil t)
-	  (global-flycheck-mode 1)
-	  (flycheck-irony-setup)
+  (global-flycheck-mode 1)
+  (flycheck-irony-setup)
+  (add-hook 'c++-mode-hook '(setq flycheck-gcc-language-standard "c++11"))
 )
 
 ; *** ggtags-mode ***
 (if (require 'ggtags nil t)
-	(add-hook 'c-mode-common-hook
-			  '(lambda ()
-				 (ggtags-mode 1)
-				 (local-set-key (kbd "C-c g s") 'ggtags-find-other-symbol)
-				 (local-set-key (kbd "C-c g h") 'ggtags-view-tag-history)
-				 (local-set-key (kbd "C-c g r") 'ggtags-find-reference)
-				 (local-set-key (kbd "C-c g f") 'ggtags-find-file)
-				 (local-set-key (kbd "C-c g c") 'ggtags-create-tags)
-				 (local-set-key (kbd "C-c g u") 'ggtags-update-tags)
- )))
+	(add-hook 'c-mode-common-hook '(lambda () (ggtags-mode 1))))
 
 ; *** Helm-mode ***
-;(when (require 'helm-config nil t)
-;  (helm-mode 1)
+(when (require 'helm-config nil t)
+  (helm-mode 1)
+  (define-key global-map (kbd "M-x") 'helm-M-x)
 ;  (define-key global-map (kbd "C-x C-f") 'helm-find-files)
-;  (define-key global-map (kbd "M-x") 'helm-M-x)
-;)
+  (define-key global-map (kbd "C-x b") 'helm-buffers-list)
+  (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
+  (define-key helm-find-files-map (kbd "C-j") 'helm-select-action)
+  (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
+  (define-key helm-read-file-map (kbd "C-j") 'helm-select-action)
+  )
 
 ; *** popwin ***
 ;(when (require 'popwin nil t)
@@ -414,7 +413,6 @@
 ; *** prog-mode-hook ***
 (add-hook 'prog-mode-hook
 		  '(lambda ()
-			 (semantic-mode 1)
 			 (font-lock-add-keywords nil
 									 '(("\\<[A-Z_]+\\>" . 'font-lock-constant-face)
 									   ("\\<0[xX][0-9A-Fa-f]+\\>" . 'font-lock-constant-face)
@@ -429,7 +427,7 @@
 									   ("\\w+::" . 'font-lock-function-name-face)
 									   ))
 			 (add-to-list 'c++-font-lock-extra-types "\\<\\(auto\\|char16_t\\|char32_t\\)\\>")
-			 (setq flycheck-gcc-language-standard "c++11")))
+			 ))
 
 ; *** gdb-mode ***
 (setq gdb-many-windows t)
