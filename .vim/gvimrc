@@ -1,5 +1,4 @@
 colorscheme evening
 set guifont=Ricty\ 12,MS_Gothic\ 12
-set guifontwide=Ricty\ 12,MS_Gothic\ 12
 set columns=120
 set lines=40
