@@ -88,7 +88,8 @@
 (global-prettify-symbols-mode 1)
 (autoload 'dired "dired-x" nil t)
 (autoload 'dired "wdired" nil t)
-(server-start 1)
+(require 'server)
+(unless (server-running-p) (server-start 1))
 (require 'saveplace)
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
@@ -415,7 +416,7 @@
 		  '(lambda ()
 			 (font-lock-add-keywords nil
 									 '(("\\<[A-Z_]+\\>" . 'font-lock-constant-face)
-									   ("\\<0[xX][0-9A-Fa-f]+\\>" . 'font-lock-constant-face)
+									   ("\\<0[xXb][0-9A-Fa-f]+\\>" . 'font-lock-constant-face)
 									   ("\\<[\\-+]?[0-9]*\\.?[0-9]+\\([uUlL]+\\|[eE][\\-+]?[0-9]+\\)?\\>" . 'font-lock-constant-face)
 									   ))))
 
@@ -426,8 +427,7 @@
 									 '(("\\<\\(alignof\\|alignas\\|constexpr\\|decltype\\|noexcept\\|nullptr\\|static_assert\\|thread_local\\|override\\|final\\)\\>" . 'font-lock-keyword-face)
 									   ("\\w+::" . 'font-lock-function-name-face)
 									   ))
-			 (add-to-list 'c++-font-lock-extra-types "\\<\\(auto\\|char16_t\\|char32_t\\)\\>")
-			 ))
+			 (add-to-list 'c++-font-lock-extra-types "\\<\\(auto\\|char16_t\\|char32_t\\)\\>")))
 
 ; *** gdb-mode ***
 (setq gdb-many-windows t)
