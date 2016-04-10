@@ -10,7 +10,8 @@ if has('mouse')
 	set mouse=a
 	set nomousehide
 endif
-set guioptions+=a
+set guioptions=aeimgt
+set showtabline=2
 set showcmd
 set laststatus=2
 set history=1000
@@ -34,4 +35,3 @@ set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 filetype on
 filetype plugin on
 filetype indent on
-" colorscheme evening
