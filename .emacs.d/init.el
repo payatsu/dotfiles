@@ -310,6 +310,11 @@
 					:background "none"
 					:underline t)
 
+(defconst include-path "/usr/local/include")
+(defconst include-path-c++ "/usr/local/include/c++/5.3.0")
+(defconst include-path2 "/toolchains/include")
+(defconst include-path-c++2 "/toolchains/include/c++/5.3.0")
+
 ; *** Semantic-mode ***
 (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
@@ -324,10 +329,10 @@
 (setq semantic-stickyfunc-sticky-classes '(function type variable include package))
 (require 'semantic/ia)
 (require 'semantic/bovine/gcc)
-(semantic-add-system-include "/usr/local/include")
-(semantic-add-system-include "/usr/local/include/c++/5.3.0" 'c++-mode)
-(semantic-add-system-include "/toolchains/include")
-(semantic-add-system-include "/toolchains/include/c++/5.3.0" 'c++-mode)
+(semantic-add-system-include include-path)
+(semantic-add-system-include include-path-c++ 'c++-mode)
+(semantic-add-system-include include-path2)
+(semantic-add-system-include include-path-c++2 'c++-mode)
 (add-hook 'prog-mode-hook '(lambda () (semantic-mode 1)))
 
 ; *** undo-tree-mode ***
@@ -341,7 +346,7 @@
   (setq company-selection-wrap-around t)
   (add-to-list 'company-backends 'company-c-headers)
   (with-eval-after-load "company"
-	'(lambda () (add-to-list 'company-c-headers-path-system "/usr/local/include/c++/5.3.0")))
+	'(lambda () (add-to-list 'company-c-headers-path-system include-path-c++)))
   (global-set-key (kbd "C-M-i") 'company-complete)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous)
