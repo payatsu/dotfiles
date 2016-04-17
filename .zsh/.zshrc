@@ -98,6 +98,6 @@ alias -s tar.gz='tar xzf'
 alias -s tgz='tar xzf'
 alias -s tar.bz2='tar xjf'
 alias -s tar.xz='tar xJf'
-prepend-to-path(){ [ -d $1 ] || return 1; echo $PATH | \grep -qe $1 || export PATH=$1:${PATH} }
-append-to-path() { [ -d $1 ] || return 1; echo $PATH | \grep -qe $1 || export PATH=${PATH}:$1 }
+prepend-to(){ [ -d $1 ] || return 1; eval echo \$$2 | \grep -qe $1 || eval export $2=$1:\$$2 }
+append-to() { [ -d $1 ] || return 1; eval echo \$$2 | \grep -qe $1 || eval export $2=\$$2:$1 }
 [ -f ${ZDOTDIR}/.zshrc.local ] && . ${ZDOTDIR}/.zshrc.local
