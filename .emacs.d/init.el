@@ -420,7 +420,7 @@
 (add-hook 'prog-mode-hook
 		  '(lambda ()
 			 (font-lock-add-keywords nil
-									 '(("\\<[A-Z_]+\\>" . 'font-lock-constant-face)
+									 '(("\\<[A-Z_][A-Z_0-9]+\\>" . 'font-lock-constant-face)
 									   ("\\<0[xXb][0-9A-Fa-f]+\\>" . 'font-lock-constant-face)
 									   ("\\<[\\-+]?[0-9]*\\.?[0-9]+\\([uUlL]+\\|[eE][\\-+]?[0-9]+\\)?\\>" . 'font-lock-constant-face)
 									   ))))
