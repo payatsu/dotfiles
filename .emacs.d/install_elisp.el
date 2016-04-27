@@ -13,6 +13,7 @@
 (package-install 'company-irony)
 (package-install 'flycheck)
 (package-install 'flycheck-irony)
+(package-install 'guide-key)
 (package-install 'helm)
 (package-install 'helm-company)
 (package-install 'irony)
