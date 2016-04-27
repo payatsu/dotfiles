@@ -32,7 +32,7 @@ setopt auto_pushd
 setopt always_to_end
 setopt complete_aliases
 zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' completer _complete _expand _match _prefix _approximate _list _history
+zstyle ':completion:*' completer _complete _expand _match _prefix _list _approximate # _history
 zstyle ':completion:*:processes' command "ps -u ${USER} -o pid,stat,%cpu,%mem,cputime,command"
 setopt nolistbeep
 setopt listpacked
@@ -88,7 +88,7 @@ alias lv='lv -c'
 alias tgif='tgif -geometry 960x1000'
 alias xdvi='xdvi -geometry 900x1100-0+0'
 alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l80 -lp -ncs -nfc1 -npcs -nprs -npsl -nsaf -nsai -nsaw -nss -sc -ts4'
-alias gcc='gcc         -std=c11   -pedantic -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wfloat-equal -Wshadow -Wwrite-strings'
+alias gcc='gcc         -std=c11   -pedantic -Wall -Wextra          -Wcast-align -Wcast-qual -Wformat                      -Wpointer-arith -Wfloat-equal -Wshadow -Wwrite-strings'
 alias g++='g++         -std=c++11 -pedantic -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wfloat-equal -Wshadow -Wwrite-strings'
 alias clang='clang     -std=c11   -pedantic -Weverything -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings'
 alias clang++='clang++ -std=c++11 -pedantic -Weverything -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wformat -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings -stdlib=libc++ -lc++abi'

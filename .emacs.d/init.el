@@ -416,6 +416,10 @@
 ; *** nyan-mode ***
 (if (require 'nyan-mode nil t) (nyan-mode 1))
 
+(when (require 'guide-key nil t)
+  (setq guide-key/guide-key-sequence '("C-x r" "C-x 4"))
+  (guide-key-mode 1))
+
 ; *** prog-mode-hook ***
 (add-hook 'prog-mode-hook
 		  '(lambda ()
