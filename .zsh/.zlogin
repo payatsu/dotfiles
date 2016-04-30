@@ -10,4 +10,4 @@ done
 
 prepend-to /usr/local/share/man MANPATH
 
-[ -f ${ZDOTDIR}/.zlogin.local ] && . ${ZDOTDIR}/.zlogin.local
+[ -f ${ZDOTDIR}/.zlogin.local ] && . ${ZDOTDIR}/.zlogin.local || return 0
