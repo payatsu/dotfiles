@@ -11,8 +11,8 @@ autoload -Uz run-help run-help-git run-help-p4 run-help-svn run-help-openssl run
 # autoload -Uz history-search-end
 bindkey -e
 setopt prompt_subst
-[ ${TERM} = linux ] &&  ok=ok   ||  ok=$'\U1F197 '
-[ ${TERM} = linux ] &&  ng=ng   ||  ng=$'\U1F196 '
+[ ${TERM} = linux ] &&  ok=OK   ||  ok=$'\U1F197 '
+[ ${TERM} = linux ] &&  ng=NG   ||  ng=$'\U1F196 '
 [ ${TERM} = linux ] && his=h    || his=$'\U1F4DD '
 [ ${TERM} = linux ] && job=j    || job=$'\U1F3C3 '
 [ ${TERM} = linux ] && lvl=l    || lvl=$'\U1F41A '
@@ -64,6 +64,7 @@ zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
 zstyle ':vcs_info:bzr:*' use-simple true
 zstyle ':vcs_info:git:*' formats       '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m'
 zstyle ':vcs_info:git:*' actionformats '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m' '%F{red}<<!%a>>%f'
+zstyle ':vcs_info:git:*' patch-format  '(%a patches)'
 zstyle ':vcs_info:git:*' check-for-changes true
 [ ${TERM} = linux ] &&   stagedstr=+ ||   stagedstr=$'\U1F199 '
 [ ${TERM} = linux ] && unstagedstr=* || unstagedstr=$'\U1F195 '
