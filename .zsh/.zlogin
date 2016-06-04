@@ -1,6 +1,10 @@
 #!/bin/zsh
 
-export EDITOR=vi
+if whence -p vim; then
+	export EDITOR=vim
+else
+	export EDITOR=vi
+fi
 export PAGER=less
 
 export GOPATH=${HOME}/go
