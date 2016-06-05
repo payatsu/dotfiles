@@ -1,10 +1,6 @@
 #!/bin/zsh
 
-if whence -p vim; then
-	export EDITOR=vim
-else
-	export EDITOR=vi
-fi
+whence -p vim > /dev/null && export EDITOR=vim || export EDITOR=vi
 export PAGER=less
 
 export GOPATH=${HOME}/go
