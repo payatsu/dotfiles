@@ -1,5 +1,7 @@
 source ~/.exrc
-syntax on
+if has('syntax')
+	syntax on
+endif
 set title
 set ruler
 set nowrap
@@ -32,6 +34,8 @@ set clipboard=unnamed,unnamedplus,autoselect
 set browsedir=buffer
 set list
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
-filetype on
-filetype plugin on
-filetype indent on
+if has('filetype')
+	filetype on
+	filetype plugin on
+	filetype indent on
+endif
