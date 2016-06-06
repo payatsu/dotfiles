@@ -51,7 +51,7 @@ add-zsh-hook chpwd chpwd_recent_dirs
 zstyle ':completion:*:*:cdr:*:*' menu selection
 umask 022
 export WORDCHARS=''
-[ -x /etc/zsh_command_not_found ] && . /etc/zsh_command_not_found
+[ -r /etc/zsh_command_not_found ] && . /etc/zsh_command_not_found
 # zle -N history-beginning-search-backward-end history-search-end
 # zle -N history-beginning-search-forward-end history-search-end
 # bindkey "" history-beginning-search-backward-end
