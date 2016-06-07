@@ -45,6 +45,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt correct
 setopt nohup
+setopt interactive_comments
 zle -N edit-command-line
 bindkey '^xe' edit-command-line
 add-zsh-hook chpwd chpwd_recent_dirs
