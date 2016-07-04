@@ -103,4 +103,4 @@ alias -s tar.bz2='tar xjf'
 alias -s tar.xz='tar xJf'
 prepend-to(){ [ -d $1 ] || return 1; eval [ -z \"\$$2\" ] && export $2=$1 && return 0; eval echo \$$2 | tr : '\n' | \grep -qe ^$1\$ || eval export $2=$1:\$$2 }
 append-to() { [ -d $1 ] || return 1; eval [ -z \"\$$2\" ] && export $2=$1 && return 0; eval echo \$$2 | tr : '\n' | \grep -qe ^$1\$ || eval export $2=\$$2:$1 }
-[ -f ${ZDOTDIR}/.zshrc.local ] && . ${ZDOTDIR}/.zshrc.local || return 0
+[ -f ${ZDOTDIR}/.zshrc.local.post ] && . ${ZDOTDIR}/.zshrc.local.post || return 0
