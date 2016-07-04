@@ -1,8 +1,8 @@
 #!/bin/zsh
 
-[ -r ${ZDOTDIR}/.zlogin.local.pre ] && . ${ZDOTDIR}/.zlogin.local.pre || return 0
+[ -r ${ZDOTDIR}/.zlogin.local.pre ] && . ${ZDOTDIR}/.zlogin.local.pre
 
-whence -p vim > /dev/null && export EDITOR=vim || export EDITOR=vi
+whence -p vim > /dev/null 2>&1 && export EDITOR=vim || export EDITOR=vi
 export PAGER=less
 
 export GOPATH=${HOME}/go
