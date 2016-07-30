@@ -8,10 +8,10 @@ defscrollback 4096
 bind  w windowlist -b
 bind ^W windowlist -b
 bind N colon 'number '
-windowlist title  '%{u .g}Num Flags Title%=[0-9] select the number [movement] j,C-n:Down k,C-p:Up (C-)f:PageDown (C-)b:PageUp'
-windowlist string '%{.g}%3n %{.y}%f%09=%{dg} %t %='
-caption always '%?%F%{= gW}%:%{= Kk}%?%2n%f%07=%t%='
-hardstatus alwayslastline '%m/%d %02c:%s %{= .g}%H%{-} %L=%-w%45L>%{=u g.}%n %t%{-}%+w %-17<%=%{= .y}(%l)'
+windowlist title  '%{u .C}Num Flags Title%=[0-9] select the number [movement] j,C-n:Down k,C-p:Up (C-)f:PageDown (C-)b:PageUp'
+windowlist string '%{Wc}%3n %{Wc}%f%09=%{Wc} %t %='
+caption always '%?%F%{=b cW}%:%{= Kk}%?%2n%f%07=%t%='
+hardstatus alwayslastline '%{=b}%m/%d %02c:%s%{-} %{=b .c}%H%{-} %L=%-w%45L>%{=ub cw}%n %t%{-}%+w %-17<%=%{= ..}[%l]'
 
 bind  j focus down
 bind ^J focus down
