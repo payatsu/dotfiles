@@ -5,7 +5,6 @@ startup_message off
 vbell off
 bind ^G
 defscrollback 8192
-defmonitor on
 caption always '%?%F%{=b cW}%:%{= Kk}%?%2n%f%07=%t%='
 hardstatus alwayslastline '%{=b}%m/%d %02c:%s%{-} %{=b .c}%H%{-} %L=%-w%45L>%{=ub cw}%n %t%{-}%+w %-17<%=%{= ..}[%l]'
 windowlist title  '%{u .C}Num Flags Title%=[0-9] select the number [movement] j,C-n:Down k,C-p:Up (C-)f:PageDown (C-)b:PageUp'
