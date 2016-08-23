@@ -83,7 +83,7 @@ alias du='du -h'
 alias df='df -h'
 alias grep="grep --exclude-dir='*.svn'${color}"
 alias g='grep'
-alias ls="ls -FGlhp${color}"
+alias ls="ls -FGlhpX --group-directories-first${color}"
 alias l='ls'
 alias less='less -R'
 alias lv='lv -c'
