@@ -312,6 +312,56 @@
 					:background "none"
 					:underline t)
 
+; *** Diff-mode ***
+(add-hook 'diff-mode-hook '(lambda () (progn
+(set-face-attribute 'diff-changed nil
+					:weight 'bold
+					)
+(set-face-attribute 'diff-added nil
+					:foreground "black"
+					:background "pale green"
+					)
+(set-face-attribute 'diff-removed nil
+					:foreground "black"
+					:background "orchid1"
+					)
+(set-face-attribute 'diff-refine-changed nil
+					:underline t
+					:background "yellow"
+					)
+(set-face-attribute 'diff-indicator-changed nil
+					:weight 'ultra-bold
+					)
+(set-face-attribute 'diff-indicator-added nil
+					:background "green"
+					)
+(set-face-attribute 'diff-indicator-removed nil
+					:background "red"
+					)
+;(set-face-attribute 'diff-refine-added nil
+;					)
+;(set-face-attribute 'diff-refine-removed nil
+;					)
+;(set-face-attribute 'diff-nonexistent nil
+;					)
+;(set-face-attribute 'diff-header nil
+;					:background "medium purple"
+;					)
+;(set-face-attribute 'diff-file-header nil
+;					:background "RoyalBlue1"
+;					)
+;(set-face-attribute 'diff-hunk-header nil
+;					:foreground "black"
+;					:background "cornflower blue"
+;					)
+;(set-face-attribute 'diff-function nil
+;					)
+;(set-face-attribute 'diff-index nil
+;					)
+)))
+(add-hook 'diff-mode-hook '(lambda () (diff-auto-refine-mode t)))
+
+; *** system C/C++ include path ***
 (defconst include-path "/usr/local/include")
 (defconst include-path-c++ "/usr/local/include/c++/5.3.0")
 (defconst include-path2 "/toolchains/include")
