@@ -95,6 +95,7 @@ alias g++='g++ -std=c++11 -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wstr
 alias clang='clang     -std=c11   -pedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual'
 alias clang++='clang++ -std=c++11 -pedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual -stdlib=libc++ -lc++abi'
 alias gdb='gdb -q'
+alias ctags='ctags --declarations --defines --globals --members --typedefs --typedefs-and-c++'
 alias gtags='gtags -c'
 alias -s txt=view
 alias -s tar.gz='tar xzf'
