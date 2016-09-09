@@ -6,6 +6,7 @@ set title
 set ruler
 set nowrap
 set cursorline
+set cursorcolumn
 set noundofile
 if has('mouse')
 	set mouse=a
@@ -22,6 +23,8 @@ set modeline
 set modelines=5
 set backspace=indent,eol,start
 set hidden
+set helplang=ja,en
+set ambiwidth=double
 set ignorecase
 set smartcase
 set incsearch
@@ -38,3 +41,5 @@ if has('filetype')
 	filetype plugin on
 	filetype indent on
 endif
+autocmd BufWinLeave ?* silent mkview
+autocmd BufWinEnter ?* silent loadview
