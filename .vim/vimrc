@@ -43,3 +43,6 @@ if has('filetype')
 endif
 autocmd BufWinLeave ?* silent mkview
 autocmd BufWinEnter ?* silent loadview
+if filereadable(expand('~/.vim/vimrc.local.vim'))
+	source ~/.vim/vimrc.local.vim
+endif
