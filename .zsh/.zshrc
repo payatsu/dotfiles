@@ -95,13 +95,14 @@ alias g++='g++ -std=c++11 -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wstr
 alias clang='clang     -std=c11   -pedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual'
 alias clang++='clang++ -std=c++11 -pedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual -stdlib=libc++ -lc++abi'
 alias gdb='gdb -q'
-alias ctags='ctags --declarations --defines --globals --members --typedefs --typedefs-and-c++'
+# alias ctags='ctags --declarations --defines --globals --members --typedefs --typedefs-and-c++'
 alias gtags='gtags -c'
 alias -s txt=view
 alias -s tar.gz='tar xzf'
 alias -s tgz='tar xzf'
 alias -s tar.bz2='tar xjf'
 alias -s tar.xz='tar xJf'
-prepend-to(){ [ -d $1 ] || return 1; eval [ -z \"\$$2\" ] && export $2=$1 && return 0; eval echo \$$2 | tr : '\n' | \grep -qe ^$1\$ || eval export $2=$1:\$$2 }
-append-to() { [ -d $1 ] || return 1; eval [ -z \"\$$2\" ] && export $2=$1 && return 0; eval echo \$$2 | tr : '\n' | \grep -qe ^$1\$ || eval export $2=\$$2:$1 }
+prepend-to()  { [ -d $1 ] || return 1; eval [ -z \"\$$2\" ] && export $2=$1 && return 0; eval echo \$$2 | tr : '\n' | \grep -qe ^$1\$ || eval export $2=$1:\$$2 }
+append-to()   { [ -d $1 ] || return 1; eval [ -z \"\$$2\" ] && export $2=$1 && return 0; eval echo \$$2 | tr : '\n' | \grep -qe ^$1\$ || eval export $2=\$$2:$1 }
+remove-from() { eval $2=`eval echo \\$$2 | sed -e "s%\(^\|:\)$1\(:\|\$\)%\\1\\2%g;s/::/:/g;s/^://;s/:\$//"` }
 [ -f ${ZDOTDIR}/.zshrc.local.post ] && . ${ZDOTDIR}/.zshrc.local.post || return 0
