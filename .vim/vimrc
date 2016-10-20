@@ -6,7 +6,7 @@ set title
 set ruler
 set nowrap
 set cursorline
-set cursorcolumn
+" set cursorcolumn
 set noundofile
 if has('mouse')
 	set mouse=a
@@ -32,6 +32,7 @@ set hlsearch
 set smarttab
 set cindent
 map  :nohl
+set tags=./.tags;./.TAGS;./tags;./TAGS;tags;TAGS;
 set clipboard=unnamed,unnamedplus,autoselect
 set browsedir=buffer
 set list
