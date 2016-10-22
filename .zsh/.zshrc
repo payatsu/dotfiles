@@ -79,14 +79,17 @@ function _update_vcs_info()
 add-zsh-hook precmd _update_vcs_info
 alias run-help > /dev/null 2>&1 && unalias run-help
 [ ${TERM} = dumb ] && color= || color=' --color=auto'
+alias ag='ag --nogroup'
 alias du='du -h'
 alias df='df -h'
 alias grep="grep --exclude-dir='*.svn'${color}"
 alias g='grep'
+alias hw='hw --no-group'
 alias ls="ls -FGlhpX --group-directories-first${color}"
 alias l='ls'
 alias less='less -R'
 alias lv='lv -c'
+alias pt='pt --nogroup'
 alias tgif='tgif -geometry 960x1000'
 alias xdvi='xdvi -geometry 900x1100-0+0'
 alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l80 -lp -ncs -nfc1 -npcs -nprs -npsl -nsaf -nsai -nsaw -nss -sc -ts4'
