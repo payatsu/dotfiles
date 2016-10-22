@@ -7,43 +7,58 @@ set ruler
 set nowrap
 set cursorline
 " set cursorcolumn
-set noundofile
 if has('mouse')
 	set mouse=a
 	set nomousehide
 endif
 set guioptions=aeimgt
 set showtabline=1
+set ambiwidth=double
 set showcmd
 set laststatus=2
+set modeline
+set modelines=5
 set history=10000
 set wildmenu
 set wildmode=list:longest
-set modeline
-set modelines=5
 set backspace=indent,eol,start
 set hidden
 set helplang=ja,en
-set ambiwidth=double
 set ignorecase
 set smartcase
 set incsearch
 set hlsearch
+map  :nohl
 set smarttab
 set cindent
-map  :nohl
-set tags=./.tags;./.TAGS;./tags;./TAGS;tags;TAGS;
+set noundofile
+set tags=./.tags;,./.TAGS;,./tags;,./TAGS;,.tags;,.TAGS;,tags;,TAGS;
 set clipboard=unnamed,unnamedplus,autoselect
 set browsedir=buffer
 set list
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+" set foldclose=all
+" set foldcolumn=1
+" set foldlevel=3
+" set foldopen=all
+" augroup BufRead
+" 	autocmd!
+" 	autocmd BufRead BufRead * set foldmethod=indent
+" augroup END
 if has('filetype')
 	filetype on
 	filetype plugin on
 	filetype indent on
 endif
-autocmd BufWinLeave ?* silent mkview
-autocmd BufWinEnter ?* silent loadview
+augroup BufWin
+	autocmd!
+	autocmd BufWinLeave ?* silent mkview
+	autocmd BufWinEnter ?* silent loadview
+augroup END
+augroup QuickFixCmd
+	autocmd!
+	autocmd QuickFixCmdPost *grep* cwindow
+augroup END
 if filereadable(expand('~/.vim/vimrc.local.vim'))
 	source ~/.vim/vimrc.local.vim
 endif
