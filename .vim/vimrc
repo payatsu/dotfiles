@@ -57,6 +57,13 @@ augroup BufWin
 	autocmd BufWinLeave ?* silent mkview
 	autocmd BufWinEnter ?* silent loadview
 augroup END
+if executable('hw')
+	set grepprg=hw\ $*\ /dev/null
+elseif executable('pt')
+	set grepprg=pt\ $*\ /dev/null
+elseif executable('ag')
+	set grepprg=ag\ $*\ /dev/null
+endif
 augroup QuickFixCmd
 	autocmd!
 	autocmd QuickFixCmdPost *grep* cwindow
