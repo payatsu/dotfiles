@@ -29,14 +29,16 @@ set smartcase
 set incsearch
 set hlsearch
 map  :nohl
-set smarttab
-set cindent
 set noundofile
-set tags=./.tags;,./.TAGS;,./tags;,./TAGS;,.tags;,.TAGS;,tags;,TAGS;
-set clipboard=unnamed,unnamedplus,autoselect
 set browsedir=buffer
 set list
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+set splitbelow
+set splitright
+set smarttab
+set cindent
+set tags=./.tags;,./.TAGS;,./tags;,./TAGS;,.tags;,.TAGS;,tags;,TAGS;
+set clipboard=unnamed,unnamedplus,autoselect
 " set foldclose=all
 " set foldcolumn=1
 " set foldlevel=3
