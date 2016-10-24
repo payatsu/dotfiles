@@ -20,7 +20,7 @@ set modeline
 set modelines=5
 set history=10000
 set wildmenu
-set wildmode=list:longest
+set wildmode=longest,list:longest,list:full
 set backspace=indent,eol,start
 set hidden
 set helplang=ja,en
