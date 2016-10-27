@@ -58,7 +58,7 @@ augroup BufWin
 	autocmd BufWinEnter ?* silent loadview
 augroup END
 if executable('hw')
-	set grepprg=hw\ $*\ /dev/null
+	set grepprg=hw\ -e\ $*\ /dev/null
 elseif executable('pt')
 	set grepprg=pt\ $*\ /dev/null
 elseif executable('ag')
