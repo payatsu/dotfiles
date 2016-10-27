@@ -55,7 +55,7 @@ endif
 augroup BufWin
 	autocmd!
 	autocmd BufWinLeave ?* silent mkview
-	autocmd BufWinEnter ?* silent loadview
+	autocmd BufWinEnter ?* silent! loadview
 augroup END
 if executable('hw')
 	set grepprg=hw\ -e\ $*\ /dev/null
