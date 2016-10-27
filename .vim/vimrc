@@ -47,16 +47,6 @@ set clipboard=unnamed,unnamedplus,autoselect
 " 	autocmd!
 " 	autocmd BufRead BufRead * set foldmethod=indent
 " augroup END
-if has('filetype')
-	filetype on
-	filetype plugin on
-	filetype indent on
-endif
-augroup BufWin
-	autocmd!
-	autocmd BufWinLeave ?* silent mkview
-	autocmd BufWinEnter ?* silent! loadview
-augroup END
 if executable('hw')
 	set grepprg=hw\ -e\ $*\ /dev/null
 elseif executable('pt')
@@ -64,10 +54,22 @@ elseif executable('pt')
 elseif executable('ag')
 	set grepprg=ag\ $*\ /dev/null
 endif
-augroup QuickFixCmd
-	autocmd!
-	autocmd QuickFixCmdPost *grep* cwindow
-augroup END
-if filereadable(expand('~/.vim/vimrc.local.vim'))
-	source ~/.vim/vimrc.local.vim
+if has('filetype')
+	filetype on
+	filetype plugin on
+	filetype indent on
+endif
+if 1
+	augroup BufWin
+		autocmd!
+		autocmd BufWinLeave ?* silent mkview
+		autocmd BufWinEnter ?* silent! loadview
+	augroup END
+	augroup QuickFixCmd
+		autocmd!
+		autocmd QuickFixCmdPost *grep* cwindow
+	augroup END
+	if filereadable(expand('~/.vim/vimrc.local.vim'))
+		source ~/.vim/vimrc.local.vim
+	endif
 endif
