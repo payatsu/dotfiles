@@ -53,6 +53,9 @@ if has('filetype')
 	filetype plugin on
 	filetype indent on
 endif
+if has('windows') && has('folding')
+	set fillchars=diff:\ 
+endif
 if has('diff')
 	set diffopt=filler,vertical,foldcolumn:2
 endif
