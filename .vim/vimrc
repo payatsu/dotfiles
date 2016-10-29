@@ -45,8 +45,8 @@ elseif executable('ag')
 endif
 if has('syntax')
 	syntax on
-	set colorcolumn=80
-	highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+"	set colorcolumn=80
+"	highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 endif
 if has('filetype')
 	filetype on
