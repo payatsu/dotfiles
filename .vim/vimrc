@@ -7,12 +7,14 @@ set cursorline
 if has('mouse')
 	set mouse=a
 	set nomousehide
+	set mousemodel=popup_setpos
 endif
-set guioptions=aeimgt
 set showtabline=1
 set ambiwidth=double
 set showcmd
 set laststatus=2
+set statusline=[%2n\|%1(%M%)\|%2(%R%)]%y\ %<%F\ %h%w\ c:%b(0x%B)\ %=(%l,%c%V)\ %p%%\ of\ %L\ lines\ [%P]
+set shortmess+=mrwI
 set modeline
 set modelines=5
 set history=10000
@@ -34,6 +36,7 @@ set splitbelow
 set splitright
 set smarttab
 set cindent
+set showfulltag
 set tags=./.tags;,./.TAGS;,./tags;,./TAGS;,.tags;,.TAGS;,tags;,TAGS;
 set clipboard=unnamed,unnamedplus,autoselect
 if executable('hw')
@@ -53,20 +56,15 @@ if has('filetype')
 	filetype plugin on
 	filetype indent on
 endif
+if has('insert_expand')
+	set completeopt=menu,preview,longest
+endif
 if has('windows') && has('folding')
 	set fillchars=diff:\ 
 endif
 if has('diff')
 	set diffopt=filler,vertical,foldcolumn:2
 endif
-" set foldclose=all
-" set foldcolumn=1
-" set foldlevel=3
-" set foldopen=all
-" augroup BufRead
-" 	autocmd!
-" 	autocmd BufRead BufRead * set foldmethod=indent
-" augroup END
 if has('autocmd')
 	augroup BufWin
 		autocmd!
