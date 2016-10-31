@@ -286,32 +286,36 @@
 (set-face-attribute 'font-lock-warning nil)
 
 ; *** whitespace-mode ***
-(global-whitespace-mode 1)
-(setq whitespace-style '(face trailing tabs spaces newline empty line-trail
-							  indentation space-after-tab space-before-tab
-							  space-mark tab-mark newline-mark))
-(setq whitespace-display-mappings '((space-mark 32 [183] [46])
-									(space-mark 160 [164] [95])
-									(newline-mark 10 [8595 10])
-									(tab-mark 9 [187 9] [92 9])))
-(set-face-attribute 'whitespace-empty nil
-					:background "none")
-(set-face-attribute 'whitespace-indentation nil
-					:foreground grayoutcolor
-					:background "none")
-(set-face-attribute 'whitespace-space nil
-					:foreground grayoutcolor
-					:background "none")
-(set-face-attribute 'whitespace-tab nil
-					:foreground grayoutcolor
-					:background "none")
-(set-face-attribute 'whitespace-newline nil
-					:foreground "SeaGreen1")
-(set-face-attribute 'whitespace-line nil
-					:foreground "red"
-					:background "none"
-					:underline t)
-
+(if window-system
+	(progn
+	  (global-whitespace-mode 1)
+	  (setq whitespace-style
+			'(face trailing tabs spaces newline empty line-trail
+				   indentation space-after-tab space-before-tab
+				   space-mark tab-mark newline-mark))
+	  (setq whitespace-display-mappings
+			'((space-mark 32 [183] [46])
+			  (space-mark 160 [164] [95])
+			  (newline-mark 10 [8595 10])
+			  (tab-mark 9 [187 9] [92 9])))
+	  (set-face-attribute 'whitespace-empty nil
+						  :background "none")
+	  (set-face-attribute 'whitespace-indentation nil
+						  :foreground grayoutcolor
+						  :background "none")
+	  (set-face-attribute 'whitespace-space nil
+						  :foreground grayoutcolor
+						  :background "none")
+	  (set-face-attribute 'whitespace-tab nil
+						  :foreground grayoutcolor
+						  :background "none")
+	  (set-face-attribute 'whitespace-newline nil
+						  :foreground "SeaGreen1")
+	  (set-face-attribute 'whitespace-line nil
+						  :foreground "red"
+						  :background "none"
+						  :underline t)
+))
 ; *** Diff-mode ***
 (add-hook 'diff-mode-hook '(lambda () (progn
 (set-face-attribute 'diff-changed nil
@@ -363,9 +367,9 @@
 
 ; *** system C/C++ include path ***
 (defconst include-path "/usr/local/include")
-(defconst include-path-c++ "/usr/local/include/c++/5.3.0")
+(defconst include-path-c++ "/usr/local/include/c++/6.2.0")
 (defconst include-path2 "/toolchains/include")
-(defconst include-path-c++2 "/toolchains/include/c++/5.3.0")
+(defconst include-path-c++2 "/toolchains/include/c++/6.2.0")
 
 ; *** Semantic-mode ***
 (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
