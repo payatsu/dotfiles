@@ -3,27 +3,27 @@ highlight DiffAdd    guifg=black guibg=lightblue
 highlight DiffChange guifg=black guibg=lightyellow
 highlight DiffDelete guifg=black guibg=lightred
 highlight DiffText   guifg=black guibg=violet
+" function! GuiTabLabel()
+" 	let label = ''
+" 	let bufnrlist = tabpagebuflist(v:lnum)
+" 	for bufnr in bufnrlist
+" 		if getbufvar(bufnr, "&modified")
+" 			let label = '[+]'
+" 			break
+" 		endif
+" 	endfor
+" 	if label != '' | let label .= ' ' | endif
+" 	return label . bufname(bufnrlist[tabpagewinnr(v:lnum) - 1])
+" endfunction
+" set guitablabel=%{GuiTabLabel()}
+set guitablabel=[%N-%n]\ %-20.20F
 set guioptions+=aci
-set guioptions-=mrLtT
-function GuiTabLabel()
-	let label = ''
-	let bufnrlist = tabpagebuflist(v:lnum)
-	for bufnr in bufnrlist
-		if getbufvar(bufnr, "&modified")
-			let label = '[+]'
-			break
-		endif
-	endfor
-	if label != ''
-		let label .= ' '
-	endif
-	return label . bufname(bufnrlist[tabpagewinnr(v:lnum) - 1])
-endfunction
-set guitablabel=%{GuiTabLabel()}
 if has('win32')
+	set guioptions-=mrLT
 	set guifont=Ricty:h12,MS_Gothic:h12
 	set renderoptions=type:directx,renmode:5
 else
+	set guioptions-=mrLtT
 	set guifont=Ricty\ 12
 endif
 set columns=120
