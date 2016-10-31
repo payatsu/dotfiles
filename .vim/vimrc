@@ -4,22 +4,17 @@ set ruler
 set nowrap
 set cursorline
 " set cursorcolumn
-if has('mouse')
-	set mouse=a
-	set nomousehide
-	set mousemodel=popup_setpos
-endif
 set showtabline=1
 set ambiwidth=double
 set showcmd
 set laststatus=2
-set statusline=[%2n\|%1(%M%)\|%2(%R%)]%y\ %<%F\ %h%w\ c:%b(0x%B)\ %=(%l,%c%V)\ %p%%\ of\ %L\ lines\ [%P]
 set shortmess+=mrwI
 set modeline
 set modelines=5
 set history=10000
 set wildmenu
 set wildmode=longest,list:longest,list:full
+set wildoptions=tagfile
 set backspace=indent,eol,start
 set hidden
 set helplang=ja,en
@@ -29,6 +24,8 @@ set incsearch
 set hlsearch
 map  :nohl
 set noundofile
+set nobackup
+set nowritebackup
 set browsedir=buffer
 set list
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
@@ -37,8 +34,9 @@ set splitright
 set smarttab
 set cindent
 set showfulltag
-set tags=./.tags;,./.TAGS;,./tags;,./TAGS;,.tags;,.TAGS;,tags;,TAGS;
+set tags^=./.tags;,./.TAGS;,./tags;,./TAGS;,.tags;,.TAGS;,tags;,TAGS;
 set clipboard=unnamed,unnamedplus,autoselect
+set virtualedit=block
 if executable('hw')
 	set grepprg=hw\ -e\ $*\ /dev/null
 elseif executable('pt')
@@ -46,6 +44,34 @@ elseif executable('pt')
 elseif executable('ag')
 	set grepprg=ag\ $*\ /dev/null
 endif
+if has('mouse')
+	set mouse=a
+	set nomousehide
+	set mousemodel=popup_setpos
+endif
+if has('eval')
+	function! FlagToStr(var, val)
+		if a:var | return a:val | else | return '' | endif
+	endfunction
+	set statusline=[%{printf('%2d\|%2s%1s\|%3s\|%.1s',bufnr('%'),FlagToStr(&readonly,'RO'),FlagToStr(&modified,'+'),tolower(&filetype),toupper(&fileformat))}]\ %<%F\ %h%wc:%05b(0x%04B)%=(%l,%3c%V)%3p%%\ of\ %L\ lines%a[%P]
+endif
+function! MyTabLine()
+	let s = ''
+	for i in range(tabpagenr('$'))
+		if i + 1 == tabpagenr() | let s .= '%#TabLineSel#' | else | let s .= '%#TabLine#' | endif
+		let s .= '%' . (i + 1) . 'T'
+		let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
+	endfor
+	let s .= '%#TabLineFill#%T'
+	if tabpagenr('$') > 1 | let s .= '%=%#TabLine#%999Xclose' | endif
+	return s
+endfunction
+function! MyTabLabel(n)
+	let buflist = tabpagebuflist(a:n)
+	let winnr = tabpagewinnr(a:n)
+	return printf('%S', bufname(buflist[winnr - 1]))
+endfunction
+set tabline=%!MyTabLine()
 if has('syntax')
 	syntax on
 "	set colorcolumn=80
