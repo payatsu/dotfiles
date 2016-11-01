@@ -52,7 +52,7 @@ if has('eval')
 	function! FlagToStr(var, val)
 		if a:var | return a:val | else | return '' | endif
 	endfunction
-	set statusline=[%{printf('%2d\|%2s%1s\|%3s\|%.1s',bufnr('%'),FlagToStr(&readonly,'RO'),FlagToStr(&modified,'+'),tolower(&filetype),toupper(&fileformat))}]\ %<%F\ %h%wc:%05b(0x%04B)%=(%l,%3c%V)%3p%%\ of\ %L\ lines%a[%P]
+	set statusline=[%{printf('%2d\|%2s%1s\|%s\|%s\|%s',bufnr('%'),FlagToStr(&readonly,'RO'),FlagToStr(&modified,'+'),&fileencoding,&fileformat,&filetype)}]\ %<%F\ %h%wc:%05b(0x%04B)%=(%l,%3c%V)%3p%%\ of\ %L\ lines%a[%P]
 endif
 function! MyTabLine()
 	let s = ''
@@ -68,7 +68,7 @@ endfunction
 function! MyTabLabel(n)
 	let buflist = tabpagebuflist(a:n)
 	let winnr = tabpagewinnr(a:n)
-	return printf('%S', bufname(buflist[winnr - 1]))
+	return printf('[%5.20S]', bufname(buflist[winnr - 1]))
 endfunction
 set tabline=%!MyTabLine()
 if has('syntax')
