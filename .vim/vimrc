@@ -1,4 +1,16 @@
 source ~/.exrc
+set runtimepath+=$HOME/.vim/repos/github.com/Shougo/dein.vim
+try
+	call dein#begin($HOME . '/.vim')
+	call dein#add('Shougo/dein.vim')
+	call dein#add('thinca/vim-quickrun')
+	call dein#add('tomasr/molokai')
+	call dein#end()
+	if dein#check_install()
+		call dein#install()
+	endif
+catch /E117.*/
+endtry
 set title
 set ruler
 set nowrap
@@ -99,17 +111,6 @@ if has('autocmd')
 		autocmd QuickFixCmdPost *grep* cwindow
 	augroup END
 endif
-set runtimepath+=$HOME/.vim/repos/github.com/Shougo/dein.vim
-try
-	call dein#begin($HOME . '/.vim')
-	call dein#add('Shougo/dein.vim')
-	call dein#add('thinca/vim-quickrun')
-	call dein#end()
-	if dein#check_install()
-		call dein#install()
-	endif
-catch /E117.*/
-endtry
 if filereadable(expand('~/.vim/vimrc.local.vim'))
 	source ~/.vim/vimrc.local.vim
 endif

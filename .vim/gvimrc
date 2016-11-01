@@ -1,4 +1,8 @@
-colorscheme evening
+try
+	colorscheme molokai
+catch /E185.*/
+	colorscheme evening
+endtry
 highlight DiffAdd    guifg=black guibg=lightblue
 highlight DiffChange guifg=black guibg=lightyellow
 highlight DiffDelete guifg=black guibg=lightred
@@ -20,11 +24,11 @@ set guitablabel=[%N-%n]\ %-20.20F
 set guioptions+=aci
 if has('win32')
 	set guioptions-=mrLT
-	set guifont=Ricty:h12,MS_Gothic:h12
+	set guifont=Ricty:h14,MS_Gothic:h14
 	set renderoptions=type:directx,renmode:5
 else
 	set guioptions-=mrLtT
-	set guifont=Ricty\ 12
+	set guifont=Ricty\ 14
 endif
 set columns=120
 set lines=40
