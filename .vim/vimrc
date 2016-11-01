@@ -3,7 +3,6 @@ set title
 set ruler
 set nowrap
 set cursorline
-" set cursorcolumn
 set showtabline=1
 set ambiwidth=double
 set showcmd
@@ -74,8 +73,6 @@ endfunction
 set tabline=%!MyTabLine()
 if has('syntax')
 	syntax on
-"	set colorcolumn=80
-"	highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 endif
 if has('filetype')
 	filetype on
@@ -102,6 +99,17 @@ if has('autocmd')
 		autocmd QuickFixCmdPost *grep* cwindow
 	augroup END
 endif
+set runtimepath+=$HOME/.vim/repos/github.com/Shougo/dein.vim
+try
+	call dein#begin($HOME . '/.vim')
+	call dein#add('Shougo/dein.vim')
+	call dein#add('thinca/vim-quickrun')
+	call dein#end()
+	if dein#check_install()
+		call dein#install()
+	endif
+catch /E117.*/
+endtry
 if filereadable(expand('~/.vim/vimrc.local.vim'))
 	source ~/.vim/vimrc.local.vim
 endif

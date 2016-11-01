@@ -28,3 +28,6 @@ else
 endif
 set columns=120
 set lines=40
+if filereadable(expand('~/.vim/gvimrc.local.vim'))
+	source ~/.vim/gvimrc.local.vim
+endif
