@@ -11,8 +11,8 @@ autoload -Uz run-help run-help-git run-help-p4 run-help-svn run-help-openssl run
 # autoload -Uz history-search-end
 bindkey -e
 setopt prompt_subst
-[ ${TERM} = linux ] &&  ok=OK   ||  ok=$'\U1F197 '
-[ ${TERM} = linux ] &&  ng=NG   ||  ng=$'\U1F196 '
+[ ${TERM} = linux ] &&  ok=OK   ||  ok=$'\U1F197'
+[ ${TERM} = linux ] &&  ng=NG   ||  ng=$'\U1F196'
 [ ${TERM} = linux ] && his=h    || his=$'\U1F4DD '
 [ ${TERM} = linux ] && job=j    || job=$'\U1F3C3 '
 [ ${TERM} = linux ] && lvl=l    || lvl=$'\U1F41A '
@@ -67,8 +67,8 @@ zstyle ':vcs_info:git:*' formats       '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m'
 zstyle ':vcs_info:git:*' actionformats '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m' '%F{red}<<!%a>>%f'
 zstyle ':vcs_info:git:*' patch-format  '(%a patches)'
 zstyle ':vcs_info:git:*' check-for-changes true
-[ ${TERM} = linux ] &&   stagedstr=+ ||   stagedstr=$'\U1F199 '
-[ ${TERM} = linux ] && unstagedstr=* || unstagedstr=$'\U1F195 '
+[ ${TERM} = linux ] &&   stagedstr=+ ||   stagedstr=$'\U1F199'
+[ ${TERM} = linux ] && unstagedstr=* || unstagedstr=$'\U1F195'
 zstyle ':vcs_info:git:*'   stagedstr "%B%K{cyan}${stagedstr}%k%b"
 zstyle ':vcs_info:git:*' unstagedstr "%B%K{red}${unstagedstr}%k%b"
 function _update_vcs_info()
