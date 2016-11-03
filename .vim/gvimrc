@@ -31,5 +31,5 @@ else
 	set guifont=Ricty\ 14
 endif
 set columns=120
-set lines=40
+set lines=30
 runtime gvimrc.local.vim
