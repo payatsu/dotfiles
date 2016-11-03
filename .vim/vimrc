@@ -1,15 +1,14 @@
 source ~/.exrc
 let s:runtimepath_first = split(&runtimepath, ',')[0]
-let &runtimepath .= ',' . s:runtimepath_first . '/repos/github.com/Shougo/dein.vim'
+let s:runtimepath_dein = s:runtimepath_first . '/repos/github.com/Shougo/dein.vim'
+if &runtimepath !~# s:runtimepath_dein | let &runtimepath .= ',' . s:runtimepath_dein | endif
 try
 	call dein#begin(s:runtimepath_first)
 	call dein#add('Shougo/dein.vim')
 	call dein#add('thinca/vim-quickrun')
 	call dein#add('tomasr/molokai')
 	call dein#end()
-	if dein#check_install()
-		call dein#install()
-	endif
+	if dein#check_install() | call dein#install() | endif
 catch /E117.*/
 endtry
 set title
@@ -65,7 +64,7 @@ if has('eval')
 	function! FlagToStr(var, val)
 		if a:var | return a:val | else | return '' | endif
 	endfunction
-	set statusline=%{printf('[%2d\|%2s%1s][%3s\|%s][%1s]',bufnr('%'),FlagToStr(&readonly,'RO'),FlagToStr(&modified,'+'),&fileencoding,&fileformat,&filetype)}\ %<%F\ %h%wc:%05b(0x%04B)%=(%l,%3c%V)%3p%%\ of\ %L\ lines%a[%P]
+	set statusline=%{printf('[%2d:%2s%1s][%3s\|%s][%1s]',bufnr('%'),FlagToStr(&readonly,'RO'),FlagToStr(&modified,'+'),&fileencoding,&fileformat,&filetype)}\ %<%F\ %h%wc:%05b(0x%04B)%=(%l,%3c%V)%3p%%\ of\ %L\ lines%a[%P]
 endif
 function! MyTabLine()
 	let s = ''

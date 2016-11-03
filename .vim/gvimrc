@@ -20,7 +20,7 @@ highlight DiffText   guifg=black guibg=violet
 " 	return label . bufname(bufnrlist[tabpagewinnr(v:lnum) - 1])
 " endfunction
 " set guitablabel=%{GuiTabLabel()}
-set guitablabel=[%N-%n]\ %-20.20F
+set guitablabel=[%n]\ %-10.30F
 set guioptions+=aci
 if has('win32')
 	set guioptions-=mrLT
