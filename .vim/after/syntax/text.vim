@@ -1,7 +1,3 @@
-if exists("b:current_syntax")
-  finish
-endif
-
 syntax match Grayout        display "前記\|該"
 syntax match Caption        display "<[^>]*>\|【[^】]*】\|『[^』]*』\|「[^」]*」\|〈[^〉]*〉\|《[^》]*》\|（[^）]*）\|｛[^｝]*｝\|［[^］]*］\|〔[^〕]*〕"
 syntax match Star           display "☆\|★"
