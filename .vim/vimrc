@@ -99,5 +99,9 @@ if has('autocmd')
 		autocmd!
 		autocmd QuickFixCmdPost *grep* cwindow
 	augroup END
+	augroup BufRead
+		autocmd!
+		autocmd BufReadPost * runtime after/syntax/text.vim
+	augroup END
 endif
 runtime vimrc.local.vim
