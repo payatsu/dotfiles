@@ -11,16 +11,18 @@ autoload -Uz run-help run-help-git run-help-p4 run-help-svn run-help-openssl run
 # autoload -Uz history-search-end
 bindkey -e
 setopt prompt_subst
-[ ${TERM} = linux ] &&  ok=OK   ||  ok=$'\U1F197'
-[ ${TERM} = linux ] &&  ng=NG   ||  ng=$'\U1F196'
-[ ${TERM} = linux ] && his=h    || his=$'\U1F4DD '
-[ ${TERM} = linux ] && job=j    || job=$'\U1F3C3 '
-[ ${TERM} = linux ] && lvl=l    || lvl=$'\U1F41A '
-[ ${TERM} = linux ] && cal=     || cal=$'\U1F4C6 '
-[ ${TERM} = linux ] && tim=' '  || tim=$'\U231A '
-[ ${TERM} = linux ] && mps=/    || mps=$'\U2199 '
-[ ${TERM} = linux ] &&  ps='$ ' ||  ps=$'\U1F449 '
-[ ${TERM} = linux ] && rps=?    || rps=$'\U1F4CA '
+[ "${TERM}" = xterm ] && export TERM=xterm-256color
+[ "${TERM}" = screen ] && [ -n "${TERMCAP}" ] && export TERMCAP=`echo "${TERMCAP}" | sed -e 's/Co#8/Co#256/g'`
+[ "${TERM}" = linux ] &&  ok=OK   ||  ok=$'\U1F197'
+[ "${TERM}" = linux ] &&  ng=NG   ||  ng=$'\U1F196'
+[ "${TERM}" = linux ] && his=h    || his=$'\U1F4DD '
+[ "${TERM}" = linux ] && job=j    || job=$'\U1F3C3 '
+[ "${TERM}" = linux ] && lvl=l    || lvl=$'\U1F41A '
+[ "${TERM}" = linux ] && cal=     || cal=$'\U1F4C6 '
+[ "${TERM}" = linux ] && tim=' '  || tim=$'\U231A '
+[ "${TERM}" = linux ] && mps=/    || mps=$'\U2199 '
+[ "${TERM}" = linux ] &&  ps='$ ' ||  ps=$'\U1F449 '
+[ "${TERM}" = linux ] && rps=?    || rps=$'\U1F4CA '
 PROMPT='%B%n@%8>..>%m%>>:%20<..<%~%<<[%(?.%F{green}${ok}%f.%F{red}${ng}%f)](%F{magenta}${his}%f:%h, %F{cyan}${job}%f:%j, %F{yellow}${lvl}%f:%L)${mps}
 %D{${cal}%m/%d${tim}%T}%(!.#.${ps})%b'
 PROMPT2='%_> '
@@ -67,8 +69,8 @@ zstyle ':vcs_info:git:*' formats       '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m'
 zstyle ':vcs_info:git:*' actionformats '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m' '%F{red}<<!%a>>%f'
 zstyle ':vcs_info:git:*' patch-format  '(%a patches)'
 zstyle ':vcs_info:git:*' check-for-changes true
-[ ${TERM} = linux ] &&   stagedstr=+ ||   stagedstr=$'\U1F199'
-[ ${TERM} = linux ] && unstagedstr=* || unstagedstr=$'\U1F195'
+[ "${TERM}" = linux ] &&   stagedstr=+ ||   stagedstr=$'\U1F199'
+[ "${TERM}" = linux ] && unstagedstr=* || unstagedstr=$'\U1F195'
 zstyle ':vcs_info:git:*'   stagedstr "%B%K{cyan}${stagedstr}%k%b"
 zstyle ':vcs_info:git:*' unstagedstr "%B%K{red}${unstagedstr}%k%b"
 function _update_vcs_info()
@@ -78,7 +80,7 @@ function _update_vcs_info()
 }
 add-zsh-hook precmd _update_vcs_info
 alias run-help > /dev/null 2>&1 && unalias run-help
-[ ${TERM} = dumb ] && color= || color=' --color=auto'
+[ "${TERM}" = dumb ] && color= || color=' --color=auto'
 alias ag='ag --nogroup'
 alias du='du -h'
 alias df='df -h'
