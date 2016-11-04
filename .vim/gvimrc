@@ -22,22 +22,23 @@ highlight DiffText   guifg=black guibg=violet
 " set guitablabel=%{GuiTabLabel()}
 set guitablabel=[%n]\ %-10.30F
 set guioptions+=aci
+let g:guifonts='Ricty:h14,MS_Gothic:h14'
 if has('win32')
 	set guioptions-=mrLT
-	set guifont=Ricty:h14,MS_Gothic:h14
 	set renderoptions=type:directx,renmode:5
-	augroup GUIEnter
+	augroup FileType
 		autocmd!
-		autocmd GUIEnter * set transparency=204
+		autocmd *   let &guifont = g:guifonts
+		autocmd tmp let &guifont = 'うずらフォント:h14,' . g:guifonts
 	augroup END
 	augroup Focus
 		autocmd!
 		autocmd FocusGained * set transparency=204
-		autocmd FocusLost * set transparency=166
+		autocmd FocusLost   * set transparency=166
 	augroup END
 else
 	set guioptions-=mrLtT
-	set guifont=Ricty\ 14
+	let &guifont = substitute(g:guifonts, ':h', '\ ', 'g')
 endif
 set columns=120
 set lines=30
