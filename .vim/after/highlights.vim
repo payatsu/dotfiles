@@ -34,7 +34,7 @@ highlight Rev09 ctermfg=Black ctermbg=LightRed     guifg=Black guibg='hot pink'
 highlight Rev10 ctermfg=Black ctermbg=Yellow       guifg=Black guibg='light goldenrod'
 
 call matchadd('Grayout'       , '前記\|該')
-call matchadd('Caption'       , '<[^>]*>\|【[^】]*】\|『[^』]*』\|「[^」]*」\|〈[^〉]*〉\|《[^》]*》\|（[^）]*）\|｛[^｝]*｝\|［[^］]*］\|〔[^〕]*〕')
+call matchadd('Caption'       , '【[^】]*】\|『[^』]*』\|「[^」]*」\|＜[^＞]*＞\|〈[^〉]*〉\|《[^》]*》\|（[^）]*）\|｛[^｝]*｝\|［[^］]*］\|〔[^〕]*〕')
 call matchadd('Star'          , '☆\|★')
 call matchadd('Circle'        , '○\|●\|◎\|◯')
 call matchadd('Square'        , '□\|■')
