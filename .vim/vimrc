@@ -48,6 +48,9 @@ set showfulltag
 set tags^=./.tags;,./.TAGS;,./tags;,./TAGS;,.tags;,.TAGS;,tags;,TAGS;
 set clipboard=unnamed,unnamedplus,autoselect
 set virtualedit=block
+if $TERMCAP =~# ':\?Co#256:'
+	set t_Co=256
+endif
 if executable('hw')
 	set grepprg=hw\ -e\ $*\ /dev/null
 elseif executable('pt')
