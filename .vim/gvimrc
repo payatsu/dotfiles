@@ -26,6 +26,9 @@ if has('win32')
 	set guioptions-=mrLT
 	set guifont=Ricty:h14,MS_Gothic:h14
 	set renderoptions=type:directx,renmode:5
+	augroup GUIEnter
+		autocmd GUIEnter * set transparency=204
+	augroup END
 else
 	set guioptions-=mrLtT
 	set guifont=Ricty\ 14
