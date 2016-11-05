@@ -1,6 +1,6 @@
 try
 	colorscheme molokai
-catch /E185.*/
+catch /:E185:/
 	colorscheme evening
 endtry
 highlight DiffAdd    guifg=black guibg=lightblue
