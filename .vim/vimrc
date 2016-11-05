@@ -97,7 +97,7 @@ if has('insert_expand') | set completeopt=menu,preview,longest | endif
 if has('windows') && has('folding') | set fillchars=diff:\  | endif
 if has('diff') | set diffopt=filler,vertical,foldcolumn:2 | endif
 if has('autocmd')
-	augroup BufWin
+	augroup MkViewLoadView
 		autocmd!
 		autocmd BufWinLeave ?* silent mkview
 		autocmd BufWinEnter ?* silent! loadview
@@ -107,7 +107,7 @@ if has('autocmd')
 		autocmd QuickFixCmdPost *grep* cwindow
 	augroup END
 	if has('syntax')
-		augroup VimEnter
+		augroup MyHighLights
 			autocmd!
 			autocmd VimEnter,WinEnter * runtime after/highlights.vim
 		augroup END
