@@ -26,12 +26,12 @@ let g:guifonts='Ricty:h14,MS_Gothic:h14'
 if has('win32')
 	set guioptions-=mrLT
 	set renderoptions=type:directx,renmode:5
-	augroup FileType
+	augroup SetGuiFonts
 		autocmd!
 		autocmd *   let &guifont = g:guifonts
 		autocmd tmp let &guifont = 'うずらフォント:h14,' . g:guifonts
 	augroup END
-	augroup Focus
+	augroup SetTransparency
 		autocmd!
 		autocmd FocusGained * set transparency=204
 		autocmd FocusLost   * set transparency=166
