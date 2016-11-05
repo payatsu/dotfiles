@@ -9,8 +9,12 @@ if has('eval')
 		call dein#add('thinca/vim-quickrun')
 		call dein#add('tomasr/molokai')
 		call dein#add('w0ng/vim-hybrid')
-		call dein#add('altercation/vim-colors-solarized')
+		call dein#add('djjcast/mirodark')
 		call dein#add('nanotech/jellybeans.vim')
+		call dein#add('jpo/vim-railscasts-theme')
+		call dein#add('jonathanfilip/vim-lucius')
+		call dein#add('altercation/vim-colors-solarized')
+		call dein#add('vim-scripts/twilight')
 		call dein#end()
 		if dein#check_install() | call dein#install() | endif
 	catch /E117.*/
@@ -43,6 +47,7 @@ set noundofile
 set nobackup
 set nowritebackup
 set browsedir=buffer
+set matchtime=2
 set list
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 set splitbelow
