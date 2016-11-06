@@ -28,8 +28,8 @@ if has('win32')
 	set renderoptions=type:directx,renmode:5
 	augroup SetGuiFonts
 		autocmd!
-		autocmd *   let &guifont = g:guifonts
-		autocmd tmp let &guifont = 'うずらフォント:h14,' . g:guifonts
+		autocmd GUIEnter *     let &guifont = g:guifonts
+"		autocmd GUIEnter *.tmp let &guifont = 'うずらフォント:h14,' . g:guifonts
 	augroup END
 	augroup SetTransparency
 		autocmd!
