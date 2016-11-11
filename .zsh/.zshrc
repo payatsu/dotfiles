@@ -23,7 +23,9 @@ setopt prompt_subst
 [ "${TERM}" = linux ] && mps=/    || mps=$'\U2199 '
 [ "${TERM}" = linux ] &&  ps='$ ' ||  ps=$'\U1F449 '
 [ "${TERM}" = linux ] && rps=?    || rps=$'\U1F4CA '
-PROMPT='%B%n@%8>..>%m%>>:%20<..<%~%<<[%(?.%F{green}${ok}%f.%F{red}${ng}%f)](%F{magenta}${his}%f:%h, %F{cyan}${job}%f:%j, %F{yellow}${lvl}%f:%L)${mps}
+colors=(red green blue cyan magenta yellow)
+hostname_color=${colors[((0x`hostname | sha1sum - | \grep -oe '[[:xdigit:]] '` % $#colors + 1))]}
+PROMPT='%B%n@%8>..>%F{${hostname_color}}%m%f%>>:%20<..<%~%<<[%(?.%F{green}${ok}%f.%F{red}${ng}%f)](%F{magenta}${his}%f:%h, %F{cyan}${job}%f:%j, %F{yellow}${lvl}%f:%L)${mps}
 %D{${cal}%m/%d${tim}%T}%(!.#.${ps})%b'
 PROMPT2='%_> '
 SPROMPT='zsh: correct %R to %r [nyae]?'
