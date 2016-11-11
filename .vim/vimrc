@@ -98,7 +98,7 @@ if has('diff') | set diffopt=filler,vertical,foldcolumn:2 | endif
 if has('autocmd')
 	augroup MkViewLoadView
 		autocmd!
-		autocmd BufWinLeave ?* silent mkview
+		autocmd BufWinLeave ?* silent! mkview
 		autocmd BufWinEnter ?* silent! loadview
 	augroup END
 	augroup QuickFixCmd
