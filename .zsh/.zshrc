@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+prepend-to()  { [ -d $1 ] || return 1; eval [ -z \"\$$2\" ] && export $2=$1 && return 0; eval echo \$$2 | tr : '\n' | command grep -qe ^$1\$ || eval export $2=$1:\$$2 }
+append-to()   { [ -d $1 ] || return 1; eval [ -z \"\$$2\" ] && export $2=$1 && return 0; eval echo \$$2 | tr : '\n' | command grep -qe ^$1\$ || eval export $2=\$$2:$1 }
+remove-from() { eval $2=`eval echo \\$$2 | sed -e "s%\(^\|:\)$1\(:\|\$\)%\\1\\2%g;s/::/:/g;s/^://;s/:\$//"` }
+[ -f ${ZDOTDIR}/.zshrc.local.pre ] && . ${ZDOTDIR}/.zshrc.local.pre
 autoload -Uz compinit; compinit
 autoload -Uz add-zsh-hook
 autoload -Uz edit-command-line
@@ -13,8 +17,8 @@ bindkey -e
 setopt prompt_subst
 [ "${TERM}" = xterm ] && export TERM=xterm-256color
 [ "${TERM}" = screen ] && [ -n "${TERMCAP}" ] && export TERMCAP=`echo "${TERMCAP}" | sed -e 's/Co#8/Co#256/g'`
-[ "${TERM}" = linux ] &&  ok=OK   ||  ok=$'\U1F197'
-[ "${TERM}" = linux ] &&  ng=NG   ||  ng=$'\U1F196'
+[ "${TERM}" = linux ] &&  ok=OK   ||  ok=$'\U1F197 '
+[ "${TERM}" = linux ] &&  ng=NG   ||  ng=$'\U1F196 '
 [ "${TERM}" = linux ] && his=h    || his=$'\U1F4DD '
 [ "${TERM}" = linux ] && job=j    || job=$'\U1F3C3 '
 [ "${TERM}" = linux ] && lvl=l    || lvl=$'\U1F41A '
@@ -71,14 +75,14 @@ zstyle ':vcs_info:git:*' formats       '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m'
 zstyle ':vcs_info:git:*' actionformats '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m' '%F{red}<<!%a>>%f'
 zstyle ':vcs_info:git:*' patch-format  '(%a patches)'
 zstyle ':vcs_info:git:*' check-for-changes true
-[ "${TERM}" = linux ] &&   stagedstr=+ ||   stagedstr=$'\U1F199'
-[ "${TERM}" = linux ] && unstagedstr=* || unstagedstr=$'\U1F195'
+[ "${TERM}" = linux ] &&   stagedstr=+ ||   stagedstr=$'\U1F199 '
+[ "${TERM}" = linux ] && unstagedstr=* || unstagedstr=$'\U1F195 '
 zstyle ':vcs_info:git:*'   stagedstr "%B%K{cyan}${stagedstr}%k%b"
 zstyle ':vcs_info:git:*' unstagedstr "%B%K{red}${unstagedstr}%k%b"
 function _update_vcs_info()
 {
 	LANG=C vcs_info
-	[ -n "${vcs_info_msg_0_}" ] && _vcs_info="%B%(!.#.${rps})%b${vcs_info_msg_0_}[${vcs_info_msg_1_:= }${vcs_info_msg_2_:= }]${vcs_info_msg_3_}${vcs_info_msg_4_}" || _vcs_info=
+	[ -n "${vcs_info_msg_0_}" ] && _vcs_info="%B%(!.#.${rps})%b${vcs_info_msg_0_}[${vcs_info_msg_1_:=  }${vcs_info_msg_2_:=  }]${vcs_info_msg_3_}${vcs_info_msg_4_}" || _vcs_info=
 }
 add-zsh-hook precmd _update_vcs_info
 alias run-help > /dev/null 2>&1 && unalias run-help
@@ -97,8 +101,8 @@ alias less='less -R'
 alias lv='lv -c'
 alias pt='pt --nogroup'
 alias tgif='tgif -geometry 960x1000'
-whence -p  vim > /dev/null &&  vim --version | \grep -qe '+clientserver' && alias  vim='vim --servername VIM'
-whence -p gvim > /dev/null && gvim --version | \grep -qe '+clientserver' && alias gvim='gvim --servername VIM'
+whence -p  vim > /dev/null &&  vim --version | command grep -qe '+clientserver' && alias  vim='vim --servername VIM'
+whence -p gvim > /dev/null && gvim --version | command grep -qe '+clientserver' && alias gvim='gvim --servername VIM'
 alias xdvi='xdvi -geometry 900x1100-0+0'
 alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l80 -lp -ncs -nfc1 -npcs -nprs -npsl -nsaf -nsai -nsaw -nss -sc -ts4'
 alias gcc='gcc -std=c11   -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wfloat-equal -Wshadow -Wformat -Wwrite-strings'
@@ -111,7 +115,4 @@ alias -s tar.gz='tar xzf'
 alias -s tgz='tar xzf'
 alias -s tar.bz2='tar xjf'
 alias -s tar.xz='tar xJf'
-prepend-to()  { [ -d $1 ] || return 1; eval [ -z \"\$$2\" ] && export $2=$1 && return 0; eval echo \$$2 | tr : '\n' | \grep -qe ^$1\$ || eval export $2=$1:\$$2 }
-append-to()   { [ -d $1 ] || return 1; eval [ -z \"\$$2\" ] && export $2=$1 && return 0; eval echo \$$2 | tr : '\n' | \grep -qe ^$1\$ || eval export $2=\$$2:$1 }
-remove-from() { eval $2=`eval echo \\$$2 | sed -e "s%\(^\|:\)$1\(:\|\$\)%\\1\\2%g;s/::/:/g;s/^://;s/:\$//"` }
 [ -f ${ZDOTDIR}/.zshrc.local.post ] && . ${ZDOTDIR}/.zshrc.local.post || return 0
