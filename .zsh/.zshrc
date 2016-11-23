@@ -99,6 +99,7 @@ alias ls="ls -FGlhpX --group-directories-first${color}"
 alias l='ls'
 alias less='less -R'
 alias lv='lv -c'
+alias pstree='pstree -ahnp'
 alias pt='pt --nogroup'
 alias tgif='tgif -geometry 960x1000'
 whence -p  vim > /dev/null &&  vim --version | command grep -qe '+clientserver' && alias  vim='vim --servername VIM'
