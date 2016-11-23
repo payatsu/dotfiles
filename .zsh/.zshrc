@@ -90,6 +90,7 @@ alias run-help > /dev/null 2>&1 && unalias run-help
 alias ag='ag --nogroup'
 alias du='du -h'
 alias df='df -h'
+alias gcov='gcov -bdflmr'
 alias gdb='gdb -q'
 alias grep="grep --exclude-dir='*.svn'${color}"
 alias g='grep'
