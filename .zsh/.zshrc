@@ -28,8 +28,8 @@ setopt prompt_subst
 [ "${TERM}" = linux ] &&  ps='$ ' ||  ps=$'\U1F449 '
 [ "${TERM}" = linux ] && rps=?    || rps=$'\U1F4CA '
 colors=(red green blue cyan magenta yellow)
-hostname_color=${colors[((0x`hostname | sha1sum - | \grep -oe '[[:xdigit:]] '` % $#colors + 1))]}
-PROMPT='%B%n@%8>..>%F{${hostname_color}}%m%f%>>:%20<..<%~%<<[%(?.%F{green}${ok}%f.%F{red}${ng}%f)](%F{magenta}${his}%f:%h, %F{cyan}${job}%f:%j, %F{yellow}${lvl}%f:%L)${mps}
+hostname_color=${colors[((0x`hostname | sha1sum - | command grep -oe '[[:xdigit:]] '` % $#colors + 1))]}
+PROMPT='%B%n@%8>..>%F{${hostname_color}}%m%f%>>:%20<..<%~%<<[%(?.%F{green}${ok}%f.%F{red}${ng}%f)](%F{magenta}${his}%f:%h, %F{cyan}${job}%f:%1(j.%U%F{red}.)%j%1(j.%f%u.), %F{yellow}${lvl}%f:%L)${mps}
 %D{${cal}%m/%d${tim}%T}%(!.#.${ps})%b'
 PROMPT2='%_> '
 SPROMPT='zsh: correct %R to %r [nyae]?'
@@ -65,18 +65,19 @@ export WORDCHARS=''
 # zle -N history-beginning-search-forward-end history-search-end
 # bindkey "" history-beginning-search-backward-end
 # bindkey "" history-beginning-search-forward-end
+[ "${TERM}" = linux ] &&  warningstr=! ||  warningstr=$'\U26A0 '
+[ "${TERM}" = linux ] &&   stagedstr=+ ||   stagedstr=$'\U1F199 '
+[ "${TERM}" = linux ] && unstagedstr=* || unstagedstr=$'\U1F195 '
 zstyle ':vcs_info:*' max-exports 5
 zstyle ':vcs_info:*' enable bzr git hg p4 svn
 zstyle ':vcs_info:*' formats       '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m'
-zstyle ':vcs_info:*' actionformats '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m' '%F{red}<<!%a>>%f'
+zstyle ':vcs_info:*' actionformats '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m' "%F{red}${warningstr}%a%f"
 zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
 zstyle ':vcs_info:bzr:*' use-simple true
 zstyle ':vcs_info:git:*' formats       '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m'
-zstyle ':vcs_info:git:*' actionformats '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m' '%F{red}<<!%a>>%f'
+zstyle ':vcs_info:git:*' actionformats '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m' "%F{red}${warningstr}%a%f"
 zstyle ':vcs_info:git:*' patch-format  '(%a patches)'
 zstyle ':vcs_info:git:*' check-for-changes true
-[ "${TERM}" = linux ] &&   stagedstr=+ ||   stagedstr=$'\U1F199 '
-[ "${TERM}" = linux ] && unstagedstr=* || unstagedstr=$'\U1F195 '
 zstyle ':vcs_info:git:*'   stagedstr "%B%K{cyan}${stagedstr}%k%b"
 zstyle ':vcs_info:git:*' unstagedstr "%B%K{red}${unstagedstr}%k%b"
 function _update_vcs_info()
