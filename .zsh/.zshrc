@@ -15,8 +15,9 @@ autoload -Uz run-help run-help-git run-help-p4 run-help-svn run-help-openssl run
 # autoload -Uz history-search-end
 bindkey -e
 setopt prompt_subst
-[ "${TERM}" = xterm ] && export TERM=xterm-256color
-[ "${TERM}" = screen ] && [ -n "${TERMCAP}" ] && export TERMCAP=`echo "${TERMCAP}" | sed -e 's/Co#8/Co#256/g'`
+[ "${TERM}" = xterm  ] && export TERM=xterm-256color
+[ "${TERM}" = screen ] && export TERM=screen-256color
+[ "${TERM}" = screen-256color ] && [ -n "${TERMCAP}" ] && export TERMCAP=`echo "${TERMCAP}" | sed -e 's/Co#8/Co#256/g'`
 [ "${TERM}" = linux ] &&  ok=OK   ||  ok=$'\U1F197 '
 [ "${TERM}" = linux ] &&  ng=NG   ||  ng=$'\U1F196 '
 [ "${TERM}" = linux ] && his=h    || his=$'\U1F4DD '
