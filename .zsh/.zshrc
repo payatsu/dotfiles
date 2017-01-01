@@ -1,8 +1,10 @@
 #!/bin/zsh
 
-prepend-to()  { [ -d $1 ] || return 1; eval [ -z \"\$$2\" ] && export $2=$1 && return 0; eval echo \$$2 | tr : '\n' | command grep -qe ^$1\$ || eval export $2=$1:\$$2 }
-append-to()   { [ -d $1 ] || return 1; eval [ -z \"\$$2\" ] && export $2=$1 && return 0; eval echo \$$2 | tr : '\n' | command grep -qe ^$1\$ || eval export $2=\$$2:$1 }
-remove-from() { eval $2=`eval echo \\$$2 | sed -e "s%\(^\|:\)$1\(:\|\$\)%\\1\\2%g;s/::/:/g;s/^://;s/:\$//"` }
+prepend-to()  { [ -d "${1}" -a -n "${2}" ] || return; eval [ -z \"\${${2}}\" ] && export ${2}=${1} && return; eval echo \${${2}} | tr : '\n' | grep -qe ^${1}\$ || eval ${2}=${1}:\${${2}} }
+append-to()   { [ -d "${1}" -a -n "${2}" ] || return; eval [ -z \"\${${2}}\" ] && export ${2}=${1} && return; eval echo \${${2}} | tr : '\n' | grep -qe ^${1}\$ || eval ${2}=\${${2}}:${1} }
+remove-from() { [ -d "${1}" -a -n "${2}" ] || return; eval ${2}=`eval echo \\\${${2}} | sed -e "s%\(^\|:\)${1}\(:\|\$\)%\\1\\2%g;s/::/:/g;s/^://;s/:\$//"` }
+lrotate() { [ -n "${1}" ] || return; eval ${1}=`eval echo \\\${${1}} | sed -e 's/^\([^:]\+\):\(.\+\)$/\2:\1/;s/::/:/g;s/^://;s/:$//'` }
+rrotate() { [ -n "${1}" ] || return; eval ${1}=`eval echo \\\${${1}} | sed -e 's/^\(.\+\):\([^:]\+\)$/\2:\1/;s/::/:/g;s/^://;s/:$//'` }
 [ -f ${ZDOTDIR}/.zshrc.local.pre ] && . ${ZDOTDIR}/.zshrc.local.pre
 autoload -Uz compinit; compinit
 autoload -Uz add-zsh-hook
@@ -29,7 +31,7 @@ setopt prompt_subst
 [ "${TERM}" = linux ] &&  ps='$ ' ||  ps=$'\U1F449 '
 [ "${TERM}" = linux ] && rps=?    || rps=$'\U1F4CA '
 colors=(red green blue cyan magenta yellow)
-hostname_color=${colors[((0x`hostname | sha1sum - | command grep -oe '[[:xdigit:]] '` % $#colors + 1))]}
+hostname_color=${colors[((0x`hostname | sha1sum - | grep -oe '[[:xdigit:]] '` % $#colors + 1))]}
 PROMPT='%B%n@%8>..>%F{${hostname_color}}%m%f%>>:%20<..<%~%<<[%(?.%F{green}${ok}%f.%F{red}${ng}%f)](%F{magenta}${his}%f:%h, %F{cyan}${job}%f:%1(j.%U%F{red}.)%j%1(j.%f%u.), %F{yellow}${lvl}%f:%L)${mps}
 %D{${cal}%m/%d${tim}%T}%(!.#.${ps})%b'
 PROMPT2='%_> '
@@ -38,7 +40,7 @@ RPROMPT='${_vcs_info}'
 [ "${EMACS}" = t ] && unsetopt zle
 setopt auto_cd
 setopt auto_pushd
-setopt always_to_end
+
 setopt complete_aliases
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' completer _complete _expand _match _prefix _list _approximate # _history
@@ -95,7 +97,7 @@ alias du='du -h'
 alias df='df -h'
 alias gcov='gcov -bdflmr'
 alias gdb='gdb -q'
-alias grep="grep --exclude-dir='*.svn'${color}"
+grep --exclude-dir='*.svn' -e '' /dev/null > /dev/null 2>&1 && alias grep="grep --exclude-dir='*.svn'${color}"
 alias g='grep'
 alias gtags='gtags -c'
 alias hw='hw --no-group -e'
@@ -109,8 +111,8 @@ alias readelf='readelf -W'
 alias pstree='pstree -ahnp'
 alias pt='pt --nogroup'
 alias tgif='tgif -geometry 960x1000'
-whence -p  vim > /dev/null &&  vim --version | command grep -qe '+clientserver' && alias  vim='vim --servername VIM'
-whence -p gvim > /dev/null && gvim --version | command grep -qe '+clientserver' && alias gvim='gvim --servername VIM'
+whence -p  vim > /dev/null &&  vim --version | grep -qe '+clientserver' && alias  vim='vim --servername VIM'
+whence -p gvim > /dev/null && gvim --version | grep -qe '+clientserver' && alias gvim='gvim --servername VIM'
 alias xdvi='xdvi -geometry 900x1100-0+0'
 alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l80 -lp -ncs -nfc1 -npcs -nprs -npsl -nsaf -nsai -nsaw -nss -sc -ts4'
 alias gcc='gcc -std=c11   -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wfloat-equal -Wshadow -Wformat -Wwrite-strings'
