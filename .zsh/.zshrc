@@ -83,7 +83,7 @@ zstyle ':vcs_info:git:*' patch-format  '(%a patches)'
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*'   stagedstr "%B%K{cyan}${stagedstr}%k%b"
 zstyle ':vcs_info:git:*' unstagedstr "%B%K{red}${unstagedstr}%k%b"
-function _update_vcs_info()
+_update_vcs_info()
 {
 	LANG=C vcs_info
 	[ -n "${vcs_info_msg_0_}" ] && _vcs_info="%B%(!.#.${rps})%b${vcs_info_msg_0_}[${vcs_info_msg_1_:=  }${vcs_info_msg_2_:=  }]${vcs_info_msg_3_}${vcs_info_msg_4_}" || _vcs_info=
@@ -91,17 +91,19 @@ function _update_vcs_info()
 add-zsh-hook precmd _update_vcs_info
 alias run-help > /dev/null 2>&1 && unalias run-help
 [ "${TERM}" = dumb ] && color= || color=' --color=auto'
+echo | grep -e '' --exclude-dir='*.svn' > /dev/null 2>&1 && grep_exclude_dir="--exclude-dir='*.svn'"
+ls --group-directories-first /dev/null > /dev/null 2>&1 && ls_group_directories_first=--group-directories-first
 alias addr2line='addr2line -C -f'
 alias ag='ag --nogroup'
 alias du='du -h'
 alias df='df -h'
 alias gcov='gcov -bdflmr'
 alias gdb='gdb -q'
-grep --exclude-dir='*.svn' -e '' /dev/null > /dev/null 2>&1 && alias grep="grep --exclude-dir='*.svn'${color}"
+alias grep="grep ${grep_exclude_dir}${color}"
 alias g='grep'
 alias gtags='gtags -c'
 alias hw='hw --no-group -e'
-alias ls="ls -FGlhpX --group-directories-first${color}"
+alias ls="ls -FGlhpX ${ls_group_directories_first}${color}"
 alias l='ls'
 alias less='less -R'
 alias lv='lv -c'
