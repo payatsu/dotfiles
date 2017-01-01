@@ -4,6 +4,7 @@ if has('eval')
 	let s:runtimepath_dein = s:runtimepath_first . '/repos/github.com/Shougo/dein.vim'
 	if &runtimepath !~# s:runtimepath_dein | let &runtimepath .= ',' . s:runtimepath_dein | endif
 	try
+		call dein#load_state(s:runtimepath_first)
 		call dein#begin(s:runtimepath_first)
 		call dein#add('Shougo/dein.vim')
 		call dein#add('thinca/vim-quickrun')
@@ -16,6 +17,7 @@ if has('eval')
 		call dein#add('altercation/vim-colors-solarized')
 		call dein#add('vim-scripts/twilight')
 		call dein#end()
+		call dein#save_state()
 		if dein#check_install() | call dein#install() | endif
 	catch /E117.*/
 	endtry
