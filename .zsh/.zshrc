@@ -1,10 +1,10 @@
 #!/bin/zsh
 
-prepend-to()  { [ -d "${1}" -a -n "${2}" ] || return; eval [ -z \"\${${2}}\" ] && export ${2}=${1} && return; eval echo \${${2}} | tr : '\n' | grep -qe ^${1}\$ || eval ${2}=${1}:\${${2}} }
-append-to()   { [ -d "${1}" -a -n "${2}" ] || return; eval [ -z \"\${${2}}\" ] && export ${2}=${1} && return; eval echo \${${2}} | tr : '\n' | grep -qe ^${1}\$ || eval ${2}=\${${2}}:${1} }
-remove-from() { [ -d "${1}" -a -n "${2}" ] || return; eval ${2}=`eval echo \\\${${2}} | sed -e "s%\(^\|:\)${1}\(:\|\$\)%\\1\\2%g;s/::/:/g;s/^://;s/:\$//"` }
-lrotate() { [ -n "${1}" ] || return; eval ${1}=`eval echo \\\${${1}} | sed -e 's/^\([^:]\+\):\(.\+\)$/\2:\1/;s/::/:/g;s/^://;s/:$//'` }
-rrotate() { [ -n "${1}" ] || return; eval ${1}=`eval echo \\\${${1}} | sed -e 's/^\(.\+\):\([^:]\+\)$/\2:\1/;s/::/:/g;s/^://;s/:$//'` }
+prepend-to() { [ -d "${1}" -a -n "${2}" ] || return; eval [ -z \"\${${2}}\" ] && export ${2}=${1} && return; eval echo \${${2}} | tr : '\n' | grep -qe ^${1}\$ || eval ${2}=${1}:\${${2}};}
+append-to()  { [ -d "${1}" -a -n "${2}" ] || return; eval [ -z \"\${${2}}\" ] && export ${2}=${1} && return; eval echo \${${2}} | tr : '\n' | grep -qe ^${1}\$ || eval ${2}=\${${2}}:${1};}
+remove-from(){ [ -d "${1}" -a -n "${2}" ] || return; eval ${2}=`eval echo \\\${${2}} | sed -e "s%\(^\|:\)${1}\(:\|\$\)%\\1\\2%g;s/::/:/g;s/^://;s/:\$//"`;}
+lrotate(){ [ -n "${1}" ] || return; eval ${1}=`eval echo \\\${${1}} | sed -e 's/^\([^:]\+\):\(.\+\)$/\2:\1/;s/::/:/g;s/^://;s/:$//'`;}
+rrotate(){ [ -n "${1}" ] || return; eval ${1}=`eval echo \\\${${1}} | sed -e 's/^\(.\+\):\([^:]\+\)$/\2:\1/;s/::/:/g;s/^://;s/:$//'`;}
 [ -f ${ZDOTDIR}/.zshrc.local.pre ] && . ${ZDOTDIR}/.zshrc.local.pre
 autoload -Uz compinit; compinit
 autoload -Uz add-zsh-hook
@@ -127,4 +127,4 @@ alias -s tar.gz='tar xzf'
 alias -s tgz='tar xzf'
 alias -s tar.bz2='tar xjf'
 alias -s tar.xz='tar xJf'
-[ -f ${ZDOTDIR}/.zshrc.local.post ] && . ${ZDOTDIR}/.zshrc.local.post || return 0
+[ -f ${ZDOTDIR}/.zshrc.local.post ] && . ${ZDOTDIR}/.zshrc.local.post || true
