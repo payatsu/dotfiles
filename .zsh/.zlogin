@@ -10,4 +10,4 @@ for p in `echo ${GOPATH} | tr : ' '`; do
 	append-to ${p}/bin PATH
 done
 
-[ -r ${ZDOTDIR}/.zlogin.local.post ] && . ${ZDOTDIR}/.zlogin.local.post || return 0
+[ -r ${ZDOTDIR}/.zlogin.local.post ] && . ${ZDOTDIR}/.zlogin.local.post || true
