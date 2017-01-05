@@ -4,6 +4,8 @@
 
 whence -p vim > /dev/null 2>&1 && export EDITOR=vim || export EDITOR=vi
 export PAGER=less
+export LESS=MNSx4
+whence -p lesspipe > /dev/null 2>&1 && eval `lesspipe`
 
 export GOPATH=${HOME}/.go
 for p in `echo ${GOPATH} | tr : ' '`; do
