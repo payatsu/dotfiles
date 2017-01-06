@@ -4,7 +4,7 @@
 
 whence -p vim > /dev/null 2>&1 && export EDITOR=vim || export EDITOR=vi
 export PAGER=less
-export LESS=MNRSx4
+export LESS=FMNRSx4X
 whence -p lesspipe > /dev/null 2>&1 && eval `lesspipe`
 
 export GOPATH=${HOME}/.go
