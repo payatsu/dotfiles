@@ -117,8 +117,8 @@ whence -p  vim > /dev/null &&  vim --version | grep -qe '+clientserver' && alias
 whence -p gvim > /dev/null && gvim --version | grep -qe '+clientserver' && alias gvim='gvim --servername VIM'
 alias xdvi='xdvi -geometry 900x1100-0+0'
 alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l80 -lp -ncs -nfc1 -npcs -nprs -npsl -nsaf -nsai -nsaw -nss -sc -ts4'
-alias gcc='gcc -std=c11   -march=native -Wpedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wfloat-equal -Wshadow -Wformat -Wwrite-strings'
-alias g++='g++ -std=c++14 -march=native -Wpedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wfloat-equal -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual'
+alias gcc="gcc -std=c11   -march=native -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C gcc -Q --help=warnings,^joined,^separate,c   | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Werror\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
+alias g++="g++ -std=c++14 -march=native -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C g++ -Q --help=warnings,^joined,^separate,c++ | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Werror\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
 alias clang='clang     -std=c11   -march=native -Wpedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual'
 alias clang++='clang++ -std=c++14 -march=native -Wpedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual -stdlib=libc++ -lc++abi'
 # alias ctags='ctags --declarations --defines --globals --members --typedefs --typedefs-and-c++'
