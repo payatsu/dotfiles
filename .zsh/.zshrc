@@ -5,6 +5,7 @@ append() { [ -d "${1}" -a -n "${2}" ] || return; eval [ -z \"\${${2}}\" ] && exp
 remove() { [ -d "${1}" -a -n "${2}" ] || return; eval ${2}=`eval echo \\\${${2}} | sed -e "s%\(^\|:\)${1}\(:\|\$\)%\\1\\2%g;s/::/:/g;s/^://;s/:\$//"`;}
 lrotate(){ [ -n "${1}" ] || return; eval ${1}=`eval echo \\\${${1}} | sed -e 's/^\([^:]\+\):\(.\+\)$/\2:\1/;s/::/:/g;s/^://;s/:$//'`;}
 rrotate(){ [ -n "${1}" ] || return; eval ${1}=`eval echo \\\${${1}} | sed -e 's/^\(.\+\):\([^:]\+\)$/\2:\1/;s/::/:/g;s/^://;s/:$//'`;}
+my(){ PATH=${MYPATH}:${PATH} eval "$@";}
 [ -f ${ZDOTDIR}/.zshrc.local.pre ] && . ${ZDOTDIR}/.zshrc.local.pre
 autoload -Uz compinit; compinit
 autoload -Uz add-zsh-hook
