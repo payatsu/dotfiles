@@ -112,6 +112,7 @@ alias nm='nm -C'
 alias objdump='objdump -C'
 alias od='od -Ax -tx1z -v'
 alias readelf='readelf -W'
+alias p="ps auxww | command grep -e '^USER\\|^${USER}'"
 alias pstree='pstree -ahnp'
 alias pt='pt --nogroup'
 alias tgif='tgif -geometry 960x1000'
