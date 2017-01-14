@@ -41,10 +41,10 @@ RPROMPT='${_vcs_info}'
 [ "${EMACS}" = t ] && unsetopt zle
 setopt auto_cd
 setopt auto_pushd
-
 setopt complete_aliases
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' completer _complete _expand _match _prefix _list _approximate # _history
+zstyle ':completion:*:default' menu select=1
 zstyle ':completion:*:processes' command "ps -u ${USER} -o pid,stat,%cpu,%mem,cputime,command"
 setopt nolistbeep
 setopt listpacked
@@ -52,9 +52,14 @@ LISTMAX=0
 setopt hist_ignore_dups
 setopt hist_save_nodups
 setopt share_history
+setopt extended_history
 HISTFILE=${ZDOTDIR}/.zsh_history
 HISTSIZE=10000
-SAVEHIST=10000
+SAVEHIST=500000
+# zle -N history-beginning-search-backward-end history-search-end
+# zle -N history-beginning-search-forward-end history-search-end
+bindkey "p" history-beginning-search-backward
+bindkey "n" history-beginning-search-forward
 setopt correct
 setopt nohup
 setopt interactive_comments
@@ -65,10 +70,6 @@ zstyle ':completion:*:*:cdr:*:*' menu selection
 umask 022
 export WORDCHARS=''
 [ -r /etc/zsh_command_not_found ] && . /etc/zsh_command_not_found
-# zle -N history-beginning-search-backward-end history-search-end
-# zle -N history-beginning-search-forward-end history-search-end
-# bindkey "" history-beginning-search-backward-end
-# bindkey "" history-beginning-search-forward-end
 [ "${TERM}" = linux ] &&  warningstr=! ||  warningstr=$'\U26A0 '
 [ "${TERM}" = linux ] &&   stagedstr=+ ||   stagedstr=$'\U1F199 '
 [ "${TERM}" = linux ] && unstagedstr=* || unstagedstr=$'\U1F195 '
@@ -84,11 +85,7 @@ zstyle ':vcs_info:git:*' patch-format  '(%a patches)'
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*'   stagedstr "%B%K{cyan}${stagedstr}%k%b"
 zstyle ':vcs_info:git:*' unstagedstr "%B%K{red}${unstagedstr}%k%b"
-_update_vcs_info()
-{
-	LANG=C vcs_info
-	[ -n "${vcs_info_msg_0_}" ] && _vcs_info="%B%(!.#.${rps})%b${vcs_info_msg_0_}[${vcs_info_msg_1_:=  }${vcs_info_msg_2_:=  }]${vcs_info_msg_3_}${vcs_info_msg_4_}" || _vcs_info=
-}
+_update_vcs_info(){ LANG=C vcs_info; [ -n "${vcs_info_msg_0_}" ] && _vcs_info="%B%(!.#.${rps})%b${vcs_info_msg_0_}[${vcs_info_msg_1_:=  }${vcs_info_msg_2_:=  }]${vcs_info_msg_3_}${vcs_info_msg_4_}" || _vcs_info=;}
 add-zsh-hook precmd _update_vcs_info
 alias run-help > /dev/null 2>&1 && unalias run-help
 [ "${TERM}" = dumb ] && color= || color=' --color=auto'
@@ -96,30 +93,33 @@ echo | grep -e '' --exclude-dir='*.svn' > /dev/null 2>&1 && grep_exclude_dir="--
 ls --group-directories-first /dev/null > /dev/null 2>&1 && ls_group_directories_first=--group-directories-first
 alias addr2line='addr2line -C -f'
 alias ag='ag --nogroup'
-alias du='du -h'
 alias df='df -h'
+alias du='du -h'
 alias gcov='gcov -bdflmr'
 alias gdb='gdb -q'
 alias grep="grep ${grep_exclude_dir}${color}"
 alias g='grep'
 alias gtags='gtags -c'
+alias history='history -i'
+alias h='history'
 alias hw='hw --no-group -e'
+alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l80 -lp -ncs -nfc1 -npcs -nprs -npsl -nsaf -nsai -nsaw -nss -sc -ts4'
+alias less='less -MNRSx4'
 alias ls="ls -FGlhpX ${ls_group_directories_first}${color}"
 alias l='ls'
-alias less='less -MNRSx4'
 alias lv='lv -c'
 alias nm='nm -C'
+alias objdump='objdump -C'
 alias od='od -Ax -tx1z -v'
 alias readelf='readelf -W'
 alias pstree='pstree -ahnp'
 alias pt='pt --nogroup'
 alias tgif='tgif -geometry 960x1000'
-whence -p  vim > /dev/null &&  vim --version | grep -qe '+clientserver' && alias  vim='vim --servername VIM'
-whence -p gvim > /dev/null && gvim --version | grep -qe '+clientserver' && alias gvim='gvim --servername VIM'
+which -p  vim > /dev/null 2>&1 &&  vim --version | grep -qe '+clientserver' && alias  vim='vim --servername VIM'
+which -p gvim > /dev/null 2>&1 && gvim --version | grep -qe '+clientserver' && alias gvim='gvim --servername VIM'
 alias xdvi='xdvi -geometry 900x1100-0+0'
-alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l80 -lp -ncs -nfc1 -npcs -nprs -npsl -nsaf -nsai -nsaw -nss -sc -ts4'
-alias gcc="gcc -std=c11   -march=native -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C gcc -Q --help=warnings,^joined,^separate,c   | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Werror\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
-alias g++="g++ -std=c++14 -march=native -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C g++ -Q --help=warnings,^joined,^separate,c++ | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Werror\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
+alias gcc="gcc -std=c11   -march=native -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C gcc /dev/null -Q --help=warnings,^joined,^separate,c   | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Werror\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
+alias g++="g++ -std=c++14 -march=native -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C g++ /dev/null -Q --help=warnings,^joined,^separate,c++ | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Werror\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
 alias clang='clang     -std=c11   -march=native -Wpedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual'
 alias clang++='clang++ -std=c++14 -march=native -Wpedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual -stdlib=libc++ -lc++abi'
 # alias ctags='ctags --declarations --defines --globals --members --typedefs --typedefs-and-c++'
