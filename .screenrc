@@ -83,3 +83,4 @@ layout new 0:default
 layout new 1:layout1
 layout new 2:layout2
 layout select 0
+source .screen/screenrc.local
