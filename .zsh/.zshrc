@@ -68,7 +68,7 @@ bindkey '^xe' edit-command-line
 add-zsh-hook chpwd chpwd_recent_dirs
 zstyle ':completion:*:*:cdr:*:*' menu selection
 umask 022
-export WORDCHARS=''
+WORDCHARS=''
 [ -r /etc/zsh_command_not_found ] && . /etc/zsh_command_not_found
 [ "${TERM}" = linux ] &&  warningstr=! ||  warningstr=$'\U26A0 '
 [ "${TERM}" = linux ] &&   stagedstr=+ ||   stagedstr=$'\U1F199 '
