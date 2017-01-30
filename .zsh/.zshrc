@@ -21,16 +21,17 @@ setopt prompt_subst
 [ "${TERM}" = xterm  ] && export TERM=xterm-256color
 [ "${TERM}" = screen ] && export TERM=screen-256color
 [ "${TERM}" = screen-256color ] && [ -n "${TERMCAP}" ] && export TERMCAP=`echo "${TERMCAP}" | sed -e 's/Co#8/Co#256/g'`
-[ -z "${emoji_available}" ] &&  ok=OK   ||  ok=$'\U1F197 '
-[ -z "${emoji_available}" ] &&  ng=NG   ||  ng=$'\U1F196 '
-[ -z "${emoji_available}" ] && his=h    || his=$'\U1F4DD '
-[ -z "${emoji_available}" ] && job=j    || job=$'\U1F3C3 '
-[ -z "${emoji_available}" ] && lvl=l    || lvl=$'\U1F41A '
-[ -z "${emoji_available}" ] && cal=     || cal=$'\U1F4C6 '
-[ -z "${emoji_available}" ] && tim=' '  || tim=$'\U231A '
-[ -z "${emoji_available}" ] && mps=/    || mps=$'\U2199 '
-[ -z "${emoji_available}" ] &&  ps='$ ' ||  ps=$'\U1F449 '
-[ -z "${emoji_available}" ] && rps=?    || rps=$'\U1F4CA '
+[ -z "${emoji_available}" ] && ambiguous_padding= || ambiguous_padding=' '
+[ -z "${emoji_available}" ] &&  ok=OK   ||  ok=$'\U1F197'${ambiguous_padding}
+[ -z "${emoji_available}" ] &&  ng=NG   ||  ng=$'\U1F196'${ambiguous_padding}
+[ -z "${emoji_available}" ] && his=h    || his=$'\U1F4DD'${ambiguous_padding}
+[ -z "${emoji_available}" ] && job=j    || job=$'\U1F3C3'${ambiguous_padding}
+[ -z "${emoji_available}" ] && lvl=l    || lvl=$'\U1F41A'${ambiguous_padding}
+[ -z "${emoji_available}" ] && cal=     || cal=$'\U1F4C6'${ambiguous_padding}
+[ -z "${emoji_available}" ] && tim=' '  || tim=$'\U231A'${ambiguous_padding}
+[ -z "${emoji_available}" ] && mps=/    || mps=$'\U2199'${ambiguous_padding}
+[ -z "${emoji_available}" ] &&  ps='$ ' ||  ps=$'\U1F449'${ambiguous_padding}
+[ -z "${emoji_available}" ] && rps=?    || rps=$'\U1F4CA'${ambiguous_padding}
 colors=(red green blue cyan magenta yellow)
 hostname_color=${colors[((0x`hostname | sha1sum - | grep -oe '[[:xdigit:]] '` % $#colors + 1))]}
 PROMPT='%B%n@%8>..>%F{${hostname_color}}%m%f%>>:%20<..<%~%<<[%(?.%F{green}${ok}%f.%F{red}${ng}%f)](%F{magenta}${his}%f:%h, %F{cyan}${job}%f:%1(j.%U%F{red}.)%j%1(j.%f%u.), %F{yellow}${lvl}%f:%L)${mps}
@@ -70,9 +71,9 @@ zstyle ':completion:*:*:cdr:*:*' menu selection
 umask 022
 WORDCHARS=''
 [ -r /etc/zsh_command_not_found ] && . /etc/zsh_command_not_found
-[ -z "${emoji_available}" ] &&  warningstr=! ||  warningstr=$'\U26A0 '
-[ -z "${emoji_available}" ] &&   stagedstr=+ ||   stagedstr=$'\U1F199 '
-[ -z "${emoji_available}" ] && unstagedstr=* || unstagedstr=$'\U1F195 '
+[ -z "${emoji_available}" ] &&  warningstr=! ||  warningstr=$'\U26A0'${ambiguous_padding}
+[ -z "${emoji_available}" ] &&   stagedstr=+ ||   stagedstr=$'\U1F199'${ambiguous_padding}
+[ -z "${emoji_available}" ] && unstagedstr=* || unstagedstr=$'\U1F195'${ambiguous_padding}
 zstyle ':vcs_info:*' max-exports 5
 zstyle ':vcs_info:*' enable bzr git hg p4 svn
 zstyle ':vcs_info:*' formats       '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m'
@@ -85,7 +86,7 @@ zstyle ':vcs_info:git:*' patch-format  '(%a patches)'
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*'   stagedstr "%B%K{cyan}${stagedstr}%k%b"
 zstyle ':vcs_info:git:*' unstagedstr "%B%K{red}${unstagedstr}%k%b"
-_update_vcs_info(){ LANG=C vcs_info; [ -n "${vcs_info_msg_0_}" ] && _vcs_info="%B%(!.#.${rps})%b${vcs_info_msg_0_}[${vcs_info_msg_1_:=  }${vcs_info_msg_2_:=  }]${vcs_info_msg_3_}${vcs_info_msg_4_}" || _vcs_info=;}
+_update_vcs_info(){ LANG=C vcs_info; [ -n "${vcs_info_msg_0_}" ] && _vcs_info="%B%(!.#.${rps})%b${vcs_info_msg_0_}[${vcs_info_msg_1_:= ${ambiguous_padding}}${vcs_info_msg_2_:= ${ambiguous_padding}}]${vcs_info_msg_3_}${vcs_info_msg_4_}" || _vcs_info=;}
 add-zsh-hook precmd _update_vcs_info
 alias run-help > /dev/null 2>&1 && unalias run-help
 [ "${TERM}" = dumb ] && color= || color=' --color=auto'
