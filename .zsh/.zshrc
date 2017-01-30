@@ -21,16 +21,16 @@ setopt prompt_subst
 [ "${TERM}" = xterm  ] && export TERM=xterm-256color
 [ "${TERM}" = screen ] && export TERM=screen-256color
 [ "${TERM}" = screen-256color ] && [ -n "${TERMCAP}" ] && export TERMCAP=`echo "${TERMCAP}" | sed -e 's/Co#8/Co#256/g'`
-[ "${TERM}" = linux ] &&  ok=OK   ||  ok=$'\U1F197 '
-[ "${TERM}" = linux ] &&  ng=NG   ||  ng=$'\U1F196 '
-[ "${TERM}" = linux ] && his=h    || his=$'\U1F4DD '
-[ "${TERM}" = linux ] && job=j    || job=$'\U1F3C3 '
-[ "${TERM}" = linux ] && lvl=l    || lvl=$'\U1F41A '
-[ "${TERM}" = linux ] && cal=     || cal=$'\U1F4C6 '
-[ "${TERM}" = linux ] && tim=' '  || tim=$'\U231A '
-[ "${TERM}" = linux ] && mps=/    || mps=$'\U2199 '
-[ "${TERM}" = linux ] &&  ps='$ ' ||  ps=$'\U1F449 '
-[ "${TERM}" = linux ] && rps=?    || rps=$'\U1F4CA '
+[ -z "${emoji_available}" ] &&  ok=OK   ||  ok=$'\U1F197 '
+[ -z "${emoji_available}" ] &&  ng=NG   ||  ng=$'\U1F196 '
+[ -z "${emoji_available}" ] && his=h    || his=$'\U1F4DD '
+[ -z "${emoji_available}" ] && job=j    || job=$'\U1F3C3 '
+[ -z "${emoji_available}" ] && lvl=l    || lvl=$'\U1F41A '
+[ -z "${emoji_available}" ] && cal=     || cal=$'\U1F4C6 '
+[ -z "${emoji_available}" ] && tim=' '  || tim=$'\U231A '
+[ -z "${emoji_available}" ] && mps=/    || mps=$'\U2199 '
+[ -z "${emoji_available}" ] &&  ps='$ ' ||  ps=$'\U1F449 '
+[ -z "${emoji_available}" ] && rps=?    || rps=$'\U1F4CA '
 colors=(red green blue cyan magenta yellow)
 hostname_color=${colors[((0x`hostname | sha1sum - | grep -oe '[[:xdigit:]] '` % $#colors + 1))]}
 PROMPT='%B%n@%8>..>%F{${hostname_color}}%m%f%>>:%20<..<%~%<<[%(?.%F{green}${ok}%f.%F{red}${ng}%f)](%F{magenta}${his}%f:%h, %F{cyan}${job}%f:%1(j.%U%F{red}.)%j%1(j.%f%u.), %F{yellow}${lvl}%f:%L)${mps}
@@ -70,9 +70,9 @@ zstyle ':completion:*:*:cdr:*:*' menu selection
 umask 022
 WORDCHARS=''
 [ -r /etc/zsh_command_not_found ] && . /etc/zsh_command_not_found
-[ "${TERM}" = linux ] &&  warningstr=! ||  warningstr=$'\U26A0 '
-[ "${TERM}" = linux ] &&   stagedstr=+ ||   stagedstr=$'\U1F199 '
-[ "${TERM}" = linux ] && unstagedstr=* || unstagedstr=$'\U1F195 '
+[ -z "${emoji_available}" ] &&  warningstr=! ||  warningstr=$'\U26A0 '
+[ -z "${emoji_available}" ] &&   stagedstr=+ ||   stagedstr=$'\U1F199 '
+[ -z "${emoji_available}" ] && unstagedstr=* || unstagedstr=$'\U1F195 '
 zstyle ':vcs_info:*' max-exports 5
 zstyle ':vcs_info:*' enable bzr git hg p4 svn
 zstyle ':vcs_info:*' formats       '%B%r%%b(%s):%B%b%%b' '%c' '%u' '%m'
