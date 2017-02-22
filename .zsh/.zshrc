@@ -36,7 +36,7 @@ colors=(red green blue cyan magenta yellow)
 hostname_color=${colors[((0x`hostname | sha1sum - | grep -oe '[[:xdigit:]] '` % $#colors + 1))]}
 PROMPT='%B%n@%8>..>%F{${hostname_color}}%m%f%>>%b%B:%b%B%20<..<%~%<<[%(?.%F{green}${ok}%f.%F{red}${ng}%f)]%b%B(%F{magenta}${his}%f:%h/%F{cyan}${job}%f:%1(j.%U%F{red}.)%j%1(j.%f%u.)/%F{yellow}${lvl}%f:%L)${mps}%b
 %B%D{${cal}%m/%d${tim}%T}%(!.#.${ps})%b'
-RPROMPT='${vcs_info_msg_0_:+%B%(!.#.${rps})%b%B${vcs_info_msg_0_}%b(${vcs_info_msg_1_}):%B${vcs_info_msg_2_}%b/%B%30<..<${vcs_info_msg_3_}%<<%b[${vcs_info_msg_4_:= ${ambiguous_padding}}${vcs_info_msg_5_:= ${ambiguous_padding}}]${vcs_info_msg_6_}%F{red}${vcs_info_msg_7_}%f}'
+RPROMPT='${vcs_info_msg_0_:+%B%(!.#.${rps})%b%B${vcs_info_msg_0_}%b(${vcs_info_msg_1_}):%B${vcs_info_msg_2_}%b/%B%30<..<${vcs_info_msg_3_}%<<%b[${vcs_info_msg_4_:- ${ambiguous_padding}}${vcs_info_msg_5_:- ${ambiguous_padding}}]${vcs_info_msg_6_}${vcs_info_msg_7_}}'
 PROMPT2='%_> '
 SPROMPT='zsh: correct %R to %r [nyae]?'
 [ "${EMACS}" = t ] && unsetopt zle
@@ -77,11 +77,11 @@ WORDCHARS=''
 zstyle ':vcs_info:*' max-exports 8
 zstyle ':vcs_info:*' enable bzr git hg p4 svn
 zstyle ':vcs_info:*' formats       '%r' '%s' '%b' '%S' '%c' '%u' '%m'
-zstyle ':vcs_info:*' actionformats '%r' '%s' '%b' '%S' '%c' '%u' '%m' "${warningstr}%a"
+zstyle ':vcs_info:*' actionformats '%r' '%s' '%b' '%S' '%c' '%u' '%m' "%F{red}${warningstr}%a%f"
 zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
 zstyle ':vcs_info:bzr:*' use-simple true
 zstyle ':vcs_info:git:*' formats       '%r' '%s' '%b' '%S' '%c' '%u' '%m'
-zstyle ':vcs_info:git:*' actionformats '%r' '%s' '%b' '%S' '%c' '%u' '%m' "${warningstr}%a"
+zstyle ':vcs_info:git:*' actionformats '%r' '%s' '%b' '%S' '%c' '%u' '%m' "%F{red}${warningstr}%a%f"
 zstyle ':vcs_info:git:*' patch-format  '(%a patches)'
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*'   stagedstr "%B%K{cyan}${stagedstr}%k%b"
