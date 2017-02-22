@@ -34,11 +34,11 @@ setopt prompt_subst
 [ -z "${emoji_available}" ] && rps=?    || rps=$'\U1F4CA'${ambiguous_padding}
 colors=(red green blue cyan magenta yellow)
 hostname_color=${colors[((0x`hostname | sha1sum - | grep -oe '[[:xdigit:]] '` % $#colors + 1))]}
-PROMPT='%B%n@%8>..>%F{${hostname_color}}%m%f%>>:%20<..<%~%<<[%(?.%F{green}${ok}%f.%F{red}${ng}%f)](%F{magenta}${his}%f:%h, %F{cyan}${job}%f:%1(j.%U%F{red}.)%j%1(j.%f%u.), %F{yellow}${lvl}%f:%L)${mps}
-%D{${cal}%m/%d${tim}%T}%(!.#.${ps})%b'
+PROMPT='%B%n@%8>..>%F{${hostname_color}}%m%f%>>%b%B:%b%B%20<..<%~%<<[%(?.%F{green}${ok}%f.%F{red}${ng}%f)]%b%B(%F{magenta}${his}%f:%h/%F{cyan}${job}%f:%1(j.%U%F{red}.)%j%1(j.%f%u.)/%F{yellow}${lvl}%f:%L)${mps}%b
+%B%D{${cal}%m/%d${tim}%T}%(!.#.${ps})%b'
+RPROMPT='${_vcs_info:+%B%(!.#.${rps})%b}${_vcs_info}'
 PROMPT2='%_> '
 SPROMPT='zsh: correct %R to %r [nyae]?'
-RPROMPT='${_vcs_info}'
 [ "${EMACS}" = t ] && unsetopt zle
 setopt auto_cd
 setopt auto_pushd
@@ -86,7 +86,7 @@ zstyle ':vcs_info:git:*' patch-format  '(%a patches)'
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*'   stagedstr "%B%K{cyan}${stagedstr}%k%b"
 zstyle ':vcs_info:git:*' unstagedstr "%B%K{red}${unstagedstr}%k%b"
-_update_vcs_info(){ LANG=C vcs_info; [ -n "${vcs_info_msg_0_}" ] && _vcs_info="%B%(!.#.${rps})%b${vcs_info_msg_0_}[${vcs_info_msg_1_:= ${ambiguous_padding}}${vcs_info_msg_2_:= ${ambiguous_padding}}]${vcs_info_msg_3_}${vcs_info_msg_4_}" || _vcs_info=;}
+_update_vcs_info(){ LANG=C vcs_info; [ -n "${vcs_info_msg_0_}" ] && _vcs_info="${vcs_info_msg_0_}[${vcs_info_msg_1_:= ${ambiguous_padding}}${vcs_info_msg_2_:= ${ambiguous_padding}}]${vcs_info_msg_3_}${vcs_info_msg_4_}" || _vcs_info=;}
 add-zsh-hook precmd _update_vcs_info
 alias run-help > /dev/null 2>&1 && unalias run-help
 [ "${TERM}" = dumb ] && color= || color=' --color=auto'
@@ -120,8 +120,8 @@ alias tgif='tgif -geometry 960x1000'
 which -p  vim > /dev/null 2>&1 &&  vim --version | grep -qe '+clientserver' && alias  vim='vim --servername VIM'
 which -p gvim > /dev/null 2>&1 && gvim --version | grep -qe '+clientserver' && alias gvim='gvim --servername VIM'
 alias xdvi='xdvi -geometry 900x1100-0+0'
-alias gcc="gcc -std=c11   -march=native -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C gcc /dev/null -Q --help=warnings,^joined,^separate,c   | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Werror\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
-alias g++="g++ -std=c++14 -march=native -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C g++ /dev/null -Q --help=warnings,^joined,^separate,c++ | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Werror\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
+alias gcc="gcc -std=c11   -march=native -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command gcc /dev/null -Q --help=warnings,^joined,^separate,c   | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Werror\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
+alias g++="g++ -std=c++14 -march=native -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command g++ /dev/null -Q --help=warnings,^joined,^separate,c++ | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Werror\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
 alias clang='clang     -std=c11   -march=native -Wpedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual'
 alias clang++='clang++ -std=c++14 -march=native -Wpedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual -stdlib=libc++ -lc++abi'
 # alias ctags='ctags --declarations --defines --globals --members --typedefs --typedefs-and-c++'
