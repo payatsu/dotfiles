@@ -29,7 +29,7 @@ setopt prompt_subst
 [ -z "${emoji_available}" ] && lvl=l    || lvl=$'\U1F41A'${ambiguous_padding}
 [ -z "${emoji_available}" ] && cal=     || cal=$'\U1F4C6'${ambiguous_padding}
 [ -z "${emoji_available}" ] && tim=' '  || tim=$'\U231A'${ambiguous_padding}
-[ -z "${emoji_available}" ] && mps=/    || mps=$'\U2199'${ambiguous_padding}
+[ -z "${emoji_available}" ] && mps=     || mps=$'\U2199'${ambiguous_padding}
 [ -z "${emoji_available}" ] &&  ps='$ ' ||  ps=$'\U1F449'${ambiguous_padding}
 [ -z "${emoji_available}" ] && rps=?    || rps=$'\U1F4CA'${ambiguous_padding}
 colors=(red green blue cyan magenta yellow)
