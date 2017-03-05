@@ -1,15 +1,7 @@
 #!/bin/zsh
 
-[ -r ${ZDOTDIR}/.zlogin.local.pre ] && . ${ZDOTDIR}/.zlogin.local.pre
+. ${HOME}/.profile
 
-which -p vim > /dev/null 2>&1 && export EDITOR=vim || export EDITOR=vi
-export PAGER=less
-export LESS=MNRSx4
-which -p lesspipe > /dev/null 2>&1 && eval `lesspipe`
+[ -f ${ZDOTDIR}/.zlogin.local.pre ] && . ${ZDOTDIR}/.zlogin.local.pre
 
-export GOPATH=${HOME}/.go
-for p in `echo ${GOPATH} | tr : ' '`; do
-	append ${p}/bin PATH
-done
-
-[ -r ${ZDOTDIR}/.zlogin.local.post ] && . ${ZDOTDIR}/.zlogin.local.post || true
+[ -f ${ZDOTDIR}/.zlogin.local.post ] && . ${ZDOTDIR}/.zlogin.local.post || true
