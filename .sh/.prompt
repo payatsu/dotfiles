@@ -1,0 +1,13 @@
+#!/bin/sh
+
+[ -z "${emoji_available}" ] && ambiguous_padding= || ambiguous_padding=' '
+[ -z "${emoji_available}" ] &&  ok=OK   ||  ok=$'\U1F197'${ambiguous_padding}
+[ -z "${emoji_available}" ] &&  ng=NG   ||  ng=$'\U1F196'${ambiguous_padding}
+[ -z "${emoji_available}" ] && his=h    || his=$'\U1F4DD'${ambiguous_padding}
+[ -z "${emoji_available}" ] && job=j    || job=$'\U1F3C3'${ambiguous_padding}
+[ -z "${emoji_available}" ] && lvl=l    || lvl=$'\U1F41A'${ambiguous_padding}
+[ -z "${emoji_available}" ] && cal=     || cal=$'\U1F4C6'${ambiguous_padding}
+[ -z "${emoji_available}" ] && tim=' '  || tim=$'\U231A'${ambiguous_padding}
+[ -z "${emoji_available}" ] && mps=     || mps=$'\U2199'${ambiguous_padding}
+[ -z "${emoji_available}" ] &&  ps='$ ' ||  ps=$'\U1F449'${ambiguous_padding}
+[ -z "${emoji_available}" ] && rps=?    || rps=$'\U1F4CA'${ambiguous_padding}
