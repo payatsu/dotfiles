@@ -1,5 +1,6 @@
 #!/bin/bash
 
+. ${HOME}/.bashrc
 . ${HOME}/.profile
 
 [ -r ${BASHDOTDIR}/.bash_profile.local.pre ] && . ${BASHDOTDIR}/.bash_profile.local.pre
