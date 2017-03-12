@@ -19,6 +19,7 @@
 (package-install 'irony)
 (package-install 'nyan-mode)
 (package-install 'popwin)
+(package-install 'molokai-theme)
 
 ;emacs -Q --batch \
 ;--eval '(require '\''package)' \
