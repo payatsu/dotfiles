@@ -115,4 +115,8 @@ if has('autocmd')
 		augroup END
 	endif
 endif
+try
+	colorscheme molokai
+catch /E185:/
+endtry
 runtime vimrc.local.vim
