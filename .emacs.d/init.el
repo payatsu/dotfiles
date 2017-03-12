@@ -258,32 +258,8 @@
 		"hi01" "hi02" "hi03" "hi04" "hi05" "hi06" "hi07" "hi08" "hi09" "hi10"
 		))
 
-; *** Font-Lock-mode ***
-(set-face-attribute 'font-lock-builtin-face nil
-					:foreground "brown")
-(set-face-attribute 'font-lock-comment-delimiter-face nil
-					:foreground "SeaGreen4" :weight 'ultra-bold)
-(set-face-attribute 'font-lock-comment-face nil
-					:foreground "SeaGreen4")
-(set-face-attribute 'font-lock-constant-face nil
-					:foreground "cyan")
-(set-face-attribute 'font-lock-doc-face nil)
-(set-face-attribute 'font-lock-function-name-face nil
-					:foreground "deep sky blue")
-(set-face-attribute 'font-lock-keyword-face nil
-					:foreground "deep pink" :weight 'ultra-bold)
-(set-face-attribute 'font-lock-negation-char-face nil)
-(set-face-attribute 'font-lock-preprocessor-face nil
-					:foreground "pale goldenrod")
-(set-face-attribute 'font-lock-regexp-grouping-backslash nil)
-(set-face-attribute 'font-lock-regexp-grouping-construct nil)
-(set-face-attribute 'font-lock-string-face nil
-					:foreground "goldenrod")
-(set-face-attribute 'font-lock-type-face nil
-					:foreground "chartreuse" :weight 'extra-bold)
-(set-face-attribute 'font-lock-variable-name-face nil
-					:foreground "tomato" :weight 'extra-bold)
-(set-face-attribute 'font-lock-warning nil)
+; *** theme ***
+(if (locate-file "molokai-theme.el" (custom-theme--load-path) '("" "c")) (load-theme 'molokai t))
 
 ; *** whitespace-mode ***
 (if window-system
