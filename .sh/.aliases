@@ -16,7 +16,7 @@ alias h='history'
 alias hw='hw --no-group -e'
 alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l80 -lp -ncs -nfc1 -npcs -nprs -npsl -nsaf -nsai -nsaw -nss -sc -ts4'
 alias less='less -MNRSx4'
-alias ls="ls -FGlhpX ${ls_group_directories_first}${color}"
+alias ls="ls -FGlhpX --time-style=long-iso ${ls_group_directories_first}${color}"
 alias l='ls'
 alias lv='lv -c'
 alias nm='nm -C'
