@@ -60,12 +60,12 @@ bind -c layout  7 eval  'command -c layout' 'layout select 7' 'layout show'
 bind -c layout  8 eval  'command -c layout' 'layout select 8' 'layout show'
 bind -c layout  9 eval  'command -c layout' 'layout select 9' 'layout show'
 
-bind -c layout l eval 'command -c load_layout' 'echo "Load layout"'
-bind -c load_layout 0 eval 'only' 'split' 'split -v' 'focus down' 'split -v' 'focus up'
-bind -c load_layout 1 eval 'only' 'split' 'split -v' 'focus down' 'resize -v min' 'resize -v +15' 'focus up'
-bind -c load_layout 2 eval 'only' 'split' 'split -v' 'split -v' 'split -v' 'focus down' 'resize -v min' 'resize -v +15' 'focus up'
-bind -c load_layout 3 eval 'only' 'split -v' 'split' 'focus right' 'resize -h min' 'resize -h +80' 'focus left'
-bind -c load_layout 4 eval 'only' 'split -v' 'split' 'split' 'split' 'focus right' 'resize -h min' 'resize -h +80' 'focus left'
+bind -c layout l eval 'command -c load_layout' 'echo "Loading layout..."'
+bind -c load_layout 0 eval 'command -c load_layout' 'only' 'split' 'split -v' 'focus down' 'split -v' 'focus up'                                            'echo "Loading layout..."'
+bind -c load_layout 1 eval 'command -c load_layout' 'only' 'split' 'split -v' 'focus down' 'resize -v min' 'resize -v +15' 'focus up'                       'echo "Loading layout..."'
+bind -c load_layout 2 eval 'command -c load_layout' 'only' 'split' 'split -v' 'split -v' 'split -v' 'focus down' 'resize -v min' 'resize -v +15' 'focus up' 'echo "Loading layout..."'
+bind -c load_layout 3 eval 'command -c load_layout' 'only' 'split -v' 'split' 'focus right' 'resize -h min' 'resize -h +80' 'focus left'                    'echo "Loading layout..."'
+bind -c load_layout 4 eval 'command -c load_layout' 'only' 'split -v' 'split' 'split' 'split' 'focus right' 'resize -h min' 'resize -h +80' 'focus left'    'echo "Loading layout..."'
 
 bind -c layout s eval 'command -c save_layout' 'layout show'
 bind -c save_layout 0 eval 'layout save 0' 'echo "save to 0"'
@@ -82,5 +82,7 @@ bind -c save_layout 9 eval 'layout save 9' 'echo "save to 9"'
 layout new 0:default
 layout new 1:layout1
 layout new 2:layout2
+layout new 3:layout3
+layout new 4:layout4
 layout select 0
 source .screen/screenrc.local
