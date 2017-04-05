@@ -85,4 +85,4 @@ layout new 2:layout2
 layout new 3:layout3
 layout new 4:layout4
 layout select 0
-source .screen/screenrc.local
+source screenrc.local
