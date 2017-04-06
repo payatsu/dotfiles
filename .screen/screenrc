@@ -5,6 +5,7 @@ startup_message off
 vbell off
 bind ^G
 defscrollback 8192
+defmousetrack on
 caption always '%?%F%{=b bW}%:%{= Kk}%?%2n%f%07=%t%='
 hardstatus alwayslastline '%{=b}%m/%d %02c:%s%{-} %{=b .b}%H%{-} %L=%-w%45L>%{=ub bw}%n %t%{-}%+w %-17<%=%{= ..}[%l]'
 windowlist title  '%{u .B}Num Flags Title%=[0-9] select the number [movement] j,C-n:Down k,C-p:Up (C-)f:PageDown (C-)b:PageUp'
