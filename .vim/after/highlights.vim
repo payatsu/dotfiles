@@ -12,26 +12,37 @@ highlight Triangle       ctermfg=DarkRed      ctermbg=NONE   cterm=bold         
 highlight DTriangle      ctermfg=LightBlue    ctermbg=NONE   cterm=bold           guifg=LightBlue   guibg=NONE   gui=bold
 highlight EnclosedNumber ctermfg=Magenta      ctermbg=NONE   cterm=bold           guifg=DarkMagenta guibg=NONE   gui=bold
 highlight Note           ctermfg=Gray         ctermbg=Yellow cterm=bold           guifg=Gray20      guibg=Orange gui=bold
-highlight Hi01  ctermfg=Red          ctermbg=NONE guifg='firebrick1'      guibg=NONE
-highlight Hi02  ctermfg=DarkBlue     ctermbg=NONE guifg='dodger blue'     guibg=NONE
-highlight Hi03  ctermfg=LightGreen   ctermbg=NONE guifg='lime green'      guibg=NONE
-highlight Hi04  ctermfg=LightMagenta ctermbg=NONE guifg='purple'          guibg=NONE
-highlight Hi05  ctermfg=DarkYellow   ctermbg=NONE guifg='orange'          guibg=NONE
-highlight Hi06  ctermfg=Magenta      ctermbg=NONE guifg='VioletRed1'      guibg=NONE
-highlight Hi07  ctermfg=LightBlue    ctermbg=NONE guifg='sky blue'        guibg=NONE
-highlight Hi08  ctermfg=DarkGreen    ctermbg=NONE guifg='SeaGreen1'       guibg=NONE
-highlight Hi09  ctermfg=LightRed     ctermbg=NONE guifg='hot pink'        guibg=NONE
-highlight Hi10  ctermfg=Yellow       ctermbg=NONE guifg='light goldenrod' guibg=NONE
-highlight Rev01 ctermfg=Black ctermbg=Red          guifg=Black guibg='firebrick1'
-highlight Rev02 ctermfg=Black ctermbg=DarkBlue     guifg=Black guibg='dodger blue'
-highlight Rev03 ctermfg=Black ctermbg=LightGreen   guifg=Black guibg='lime green'
-highlight Rev04 ctermfg=Black ctermbg=LightMagenta guifg=Black guibg='purple'
-highlight Rev05 ctermfg=Black ctermbg=DarkYellow   guifg=Black guibg='orange'
-highlight Rev06 ctermfg=Black ctermbg=Magenta      guifg=Black guibg='VioletRed1'
-highlight Rev07 ctermfg=Black ctermbg=LightBlue    guifg=Black guibg='sky blue'
-highlight Rev08 ctermfg=Black ctermbg=DarkGreen    guifg=Black guibg='SeaGreen1'
-highlight Rev09 ctermfg=Black ctermbg=LightRed     guifg=Black guibg='hot pink'
-highlight Rev10 ctermfg=Black ctermbg=Yellow       guifg=Black guibg='light goldenrod'
+highlight Red          ctermfg=Red         ctermbg=NONE guifg=Red        guibg=NONE
+highlight Green        ctermfg=Green       ctermbg=NONE guifg=Green      guibg=NONE
+highlight Blue         ctermfg=Blue        ctermbg=NONE guifg=DodgerBlue guibg=NONE
+highlight Cyan         ctermfg=Cyan        ctermbg=NONE guifg=Cyan       guibg=NONE
+highlight Magenta      ctermfg=Magenta     ctermbg=NONE guifg=Magenta    guibg=NONE
+highlight Yellow       ctermfg=Yellow      ctermbg=NONE guifg=Yellow     guibg=NONE
+highlight LightRed     ctermfg=LightRed    ctermbg=NONE guifg=HotPink    guibg=NONE
+highlight LightGreen   ctermfg=LightGreen  ctermbg=NONE guifg=SeaGreen1  guibg=NONE
+highlight LightBlue    ctermfg=LightBlue   ctermbg=NONE guifg=SkyBlue    guibg=NONE
+highlight LightYellow  ctermfg=LightYellow ctermbg=NONE guifg=Orange     guibg=NONE
+highlight RedR         ctermbg=Black ctermfg=Red         guibg=Black guifg=Red
+highlight GreenR       ctermbg=Black ctermfg=Green       guibg=Black guifg=Green
+highlight BlueR        ctermbg=Black ctermfg=Blue        guibg=Black guifg=DodgerBlue
+highlight CyanR        ctermbg=Black ctermfg=Cyan        guibg=Black guifg=Cyan
+highlight MagentaR     ctermbg=Black ctermfg=Magenta     guibg=Black guifg=Magenta
+highlight YellowR      ctermbg=Black ctermfg=Yellow      guibg=Black guifg=Yellow
+highlight LightRedR    ctermbg=Black ctermfg=LightRed    guibg=Black guifg=HotPink
+highlight LightGreenR  ctermbg=Black ctermfg=LightGreen  guibg=Black guifg=SeaGreen1
+highlight LightBlueR   ctermbg=Black ctermfg=LightBlue   guibg=Black guifg=SkyBlue
+highlight LightYellowR ctermbg=Black ctermfg=LightYellow guibg=Black guifg=Orange
+
+highlight link Hi01 Red
+highlight link Hi02 Green
+highlight link Hi03 Blue
+highlight link Hi04 Cyan
+highlight link Hi05 Magenta
+highlight link Hi06 Yellow
+highlight link Hi07 LightRed
+highlight link Hi08 LightGreen
+highlight link Hi09 LightBlue
+highlight link Hi10 LightYellow
 
 call matchadd('Grayout'       , '前記\|該')
 call matchadd('Caption'       , '【[^】]*】\|『[^』]*』\|「[^」]*」\|＜[^＞]*＞\|〈[^〉]*〉\|《[^》]*》\|（[^）]*）\|｛[^｝]*｝\|［[^］]*］\|〔[^〕]*〕')
