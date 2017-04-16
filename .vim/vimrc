@@ -16,6 +16,7 @@ if has('eval')
 			call dein#add('jonathanfilip/vim-lucius')
 			call dein#add('altercation/vim-colors-solarized')
 			call dein#add('vim-scripts/twilight')
+			call dein#add('itchyny/lightline.vim')
 			call dein#end()
 			call dein#save_state()
 		endif
@@ -120,4 +121,41 @@ try
 	colorscheme molokai
 catch /E185:/
 endtry
+let g:lightline = {
+	\ 'colorscheme': 'wombat',
+	\ 'active': {
+		\ 'left': [['mode', 'paste'], ['readonly', 'modified', 'fileencoding', 'fileformat', 'filetype', 'filename']],
+		\ 'right': [['lineinfo'], ['percent']]
+		\ },
+	\ 'component_function': {
+		\ 'modified': 'LightlineModified',
+		\ 'readonly': 'LightlineReadonly',
+		\ 'filename': 'LightlineFilename',
+		\ 'fileformat': 'LightlineFileformat',
+		\ 'filetype': 'LightlineFiletype',
+		\ 'fileencoding': 'LightlineFileencoding',
+		\ 'mode': 'LightlineMode'
+		\ }
+	\ }
+function! LightlineModified()
+	return &filetype =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? ' ' : '-'
+endfunction
+function! LightlineReadonly()
+	return &filetype !~? 'help\|vimfiler\|gundo' && &readonly ? 'RO' : '  '
+endfunction
+function! LightlineFilename()
+	return '' != expand('%:t') ? expand('%:t') : '[No Name]'
+endfunction
+function! LightlineFileformat()
+	return 70 < winwidth(0) ? &fileformat : ''
+endfunction
+function! LightlineFiletype()
+	return 70 < winwidth(0) ? &filetype : ''
+endfunction
+function! LightlineFileencoding()
+	return 70 < winwidth(0) ? &fileencoding : ''
+endfunction
+function! LightlineMode()
+	return 60 < winwidth(0) ? lightline#mode() : ''
+endfunction
 runtime vimrc.local.vim
