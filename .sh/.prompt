@@ -1,13 +1,45 @@
 #!/bin/sh
 
-[ -z "${emoji_available}" ] && ambiguous_padding= || ambiguous_padding=' '
-[ -z "${emoji_available}" ] &&  ok=OK   ||  ok=$'\U1F197'${ambiguous_padding}
-[ -z "${emoji_available}" ] &&  ng=NG   ||  ng=$'\U1F196'${ambiguous_padding}
-[ -z "${emoji_available}" ] && his=h    || his=$'\U1F4DD'${ambiguous_padding}
-[ -z "${emoji_available}" ] && job=j    || job=$'\U1F3C3'${ambiguous_padding}
-[ -z "${emoji_available}" ] && lvl=l    || lvl=$'\U1F41A'${ambiguous_padding}
-[ -z "${emoji_available}" ] && cal=     || cal=$'\U1F4C6'${ambiguous_padding}
-[ -z "${emoji_available}" ] && tim=' '  || tim=$'\U231A'${ambiguous_padding}
-[ -z "${emoji_available}" ] && mps=     || mps=$'\U2199'${ambiguous_padding}
-[ -z "${emoji_available}" ] &&  ps='$ ' ||  ps=$'\U1F449'${ambiguous_padding}
-[ -z "${emoji_available}" ] && rps=?    || rps=$'\U1F4CA'${ambiguous_padding}
+prompt_symbol()
+{
+	[ "${1}" = emoji ] && {
+		ambiguous_padding=' '
+		ok=$'\U1F197'${ambiguous_padding}
+		ng=$'\U1F196'${ambiguous_padding}
+		his=$'\U1F4DD'${ambiguous_padding}
+		job=$'\U1F3C3'${ambiguous_padding}
+		lvl=$'\U1F41A'${ambiguous_padding}
+		cal=$'\U1F4C6'${ambiguous_padding}
+		tim=$'\U231A'${ambiguous_padding}
+		mps=$'\U2199'${ambiguous_padding}
+		ps=$'\U1F449'${ambiguous_padding}
+		rps=$'\U1F4CA'${ambiguous_padding}
+	} || {
+		ambiguous_padding=
+		[ "${1}" = aa ] && {
+			ok="(*^_^${ZSH_VERSION:+%})b"
+			ng="(;*_*${ZSH_VERSION:+%})p"
+		} || {
+			ok=OK
+			ng=NG
+		}
+		his=h
+		job=j
+		lvl=l
+		cal=
+		tim=' '
+		mps=
+		ps='$ '
+		rps=?
+	}
+}
+
+prompt()
+{
+	case "${1}" in
+	simple) PS1=${simple_prompt};;
+	*) prompt_symbol ${1}; PS1=${custom_prompt};;
+	esac
+}
+
+prompt_symbol
