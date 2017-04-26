@@ -2,3 +2,11 @@
 
 . ${HOME}/.sh/.term
 [ "${EMACS}" = t ] && unsetopt zle
+set_window_title()
+{
+	case ${TERM} in
+	screen*) echo -n '\ek'`echo ${2:-\`basename ${SHELL}\`} | cut -d ' ' -f 1`'\e\\';;
+	esac
+}
+add-zsh-hook preexec set_window_title
+add-zsh-hook precmd set_window_title
