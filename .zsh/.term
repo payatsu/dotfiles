@@ -4,8 +4,10 @@
 [ "${EMACS}" = t ] && unsetopt zle
 set_window_title()
 {
+	command=`echo ${2:-\`basename ${SHELL}\`} | cut -d ' ' -f 1`
+	type ${command} | grep -qe "^${command} is a shell builtin\$" && return
 	case ${TERM} in
-	screen*) echo -n '\ek'`echo ${2:-\`basename ${SHELL}\`} | cut -d ' ' -f 1`'\e\\';;
+	screen*) echo -n '\ek'`basename ${command}`'\e\\';;
 	esac
 }
 add-zsh-hook preexec set_window_title
