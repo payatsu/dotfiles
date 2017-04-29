@@ -17,8 +17,8 @@ prompt_symbol()
 	} || {
 		ambiguous_padding=
 		[ "${1}" = aa ] && {
-			ok="(*^_^${ZSH_VERSION:+%})b"
-			ng="(;*_*${ZSH_VERSION:+%})p"
+			ok="(*^-'${ZSH_VERSION:+%})b"
+			ng="(#\`_'${ZSH_VERSION:+%})p"
 		} || {
 			ok=OK
 			ng=NG
