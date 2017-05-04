@@ -4,6 +4,7 @@ if has('eval')
 	let s:runtimepath_dein = s:runtimepath_first . '/repos/github.com/Shougo/dein.vim'
 	if &runtimepath !~# s:runtimepath_dein | let &runtimepath .= ',' . s:runtimepath_dein | endif
 	try
+		if ! isdirectory(s:runtimepath_dein) | execute '!git clone http://github.com/Shougo/dein.vim ' . s:runtimepath_dein | endif
 		if dein#load_state(s:runtimepath_first)
 			call dein#begin(s:runtimepath_first)
 			call dein#add('Shougo/dein.vim')
