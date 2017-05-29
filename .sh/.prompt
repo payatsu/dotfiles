@@ -6,6 +6,7 @@ prompt_symbol()
 		ambiguous_padding=' '
 		ok=$'\U1F197'${ambiguous_padding}
 		ng=$'\U1F196'${ambiguous_padding}
+		idle=$'\U1F4A4'${ambiguous_padding}
 		his=$'\U1F4DD'${ambiguous_padding}
 		job=$'\U1F3C3'${ambiguous_padding}
 		lvl=$'\U1F41A'${ambiguous_padding}
@@ -19,9 +20,11 @@ prompt_symbol()
 		[ "${1}" = aa ] && {
 			ok="(*^-'${ZSH_VERSION:+%})b"
 			ng="(#\`_'${ZSH_VERSION:+%})p"
+			idle="( =_=${ZSH_VERSION:+%})"
 		} || {
 			ok=OK
 			ng=NG
+			idle=ZZ
 		}
 		his=h
 		job=j
