@@ -4,7 +4,7 @@
 [ "${EMACS}" = t ] && unsetopt zle
 set_window_title()
 {
-	command=`echo ${2:-\`basename ${SHELL}\`} | sed -e 's/[[:graph:]]\+=[[:graph:]]\+ \+//' | cut -d ' ' -f 1`
+	command=`echo ${2:-zsh} | sed -e 's/[[:graph:]]\+=[[:graph:]]\+ \+//' | cut -d ' ' -f 1`
 	type ${command} | grep -qe "^${command} is a shell builtin\$" && return
 	case ${TERM} in
 	screen*) echo -n '\ek'`basename "${command}"`'\e\\';;
