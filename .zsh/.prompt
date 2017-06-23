@@ -11,15 +11,15 @@ simple_prompt='%n@%m:%~%(!.#.$) '
 PS1=${custom_prompt}
 PS2='%_> '
 SPROMPT='zsh: correct %R to %r [nyae]?'
-[ -z "${emoji_available}" ] &&  warningstr=! ||  warningstr=$'\U26A0'${ambiguous_padding}
+# [ -z "${emoji_available}" ] &&  warningstr=! ||  warningstr=$'\U26A0'${ambiguous_padding}
 [ -z "${emoji_available}" ] &&   stagedstr=+ ||   stagedstr=$'\U1F199'${ambiguous_padding}
 [ -z "${emoji_available}" ] && unstagedstr=* || unstagedstr=$'\U1F195'${ambiguous_padding}
 zstyle ':vcs_info:*' max-exports 8
 zstyle ':vcs_info:*' enable bzr git hg p4 svn
 zstyle ':vcs_info:*' formats       '%R' '%s' '%b' '%S' '%c' '%u' '%m'
-zstyle ':vcs_info:*' actionformats '%R' '%s' '%b' '%S' '%c' '%u' '%m' "%F{red}${warningstr}%a%f"
+zstyle ':vcs_info:*' actionformats '%R' '%s' '%b' '%S' '%c' '%u' '%m' "%B%F{red}**%a**%f%%b"
 zstyle ':vcs_info:bzr:*' use-simple true
-zstyle ':vcs_info:git:*' patch-format  '(%a patches)'
+zstyle ':vcs_info:git:*' patch-format '(%B%n%%b/%B%c%%b/%B%a%%b patches)'
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*'   stagedstr "%B%K{cyan}${stagedstr}%k%b"
 zstyle ':vcs_info:git:*' unstagedstr "%B%K{red}${unstagedstr}%k%b"
