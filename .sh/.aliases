@@ -37,7 +37,7 @@ alias clang++='clang++ -std=c++14 -march=native -Wpedantic -Weverything -Wall -W
 git()
 {
 	case ${1} in
-	log) shift; command git log --oneline --graph "$@";;
+	log) shift; command git log --graph --date='format:%F %R' --pretty='tformat:%C(auto,yellow)%>|(13)%h%Creset %C(auto,blue)%ad%Creset [%C(auto,green)%<(8,trunc)%an%Creset] %C(auto)%s%Creset%C(auto)%d%Creset' "$@";;
 	*) command git "$@";;
 	esac
 }
