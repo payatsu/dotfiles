@@ -34,10 +34,16 @@ alias gcc="gcc -std=c11   -march=native -Wextra -Wcast-align -Wstrict-aliasing -
 alias g++="g++ -std=c++14 -march=native -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command g++ -fsyntax-only -Q --help=warnings,^joined,^separate,c++ | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
 alias clang='clang     -std=c11   -march=native -Wpedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual'
 alias clang++='clang++ -std=c++14 -march=native -Wpedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual -stdlib=libc++ -lc++abi'
+which ${ZSH_VERSION:+-p} git > /dev/null && git_subcommands=`echo \`command git --exec-path\`/git-* | grep -oPe '(?<=core/git-)[\w-]+' | tr '\n' ' ' | sed -e 's/ /\\\\|/g;s/^/\\\\(/;s/\\\\|$/\\\\)/'`
 git()
 {
+	[ -n "${BASH_VERSION}${ZSH_VERSION}" ] && local git_opt= || git_opt=
+	while ! echo ${1} | grep -qe "${git_subcommands}"; do
+		git_opt="${git_opt} ${1}"
+		shift
+	done
 	case ${1} in
-	log) shift; command git log --graph --date='format:%F %R' --pretty='tformat:%C(auto,yellow)%>|(13)%h%Creset %C(auto,blue)%ad%Creset [%C(auto,green)%<(8,trunc)%an%Creset] %C(auto)%s%Creset%C(auto)%d%Creset' "$@";;
-	*) command git "$@";;
+	log) shift; command git ${git_opt} log --graph --date='format:%F %R' --pretty='tformat:%C(auto,yellow)%>|(13)%h%Creset %C(auto,blue)%ad%Creset [%C(auto,green)%<(8,trunc)%an%Creset] %C(auto)%s%Creset%C(auto)%d%Creset' "$@";;
+	*) command git ${git_opt} "$@";;
 	esac
 }
