@@ -1,18 +1,24 @@
 #!/bin/zsh
 
-setopt prompt_subst
 setopt auto_cd
 setopt auto_pushd
+setopt chase_dots
+setopt chase_links
 setopt complete_aliases
-setopt nolistbeep
-setopt listpacked
+setopt no_list_beep
+setopt list_packed
+setopt menu_complete
+setopt extended_history
 setopt hist_ignore_dups
+setopt hist_ignore_space
 setopt hist_save_no_dups
 setopt share_history
-setopt extended_history
 setopt correct
-setopt nohup
 setopt interactive_comments
+setopt no_hup
+setopt prompt_subst
+setopt function_argzero
+setopt sh_word_split
 bindkey -e
 bindkey "p" history-beginning-search-backward
 bindkey "n" history-beginning-search-forward
