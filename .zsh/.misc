@@ -7,7 +7,6 @@ setopt chase_links
 setopt complete_aliases
 setopt no_list_beep
 setopt list_packed
-setopt menu_complete
 setopt extended_history
 setopt hist_ignore_dups
 setopt hist_ignore_space
