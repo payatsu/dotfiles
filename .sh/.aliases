@@ -38,7 +38,7 @@ which ${ZSH_VERSION:+-p} git > /dev/null && git_subcommands=`echo \`command git 
 git()
 {
 	[ -n "${BASH_VERSION}${ZSH_VERSION}" ] && local git_opt= || git_opt=
-	while ! echo ${1} | grep -qe "${git_subcommands}"; do
+	while [ $# -gt 0 ] && ! echo ${1} | grep -qe "${git_subcommands}"; do
 		git_opt="${git_opt} ${1}"
 		shift
 	done
