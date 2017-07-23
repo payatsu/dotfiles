@@ -1,4 +1,5 @@
 source ~/.exrc
+set nocompatible
 if has('eval')
 	let s:runtimepath_first = split(&runtimepath, ',')[0]
 	let s:runtimepath_dein = s:runtimepath_first . '/repos/github.com/Shougo/dein.vim'
