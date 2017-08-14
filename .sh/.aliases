@@ -21,7 +21,7 @@ alias ls="ls -FGlhpX --time-style=long-iso ${ls_group_directories_first}${color}
 alias l='ls'
 alias lv='lv -c'
 alias nm='nm -C'
-alias objdump='objdump -C'
+alias objdump='objdump -C -w'
 alias od='od -Ax -tx1z -v'
 alias readelf='readelf -W'
 alias p="ps auxww | command grep -e '^USER\\|^${USER}'"
