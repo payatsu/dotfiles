@@ -6,7 +6,7 @@ ls --group-directories-first /dev/null > /dev/null 2>&1 && ls_group_directories_
 alias addr2line='addr2line -C -f'
 alias ag='ag --nogroup'
 alias df='df -h'
-alias diff="diff -u${color}"
+alias diff="diff${color}"
 alias du='du -h'
 alias gcov='gcov -bdflmr'
 alias gdb='gdb -q'
