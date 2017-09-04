@@ -19,6 +19,7 @@ if has('eval')
 			call dein#add('altercation/vim-colors-solarized')
 			call dein#add('vim-scripts/twilight')
 			call dein#add('itchyny/lightline.vim')
+			call dein#add('Shougo/neocomplete.vim')
 			call dein#end()
 			call dein#save_state()
 		endif
@@ -120,4 +121,5 @@ if has('autocmd')
 	endif
 endif
 runtime lightline.vim
+runtime neocomplete.vim
 runtime vimrc.local.vim
