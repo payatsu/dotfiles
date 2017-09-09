@@ -3,13 +3,11 @@
 [ "${TERM}" = dumb ] && color= || color=' --color=auto'
 echo | grep -e '' --exclude-dir='*.svn' > /dev/null 2>&1 && grep_exclude_dir="--exclude-dir='*.svn'"
 ls --group-directories-first /dev/null > /dev/null 2>&1 && ls_group_directories_first=--group-directories-first
-alias addr2line='addr2line -C -f'
 alias ag='ag --nogroup'
 alias df='df -h'
 alias diff="diff${color}"
 alias du='du -h'
 alias gcov='gcov -bdflmr'
-alias gdb='gdb -q'
 alias grep="grep ${grep_exclude_dir}${color}"
 alias g='grep'
 alias gtags='gtags -c'
@@ -19,19 +17,24 @@ alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l8
 alias ls="ls -FGlhpX --time-style=long-iso ${ls_group_directories_first}${color}"
 alias l='ls'
 alias lv='lv -c'
-alias nm='nm -C'
-alias objdump='objdump -C -w'
 alias od='od -Ax -tx1z -v'
-alias readelf='readelf -W'
 alias p="ps auxww | command grep -e '^USER\\|^${USER}'"
 alias pstree='pstree -ahnp'
 alias pt='pt --nogroup'
 alias tgif='tgif -geometry 960x1000'
-which ${ZSH_VERSION:+-p}  vim > /dev/null 2>&1 &&  vim --version | grep -qe '+clientserver' && alias  vim='vim --servername VIM'
-which ${ZSH_VERSION:+-p} gvim > /dev/null 2>&1 && gvim --version | grep -qe '+clientserver' && alias gvim='gvim --servername VIM'
+[ -z "${MSYSTEM}${CYGWIN}" ] && which ${ZSH_VERSION:+-p}  vim > /dev/null 2>&1 &&  vim --version | grep -qe '+clientserver' && alias  vim='vim --servername VIM'
+[ -z "${MSYSTEM}${CYGWIN}" ] && which ${ZSH_VERSION:+-p} gvim > /dev/null 2>&1 && gvim --version | grep -qe '+clientserver' && alias gvim='gvim --servername VIM'
 alias xdvi='xdvi -geometry 900x1100-0+0'
-alias gcc="gcc -std=c11   -march=native -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command gcc -fsyntax-only -Q --help=warnings,^joined,^separate,c   | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
-alias g++="g++ -std=c++14 -march=native -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command g++ -fsyntax-only -Q --help=warnings,^joined,^separate,c++ | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
+for gcc in `find \`echo ${PATH} | tr : ' '\` -executable -regextype posix-basic -regex '^/.\+/\([^-]\+-[^-]\+-[^-]\+-\)\?gcc' -exec basename \{\} \; | sort | uniq`; do
+	triplet=`echo ${gcc} | sed -e 's/gcc$//'`
+	alias ${triplet}addr2line="${triplet}addr2line -C -f"
+	alias ${triplet}gcc="${triplet}gcc -std=c11   -march=native -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command ${triplet}gcc -fsyntax-only -Q --help=warnings,^joined,^separate,c   | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
+	alias ${triplet}g++="${triplet}g++ -std=c++14 -march=native -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command ${triplet}g++ -fsyntax-only -Q --help=warnings,^joined,^separate,c++ | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
+	which ${ZSH_VERSION:+-p} ${triplet}gdb > /dev/null 2>&1 && alias ${triplet}gdb="${triplet}gdb -q"
+	alias ${triplet}nm="${triplet}nm -C"
+	alias ${triplet}objdump="${triplet}objdump -C -w"
+	alias ${triplet}readelf="${triplet}readelf -W"
+done
 alias clang='clang     -std=c11   -march=native -Wpedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual'
 alias clang++='clang++ -std=c++14 -march=native -Wpedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual -stdlib=libc++ -lc++abi'
 which ${ZSH_VERSION:+-p} git > /dev/null && git_subcommands=`echo \`command git --exec-path\`/git-* | grep -oPe '(?<=core/git-)[\w-]+' | tr '\n' ' ' | sed -e 's/ /\\\\|/g;s/^/\\\\(/;s/\\\\|$/\\\\)/'`
