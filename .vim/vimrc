@@ -20,6 +20,7 @@ if has('eval')
 			call dein#add('vim-scripts/twilight')
 			call dein#add('itchyny/lightline.vim')
 			call dein#add('Shougo/neocomplete.vim')
+			call dein#add('justmao945/vim-clang')
 			call dein#end()
 			call dein#save_state()
 		endif
@@ -122,4 +123,5 @@ if has('autocmd')
 endif
 runtime lightline.vim
 runtime neocomplete.vim
+runtime vim-clang.vim
 runtime vimrc.local.vim
