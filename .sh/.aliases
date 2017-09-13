@@ -25,6 +25,7 @@ alias tgif='tgif -geometry 960x1000'
 [ -z "${MSYSTEM}${CYGWIN}" ] && which ${ZSH_VERSION:+-p}  vim > /dev/null 2>&1 &&  vim --version | grep -qe '+clientserver' && alias  vim='vim --servername VIM'
 [ -z "${MSYSTEM}${CYGWIN}" ] && which ${ZSH_VERSION:+-p} gvim > /dev/null 2>&1 && gvim --version | grep -qe '+clientserver' && alias gvim='gvim --servername VIM'
 alias xdvi='xdvi -geometry 900x1100-0+0'
+alias xxd='xxd -g 1'
 for gcc in `find \`echo ${PATH} | tr : ' '\` -executable -regextype posix-basic -regex '^/.\+/\([^-]\+-[^-]\+-\([^-]\+-\)\?\)\?gcc' -exec basename \{\} \; | sort | uniq`; do
 	triplet=`echo ${gcc} | sed -e 's/gcc$//'`
 	alias ${triplet}addr2line="${triplet}addr2line -C -f"
