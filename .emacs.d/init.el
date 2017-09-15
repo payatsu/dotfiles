@@ -460,15 +460,6 @@
 									   ("\\<[\\-+]?[0-9]*\\.?[0-9]+\\([uUlL]+\\|[eE][\\-+]?[0-9]+\\)?\\>" . 'font-lock-constant-face)
 									   ))))
 
-; *** C++ settings ***
-(add-hook 'c++-mode-hook
-		  '(lambda ()
-			 (font-lock-add-keywords nil
-									 '(("\\<\\(alignof\\|alignas\\|constexpr\\|decltype\\|noexcept\\|nullptr\\|static_assert\\|thread_local\\|override\\|final\\)\\>" . 'font-lock-keyword-face)
-									   ("\\w+::" . 'font-lock-function-name-face)
-									   ))
-			 (add-to-list 'c++-font-lock-extra-types "\\<\\(auto\\|char16_t\\|char32_t\\)\\>")))
-
 ; *** gdb-mode ***
 (setq gdb-many-windows t)
 
