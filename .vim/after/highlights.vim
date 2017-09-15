@@ -49,7 +49,7 @@ highlight link Hi10 LightYellow
 
 call matchadd('Grayout'       , '前記\|該')
 call matchadd('Attention'     , 'A\.I\.')
-call matchadd('AttentionStr'  , 'A\.I\.\zs.\+。')
+call matchadd('AttentionStr'  , 'A\.I\.\zs[^。]\+\(。\|$\)')
 call matchadd('Caption'       , '【[^】]*】\|『[^』]*』\|「[^」]*」\|＜[^＞]*＞\|〈[^〉]*〉\|《[^》]*》\|（[^）]*）\|｛[^｝]*｝\|［[^］]*］\|〔[^〕]*〕')
 call matchadd('Star'          , '☆\|★')
 call matchadd('Circle'        , '○\|●\|◎\|◯')
@@ -59,6 +59,6 @@ call matchadd('Triangle'      , '△\|▲')
 call matchadd('DTriangle'     , '▽\|▼')
 call matchadd('EnclosedNumber', '①\|②\|③\|④\|⑤\|⑥\|⑦\|⑧\|⑨')
 call matchadd('Note'          , '※')
-call matchadd('NoteStr'       , '※\zs.\+。')
+call matchadd('NoteStr'       , '※\zs[^。]\+\(。\|$\)')
 
 let w:my_highlights_already_loaded = 1
