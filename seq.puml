@@ -168,7 +168,7 @@ activate zdotdir.zlogin #LightPink
 
 	create .profile
 	zdotdir.zlogin ->  .profile : source
-	activate   .profile
+	activate   .profile #LightPink
 		create .sh_.profile.local.pre
 		.profile ->  .sh_.profile.local.pre : source
 		activate   .sh_.profile.local.pre
