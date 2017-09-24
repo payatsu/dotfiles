@@ -1,5 +1,5 @@
-@startuml seq.png
-title シェル起動シーケンス
+@startuml zsh.png
+title zsh起動シーケンス
 hide footbox
 
 box "sh-compatible common user's files"
@@ -7,6 +7,7 @@ box "sh-compatible common user's files"
 	entity "${HOME}/.sh/.profile.local.pre"  as .sh_.profile.local.pre
 	entity "${HOME}/.sh/.profile.local.post" as .sh_.profile.local.post
 	entity "${HOME}/.sh/.functions"          as .sh_.functions
+	entity "${HOME}/.sh/.term"               as .sh_.term
 	entity "${HOME}/.sh/.prompt"             as .sh_.prompt
 	entity "${HOME}/.sh/.aliases"            as .sh_.aliases
 end box
@@ -91,7 +92,7 @@ activate zdotdir.zshrc #LightPink
 	deactivate .sh_.functions
 	destroy .sh_.functions
 
-	opt ${ZDOTDIR}/.zshrc.local.pre が存在するなら
+	opt ${ZDOTDIR}/.zshrc.local.pre が存在
 		create zdotdir.zshrc.local.pre
 		zdotdir.zshrc ->  zdotdir.zshrc.local.pre : source
 		activate   zdotdir.zshrc.local.pre
@@ -110,6 +111,12 @@ activate zdotdir.zshrc #LightPink
 	create zdotdir.term
 	zdotdir.zshrc ->  zdotdir.term : source
 	activate   zdotdir.term
+		create .sh_.term
+		zdotdir.term ->  .sh_.term : source
+		activate   .sh_.term
+		zdotdir.term <-- .sh_.term
+		deactivate .sh_.term
+		destroy .sh_.term
 	zdotdir.zshrc <-- zdotdir.term
 	deactivate zdotdir.term
 	destroy zdotdir.term
@@ -140,7 +147,7 @@ activate zdotdir.zshrc #LightPink
 	deactivate zdotdir.aliases
 	destroy zdotdir.aliases
 
-	opt ${ZDOTDIR}/.zshrc.local.post が存在するなら
+	opt ${ZDOTDIR}/.zshrc.local.post が存在
 		create zdotdir.zshrc.local.post
 		zdotdir.zshrc ->  zdotdir.zshrc.local.post : source
 		activate   zdotdir.zshrc.local.post
@@ -169,24 +176,28 @@ activate zdotdir.zlogin #LightPink
 	create .profile
 	zdotdir.zlogin ->  .profile : source
 	activate   .profile #LightPink
-		create .sh_.profile.local.pre
-		.profile ->  .sh_.profile.local.pre : source
-		activate   .sh_.profile.local.pre
-		.profile <-- .sh_.profile.local.pre
-		deactivate .sh_.profile.local.pre
-		destroy .sh_.profile.local.pre
+		opt ${HOME}/.sh/.profile.local.pre が存在
+			create .sh_.profile.local.pre
+			.profile ->  .sh_.profile.local.pre : source
+			activate   .sh_.profile.local.pre
+			.profile <-- .sh_.profile.local.pre
+			deactivate .sh_.profile.local.pre
+			destroy .sh_.profile.local.pre
+		end
 
-		create .sh_.profile.local.post
-		.profile ->  .sh_.profile.local.post : source
-		activate   .sh_.profile.local.post
-		.profile <-- .sh_.profile.local.post
-		deactivate .sh_.profile.local.post
-		destroy .sh_.profile.local.post
+		opt ${HOME}/.sh/.profile.local.post が存在
+			create .sh_.profile.local.post
+			.profile ->  .sh_.profile.local.post : source
+			activate   .sh_.profile.local.post
+			.profile <-- .sh_.profile.local.post
+			deactivate .sh_.profile.local.post
+			destroy .sh_.profile.local.post
+		end
 	zdotdir.zlogin <-- .profile
 	deactivate .profile
 	destroy .profile
 
-	opt ${ZDOTDIR}/.zlogin.local.pre が存在するなら
+	opt ${ZDOTDIR}/.zlogin.local.pre が存在
 		create zdotdir.zlogin.local.pre
 		zdotdir.zlogin ->  zdotdir.zlogin.local.pre : source
 		activate   zdotdir.zlogin.local.pre
@@ -195,7 +206,7 @@ activate zdotdir.zlogin #LightPink
 		destroy zdotdir.zlogin.local.pre
 	end
 
-	opt ${ZDOTDIR}/.zlogin.local.post が存在するなら
+	opt ${ZDOTDIR}/.zlogin.local.post が存在
 		create zdotdir.zlogin.local.post
 		zdotdir.zlogin ->  zdotdir.zlogin.local.post : source
 		activate   zdotdir.zlogin.local.post
@@ -207,6 +218,151 @@ activate zdotdir.zlogin #LightPink
 zsh <-- zdotdir.zlogin
 deactivate zdotdir.zlogin
 destroy zdotdir.zlogin
+|||
+
+@enduml
+
+@startuml bash.png
+title bash起動シーケンス
+hide footbox
+
+box "sh-compatible common user's files"
+	entity "${HOME}/.profile"                as .profile
+	entity "${HOME}/.sh/.profile.local.pre"  as .sh_.profile.local.pre
+	entity "${HOME}/.sh/.profile.local.post" as .sh_.profile.local.post
+	entity "${HOME}/.sh/.functions"          as .sh_.functions
+	entity "${HOME}/.sh/.term"               as .sh_.term
+	entity "${HOME}/.sh/.aliases"            as .sh_.aliases
+end box
+
+participant bash
+
+box "bash-specific system's files"
+end box
+
+box "bash-specific user's files"
+	entity "${HOME}/.bash_profile" as .bash_profile
+	entity "${BASHDOTDIR}/.bash_profile.local.pre"  as bashdotdir.bash_profile.local.pre
+	entity "${BASHDOTDIR}/.bash_profile.local.post" as bashdotdir.bash_profile.local.post
+	entity "${HOME}/.bashrc"                        as .bashrc
+	entity "${BASHDOTDIR}/.bashrc.local.pre"        as bashdotdir.bashrc.local.pre
+	entity "${BASHDOTDIR}/.misc"                    as bashdotdir.misc
+	entity "${BASHDOTDIR}/.prompt"                  as bashdotdir.prompt
+	entity "${BASHDOTDIR}/.bashrc.local.post"       as bashdotdir.bashrc.local.post
+end box
+
+[->> bash : exec()
+activate bash #Cyan
+
+create .bash_profile
+bash ->  .bash_profile : source
+activate   .bash_profile #LightBlue
+	create .bashrc
+	.bash_profile ->  .bashrc : source
+	activate   .bashrc #LightBlue
+		create .sh_.functions
+		.bashrc ->  .sh_.functions : source
+		activate   .sh_.functions
+		.bashrc <-- .sh_.functions
+		deactivate .sh_.functions
+		destroy .sh_.functions
+
+		opt ${BASHDOTDIR}/.bashrc.local.pre が存在
+			create bashdotdir.bashrc.local.pre
+			.bashrc ->  bashdotdir.bashrc.local.pre : source
+			activate   bashdotdir.bashrc.local.pre
+			.bashrc <-- bashdotdir.bashrc.local.pre
+			deactivate bashdotdir.bashrc.local.pre
+			destroy bashdotdir.bashrc.local.pre
+		end
+
+		create bashdotdir.misc
+		.bashrc ->  bashdotdir.misc : source
+		activate   bashdotdir.misc
+		.bashrc <-- bashdotdir.misc
+		deactivate bashdotdir.misc
+		destroy bashdotdir.misc
+
+		create .sh_.term
+		.bashrc ->  .sh_.term : source
+		activate   .sh_.term
+		.bashrc <-- .sh_.term
+		deactivate .sh_.term
+		destroy .sh_.term
+
+		create bashdotdir.prompt
+		.bashrc ->  bashdotdir.prompt : source
+		activate   bashdotdir.prompt
+		.bashrc <-- bashdotdir.prompt
+		deactivate bashdotdir.prompt
+		destroy bashdotdir.prompt
+
+		create .sh_.aliases
+		.bashrc ->  .sh_.aliases : source
+		activate   .sh_.aliases
+		.bashrc <-- .sh_.aliases
+		deactivate .sh_.aliases
+		destroy .sh_.aliases
+
+		opt ${BASHDOTDIR}/.bashrc.local.post が存在
+			create bashdotdir.bashrc.local.post
+			.bashrc ->  bashdotdir.bashrc.local.post : source
+			activate   bashdotdir.bashrc.local.post
+			.bashrc <-- bashdotdir.bashrc.local.post
+			deactivate bashdotdir.bashrc.local.post
+			destroy bashdotdir.bashrc.local.post
+		end
+
+	.bash_profile <-- .bashrc
+	deactivate .bashrc
+	destroy .bashrc
+
+	create .profile
+	.bash_profile ->  .profile : source
+	activate   .profile #LightBlue
+		opt ${HOME}/.sh/.profile.local.pre が存在
+			create .sh_.profile.local.pre
+			.profile ->  .sh_.profile.local.pre : source
+			activate   .sh_.profile.local.pre
+			.profile <-- .sh_.profile.local.pre
+			deactivate .sh_.profile.local.pre
+			destroy .sh_.profile.local.pre
+		end
+
+		opt ${HOME}/.sh/.profile.local.post が存在
+			create .sh_.profile.local.post
+			.profile ->  .sh_.profile.local.post : source
+			activate   .sh_.profile.local.post
+			.profile <-- .sh_.profile.local.post
+			deactivate .sh_.profile.local.post
+			destroy .sh_.profile.local.post
+		end
+	.bash_profile <-- .profile
+	deactivate .profile
+	destroy .profile
+
+	opt ${BASHDOTDIR}/.bash_profile.local.pre が存在
+		create bashdotdir.bash_profile.local.pre
+		.bash_profile ->  bashdotdir.bash_profile.local.pre : source
+		activate   bashdotdir.bash_profile.local.pre
+		.bash_profile <-- bashdotdir.bash_profile.local.pre
+		deactivate bashdotdir.bash_profile.local.pre
+		destroy bashdotdir.bash_profile.local.pre
+	end
+
+	opt ${BASHDOTDIR}/.bash_profile.local.post が存在
+		create bashdotdir.bash_profile.local.post
+		.bash_profile ->  bashdotdir.bash_profile.local.post : source
+		activate   bashdotdir.bash_profile.local.post
+		.bash_profile <-- bashdotdir.bash_profile.local.post
+		deactivate bashdotdir.bash_profile.local.post
+		destroy bashdotdir.bash_profile.local.post
+	end
+
+
+bash <-- .bash_profile
+deactivate .bash_profile
+destroy .bash_profile
 |||
 
 @enduml
