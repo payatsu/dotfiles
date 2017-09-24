@@ -232,6 +232,7 @@ box "sh-compatible common user's files"
 	entity "${HOME}/.sh/.profile.local.post" as .sh_.profile.local.post
 	entity "${HOME}/.sh/.functions"          as .sh_.functions
 	entity "${HOME}/.sh/.term"               as .sh_.term
+	entity "${HOME}/.sh/.prompt"             as .sh_.prompt
 	entity "${HOME}/.sh/.aliases"            as .sh_.aliases
 end box
 
@@ -293,6 +294,12 @@ activate   .bash_profile #LightBlue
 		create bashdotdir.prompt
 		.bashrc ->  bashdotdir.prompt : source
 		activate   bashdotdir.prompt
+			create .sh_.prompt
+			bashdotdir.prompt ->  .sh_.prompt : source
+			activate   .sh_.prompt
+			bashdotdir.prompt <-- .sh_.prompt
+			deactivate .sh_.prompt
+			destroy .sh_.prompt
 		.bashrc <-- bashdotdir.prompt
 		deactivate bashdotdir.prompt
 		destroy bashdotdir.prompt
