@@ -1,0 +1,212 @@
+@startuml seq.png
+title シェル起動シーケンス
+hide footbox
+
+box "sh-compatible common user's files"
+	entity "${HOME}/.profile"                as .profile
+	entity "${HOME}/.sh/.profile.local.pre"  as .sh_.profile.local.pre
+	entity "${HOME}/.sh/.profile.local.post" as .sh_.profile.local.post
+	entity "${HOME}/.sh/.functions"          as .sh_.functions
+	entity "${HOME}/.sh/.prompt"             as .sh_.prompt
+	entity "${HOME}/.sh/.aliases"            as .sh_.aliases
+end box
+
+participant zsh
+
+box "zsh-specific system's files"
+	entity "/etc/zsh/zshenv"   as etc.zshenv
+	entity "/etc/zsh/zprofile" as etc.zprofile
+	entity "/etc/zsh/zshrc"    as etc.zshrc
+	entity "/etc/zsh/zlogin"   as etc.zlogin
+end box
+
+box "zsh-specific user's files"
+	entity "${ZDOTDIR}/.zshenv"            as zdotdir.zshenv
+	entity "${ZDOTDIR}/.zprofile"          as zdotdir.zprofile
+	entity "${ZDOTDIR}/.zshrc"             as zdotdir.zshrc
+	entity "${ZDOTDIR}/.zshrc.local.pre"   as zdotdir.zshrc.local.pre
+	entity "${ZDOTDIR}/.misc"              as zdotdir.misc
+	entity "${ZDOTDIR}/.term"              as zdotdir.term
+	entity "${ZDOTDIR}/.prompt"            as zdotdir.prompt
+	entity "${ZDOTDIR}/.aliases"           as zdotdir.aliases
+	entity "${ZDOTDIR}/.zshrc.local.post"  as zdotdir.zshrc.local.post
+	entity "${ZDOTDIR}/.zlogin"            as zdotdir.zlogin
+	entity "${ZDOTDIR}/.zlogin.local.pre"  as zdotdir.zlogin.local.pre
+	entity "${ZDOTDIR}/.zlogin.local.post" as zdotdir.zlogin.local.post
+end box
+
+[->> zsh : exec()
+activate zsh #Salmon
+
+== .zshenv 読み込み==
+
+create etc.zshenv
+zsh ->  etc.zshenv : source
+note right : 最初に必ず読み込まれる
+activate   etc.zshenv #LightPink
+zsh <-- etc.zshenv
+deactivate etc.zshenv
+destroy etc.zshenv
+
+create zdotdir.zshenv
+zsh ->  zdotdir.zshenv : source
+activate   zdotdir.zshenv #LightPink
+zsh <-- zdotdir.zshenv
+deactivate zdotdir.zshenv
+destroy zdotdir.zshenv
+
+== .zprofile 読み込み（ログインシェル限定）==
+
+create etc.zprofile
+zsh ->  etc.zprofile : source
+activate   etc.zprofile #LightPink
+zsh <-- etc.zprofile
+deactivate etc.zprofile
+destroy etc.zprofile
+
+create zdotdir.zprofile
+zsh ->  zdotdir.zprofile : source
+activate   zdotdir.zprofile #LightPink
+zsh <-- zdotdir.zprofile
+deactivate zdotdir.zprofile
+destroy zdotdir.zprofile
+
+== .zshrc 読み込み（インタラクティブシェル限定）==
+
+create etc.zshrc
+zsh ->  etc.zshrc : source
+activate   etc.zshrc #LightPink
+zsh <-- etc.zshrc
+deactivate etc.zshrc
+destroy etc.zshrc
+
+create zdotdir.zshrc
+zsh -> zdotdir.zshrc : source
+activate zdotdir.zshrc #LightPink
+
+	create .sh_.functions
+	zdotdir.zshrc ->  .sh_.functions : source
+	activate   .sh_.functions
+	zdotdir.zshrc <-- .sh_.functions
+	deactivate .sh_.functions
+	destroy .sh_.functions
+
+	opt ${ZDOTDIR}/.zshrc.local.pre が存在するなら
+		create zdotdir.zshrc.local.pre
+		zdotdir.zshrc ->  zdotdir.zshrc.local.pre : source
+		activate   zdotdir.zshrc.local.pre
+		zdotdir.zshrc <-- zdotdir.zshrc.local.pre
+		deactivate zdotdir.zshrc.local.pre
+		destroy zdotdir.zshrc.local.pre
+	end
+
+	create zdotdir.misc
+	zdotdir.zshrc ->  zdotdir.misc : source
+	activate   zdotdir.misc
+	zdotdir.zshrc <-- zdotdir.misc
+	deactivate zdotdir.misc
+	destroy zdotdir.misc
+
+	create zdotdir.term
+	zdotdir.zshrc ->  zdotdir.term : source
+	activate   zdotdir.term
+	zdotdir.zshrc <-- zdotdir.term
+	deactivate zdotdir.term
+	destroy zdotdir.term
+
+	create zdotdir.prompt
+	zdotdir.zshrc ->  zdotdir.prompt : source
+	activate   zdotdir.prompt
+		create .sh_.prompt
+		zdotdir.prompt ->  .sh_.prompt : source
+		activate   .sh_.prompt
+		zdotdir.prompt <-- .sh_.prompt
+		deactivate .sh_.prompt
+		destroy .sh_.prompt
+	zdotdir.zshrc <-- zdotdir.prompt
+	deactivate zdotdir.prompt
+	destroy zdotdir.prompt
+
+	create zdotdir.aliases
+	zdotdir.zshrc ->  zdotdir.aliases : source
+	activate   zdotdir.aliases
+		create .sh_.aliases
+		zdotdir.aliases ->  .sh_.aliases : source
+		activate   .sh_.aliases
+		zdotdir.aliases <-- .sh_.aliases
+		deactivate .sh_.aliases
+		destroy .sh_.aliases
+	zdotdir.zshrc <-- zdotdir.aliases
+	deactivate zdotdir.aliases
+	destroy zdotdir.aliases
+
+	opt ${ZDOTDIR}/.zshrc.local.post が存在するなら
+		create zdotdir.zshrc.local.post
+		zdotdir.zshrc ->  zdotdir.zshrc.local.post : source
+		activate   zdotdir.zshrc.local.post
+		zdotdir.zshrc <-- zdotdir.zshrc.local.post
+		deactivate zdotdir.zshrc.local.post
+		destroy zdotdir.zshrc.local.post
+	end
+
+zsh <-- zdotdir.zshrc
+deactivate zdotdir.zshrc
+destroy zdotdir.zshrc
+
+== .zlogin 読み込み（ログインシェル限定）==
+
+create etc.zlogin
+zsh ->  etc.zlogin : source
+activate   etc.zlogin #LightPink
+zsh <-- etc.zlogin
+deactivate etc.zlogin
+destroy etc.zlogin
+
+create zdotdir.zlogin
+zsh -> zdotdir.zlogin : source
+activate zdotdir.zlogin #LightPink
+
+	create .profile
+	zdotdir.zlogin ->  .profile : source
+	activate   .profile
+		create .sh_.profile.local.pre
+		.profile ->  .sh_.profile.local.pre : source
+		activate   .sh_.profile.local.pre
+		.profile <-- .sh_.profile.local.pre
+		deactivate .sh_.profile.local.pre
+		destroy .sh_.profile.local.pre
+
+		create .sh_.profile.local.post
+		.profile ->  .sh_.profile.local.post : source
+		activate   .sh_.profile.local.post
+		.profile <-- .sh_.profile.local.post
+		deactivate .sh_.profile.local.post
+		destroy .sh_.profile.local.post
+	zdotdir.zlogin <-- .profile
+	deactivate .profile
+	destroy .profile
+
+	opt ${ZDOTDIR}/.zlogin.local.pre が存在するなら
+		create zdotdir.zlogin.local.pre
+		zdotdir.zlogin ->  zdotdir.zlogin.local.pre : source
+		activate   zdotdir.zlogin.local.pre
+		zdotdir.zlogin <-- zdotdir.zlogin.local.pre
+		deactivate zdotdir.zlogin.local.pre
+		destroy zdotdir.zlogin.local.pre
+	end
+
+	opt ${ZDOTDIR}/.zlogin.local.post が存在するなら
+		create zdotdir.zlogin.local.post
+		zdotdir.zlogin ->  zdotdir.zlogin.local.post : source
+		activate   zdotdir.zlogin.local.post
+		zdotdir.zlogin <-- zdotdir.zlogin.local.post
+		deactivate zdotdir.zlogin.local.post
+		destroy zdotdir.zlogin.local.post
+	end
+
+zsh <-- zdotdir.zlogin
+deactivate zdotdir.zlogin
+destroy zdotdir.zlogin
+|||
+
+@enduml
