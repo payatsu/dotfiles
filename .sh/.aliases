@@ -36,8 +36,8 @@ for gcc in `find \`echo ${PATH} | tr : ' '\` -executable -regextype posix-basic 
 	alias ${triplet}objdump="${triplet}objdump -C -w"
 	alias ${triplet}readelf="${triplet}readelf -W"
 done
-alias clang='clang     -std=c11   -march=native -Wpedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual'
-alias clang++='clang++ -std=c++14 -march=native -Wpedantic -Weverything -Wall -Wextra -Wcast-align -Wcast-qual -Wstrict-aliasing -Wpointer-arith -Wshadow -Wformat -Wwrite-strings -Weffc++ -Woverloaded-virtual -stdlib=libc++ -lc++abi'
+alias clang='clang     -std=c11   -march=native -Wpedantic -Weverything'
+alias clang++='clang++ -std=c++14 -march=native -Wpedantic -Weverything -stdlib=libc++ -lc++abi'
 which ${ZSH_VERSION:+-p} git > /dev/null && git_subcommands=`echo \`command git --exec-path\`/git-* | grep -oPe '(?<=core/git-)[\w-]+' | tr '\n' ' ' | sed -e 's/ /\\\\|/g;s/^/\\\\(/;s/\\\\|$/\\\\)/'`
 git()
 {
