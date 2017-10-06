@@ -9,7 +9,7 @@ export LESS=MRS
 which ${ZSH_VERSION:+-p} lesspipe > /dev/null 2>&1 && eval `lesspipe`
 export SCREENRC=${HOME}/.screen/screenrc
 
-export ${GOPATH:=${HOME}/.go}
+export GOPATH=${GOPATH:-${HOME}/.go}
 for p in `echo ${GOPATH} | tr : ' '`; do
 	append ${p}/bin PATH
 done
