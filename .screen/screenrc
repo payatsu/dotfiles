@@ -68,8 +68,8 @@ bind -c layout  9 eval  'command -c layout' 'layout select 9' 'layout show'
 
 bind -c layout l eval 'command -c load_layout' 'echo "Loading layout..."'
 bind -c load_layout 0 eval 'command -c load_layout' 'only' 'split' 'split -v' 'focus down' 'split -v' 'focus up'                                            'echo "Loading layout..."'
-bind -c load_layout 1 eval 'command -c load_layout' 'only' 'split' 'split -v' 'focus down' 'resize -v min' 'resize -v +15' 'focus up'                       'echo "Loading layout..."'
-bind -c load_layout 2 eval 'command -c load_layout' 'only' 'split' 'split -v' 'split -v' 'split -v' 'focus down' 'resize -v min' 'resize -v +15' 'focus up' 'echo "Loading layout..."'
+bind -c load_layout 1 eval 'command -c load_layout' 'only' 'split' 'split -v' 'focus down' 'resize -v min' 'resize -v +10' 'focus up'                       'echo "Loading layout..."'
+bind -c load_layout 2 eval 'command -c load_layout' 'only' 'split' 'split -v' 'split -v' 'split -v' 'focus down' 'resize -v min' 'resize -v +10' 'focus up' 'echo "Loading layout..."'
 bind -c load_layout 3 eval 'command -c load_layout' 'only' 'split -v' 'split' 'focus right' 'resize -h min' 'resize -h +80' 'focus left'                    'echo "Loading layout..."'
 bind -c load_layout 4 eval 'command -c load_layout' 'only' 'split -v' 'split' 'split' 'split' 'focus right' 'resize -h min' 'resize -h +80' 'focus left'    'echo "Loading layout..."'
 
