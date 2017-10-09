@@ -2,6 +2,8 @@ if exists('w:my_highlights_already_loaded')
 	finish
 endif
 
+highlight Todo term=standout cterm=bold ctermfg=Gray ctermbg=Yellow gui=bold guifg=Gray30 guibg=Yellow
+
 highlight Grayout        ctermfg=Gray         ctermbg=NONE   cterm=NONE           guifg=Gray40      guibg=NONE   gui=NONE
 highlight Caption        ctermfg=NONE         ctermbg=NONE   cterm=bold,underline guifg=NONE        guibg=NONE   gui=bold,underline
 highlight Star           ctermfg=Yellow       ctermbg=NONE   cterm=bold           guifg=Yellow      guibg=NONE   gui=bold
@@ -12,9 +14,9 @@ highlight Triangle       ctermfg=DarkRed      ctermbg=NONE   cterm=bold         
 highlight DTriangle      ctermfg=LightBlue    ctermbg=NONE   cterm=bold           guifg=LightBlue   guibg=NONE   gui=bold
 highlight EnclosedNumber ctermfg=Magenta      ctermbg=NONE   cterm=bold           guifg=DarkMagenta guibg=NONE   gui=bold
 highlight Attention      ctermfg=Black        ctermbg=Red    cterm=NONE           guifg=Black       guibg=Red    gui=bold
-highlight AttentionStr   ctermfg=Red          ctermbg=NONE   cterm=bold           guifg=Red         guibg=NONE   gui=bold
+highlight AttentionStr   ctermfg=Red          ctermbg=NONE   cterm=bold,underline guifg=Red         guibg=NONE   gui=bold,underline
 highlight Note           ctermfg=Gray         ctermbg=Yellow cterm=bold           guifg=Gray20      guibg=Orange gui=bold
-highlight NoteStr        ctermfg=Yellow       ctermbg=NONE   cterm=bold           guifg=Yellow      guibg=NONE   gui=bold
+highlight NoteStr        ctermfg=Yellow       ctermbg=NONE   cterm=bold,underline guifg=Orange      guibg=NONE   gui=bold,underline
 highlight Red          ctermfg=Red         ctermbg=NONE        guifg=Red        guibg=NONE
 highlight Green        ctermfg=Green       ctermbg=NONE        guifg=Green      guibg=NONE
 highlight Blue         ctermfg=Blue        ctermbg=NONE        guifg=DodgerBlue guibg=NONE
