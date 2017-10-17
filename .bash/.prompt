@@ -17,5 +17,5 @@ prompt_command(){ [ $? = 0 ] && last_status=${green}${ok}${reset} || last_status
 PROMPT_COMMAND=prompt_command
 custom_prompt='\[${bold}\]\u\[${reset}\]@\[${bold}\]\[`eval echo \\\$${hostname_color}`\]${abbrev_host}\[${reset}\][\[${bold}\]${last_status}\[${reset}\]](\[${bold}\]\[${magenta}\]${his}\[${reset}\]:\[${bold}\]\!\[${reset}\]/\[${bold}\]\[${cyan}\]${job}\[${reset}\]:\[${bold}\]\j\[${reset}\]/\[${bold}\]\[${yellow}\]${lvl}\[${reset}\]:\[${bold}\]${SHLVL}\[${reset}\]):\[${bold}\]\w\[${reset}\]
 \[${bold}\]${cal}\D{%m:%d}\[${reset}\]\[${bold}\]${tim}\t\[${reset}\]\[${bold}\]\$\[${reset}\] '
-simple_prompt='\u@\h:\w\$ '
+simple_prompt='\[${bold}\]\u\[${reset}\]@\[${bold}\]\[`eval echo \\\$${hostname_color}`\]\h\[${reset}\]:\[${bold}${magenta}\]\w\[${reset}\]\$ '
 PS1=${custom_prompt}

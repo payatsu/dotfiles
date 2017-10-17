@@ -7,7 +7,7 @@ vcs_info='%B${vcs_info_msg_0_/${HOME}/~}%b(${vcs_info_msg_1_}):%B${vcs_info_msg_
 custom_prompt='%B%n%b@%B%8>..>%F{${hostname_color}}%m%f%>>%b[%B%(?.%F{green}${ok}%f.%F{red}${ng}%f'$'\a'')%b](%B%F{magenta}${his}%f%b:%B%h%b/%B%F{cyan}${job}%f%b:%B%1(j.%U%F{red}.)%j%1(j.%f%u.)%b/%B%F{yellow}${lvl}%f%b:%B%L%b):%(V"'${vcs_info}'"%B%20<..<%~%<<%b)%B${mps}%b
 %B%D{${cal}%m/%d${tim}%T}%(!.#.${ps})%b'
 #RPROMPT='${vcs_info_msg_0_:+%B%(!.#.${rps})%b'${vcs_info}'}'
-simple_prompt='%n@%m:%~%(!.#.$) '
+simple_prompt='%B%n%b@%F{${hostname_color}}%B%m%b%f:%B%F{magenta}%~%f%b%(!.#.$) '
 PS1=${custom_prompt}
 PS2='%_> '
 SPROMPT='zsh: correct %R to %r [nyae]?'
