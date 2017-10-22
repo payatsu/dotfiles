@@ -72,7 +72,7 @@ set virtualedit=block
 if $TERMCAP =~# ':\?Co#256:' | set t_Co=256 | endif
 if &viminfo !~# ',n' | let &viminfo .= ',n' . split(&runtimepath, ',')[0] . '/viminfo' | endif
 if executable('hw')
-	set grepprg=hw\ -e\ $*\ /dev/null
+	set grepprg=hw\ $*\ /dev/null
 elseif executable('pt')
 	set grepprg=pt\ $*\ /dev/null
 elseif executable('ag')
