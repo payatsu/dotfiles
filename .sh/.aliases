@@ -10,7 +10,7 @@ alias grep="grep`echo | command grep -e '' --exclude-dir='*.svn' > /dev/null 2>&
 alias g='grep'
 alias gtags='gtags -c'
 alias h='history'
-alias hw='hw --no-group -e'
+alias hw='hw --no-group'
 alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l80 -lp -ncs -nfc1 -npcs -nprs -npsl -nsaf -nsai -nsaw -nss -sc -ts4'
 alias ls="ls -FGlhpX --time-style=long-iso`command ls --group-directories-first /dev/null > /dev/null 2>&1 && echo ' --group-directories-first'`${color}"
 alias l='ls'
