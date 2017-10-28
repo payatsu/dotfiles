@@ -10,6 +10,11 @@ if has('eval')
 			call dein#begin(s:runtimepath_first)
 			call dein#add('Shougo/dein.vim')
 			call dein#add('thinca/vim-quickrun')
+			call dein#add('Shougo/neocomplete.vim')
+			call dein#add('Shougo/neosnippet.vim')
+			call dein#add('Shougo/neosnippet-snippets')
+			call dein#add('justmao945/vim-clang')
+			call dein#add('aklt/plantuml-syntax')
 			call dein#add('tomasr/molokai')
 			call dein#add('w0ng/vim-hybrid')
 			call dein#add('djjcast/mirodark')
@@ -20,9 +25,6 @@ if has('eval')
 			call dein#add('vim-scripts/twilight')
 			call dein#add('NLKNguyen/papercolor-theme')
 			call dein#add('itchyny/lightline.vim')
-			call dein#add('Shougo/neocomplete.vim')
-			call dein#add('justmao945/vim-clang')
-			call dein#add('aklt/plantuml-syntax')
 			call dein#end()
 			call dein#save_state()
 		endif
@@ -124,7 +126,8 @@ if has('autocmd')
 		augroup END
 	endif
 endif
-runtime lightline.vim
 runtime neocomplete.vim
+runtime neosnippet.vim
 runtime vim-clang.vim
+runtime lightline.vim
 runtime vimrc.local.vim
