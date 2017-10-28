@@ -9,6 +9,7 @@ if has('eval')
 		if dein#load_state(s:runtimepath_first)
 			call dein#begin(s:runtimepath_first)
 			call dein#add('Shougo/dein.vim')
+			call dein#add('t9md/vim-quickhl')
 			call dein#add('thinca/vim-quickrun')
 			call dein#add('Shougo/neocomplete.vim')
 			call dein#add('Shougo/neosnippet.vim')
@@ -128,6 +129,7 @@ if has('autocmd')
 		augroup END
 	endif
 endif
+runtime vim-quickhl.vim
 runtime neocomplete.vim
 runtime neosnippet.vim
 runtime vim-clang.vim
