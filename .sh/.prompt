@@ -20,11 +20,11 @@ prompt_symbol()
 		[ "${1}" = aa ] && {
 			ok="(*^-'${ZSH_VERSION:+%})b"
 			ng="(#\`_'${ZSH_VERSION:+%})p"
-			idle="( =_=${ZSH_VERSION:+%})"
+			idle="( =_=${ZSH_VERSION:+%}).ozZ"
 		} || {
 			ok=OK
 			ng=NG
-			idle=ZZ
+			idle=zZ
 		}
 		his=h
 		job=j
@@ -37,8 +37,14 @@ prompt_symbol()
 	}
 }
 
+prompt_idle()
+{
+	ok=${idle}
+	ng=${idle}
+}
 prompt()
 {
+	[ "${1}" = prev ] && set "${prev_prompt}" || prev_prompt=${1}
 	case "${1}" in
 	simple) PS1=${simple_prompt};;
 	*) prompt_symbol ${1}; PS1=${custom_prompt};;
