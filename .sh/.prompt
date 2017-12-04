@@ -35,12 +35,14 @@ prompt_symbol()
 		ps='$ '
 		rps=?
 	}
+	bell=$'\a'
 }
 
 prompt_idle()
 {
 	ok=${idle}
 	ng=${idle}
+	bell=
 }
 prompt()
 {
