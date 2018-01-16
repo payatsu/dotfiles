@@ -49,6 +49,7 @@ prompt()
 	[ "${1}" = prev ] && set "${prev_prompt}" || prev_prompt=${1}
 	case "${1}" in
 	simple) PS1=${simple_prompt};;
+	simplest)PS1='$ ';;
 	*) prompt_symbol ${1}; PS1=${custom_prompt};;
 	esac
 }
