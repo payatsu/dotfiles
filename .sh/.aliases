@@ -15,7 +15,7 @@ alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l8
 alias ls="ls -FGlhpX --time-style=long-iso`command ls --group-directories-first /dev/null > /dev/null 2>&1 && echo ' --group-directories-first'`${color}"
 alias l='ls'
 alias lv='lv -c'
-alias od='od -Ax -tx1z -v'
+alias od='echo "       00       04       08       0c    "; echo "       -----------------------------------"; od -Ax -tx4z -v --endian=big'
 alias p="ps auxww | command grep -e '^USER\\|^${USER}'"
 alias pstree='pstree -ahnp'
 alias pt='pt --nogroup'
