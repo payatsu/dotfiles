@@ -6,11 +6,11 @@ set_window_title()
 {
 	commandline=`echo ${2:-zsh} | sed -e 's/[[:alnum:]]\+=\('\''[^'\'']*'\''\|"[^"]*"\|[[:graph:]]\)\+//;s/^ \+//;s/\;.*//'`
 	command=`echo "${commandline}" | cut -d ' ' -f 1`
-	[ ${command} != fg ] && type ${command} | grep -qe "^${command} is a shell builtin\$" && return
+	[ ${command} != fg ] && type -- ${command} | grep -qe "^${command} is a shell builtin\$" && return
 	commandline=`echo "${commandline}" | sed -e 's/^fg$/& %%/'`
 	[ ${command} = fg ] && command=`jobs -l \`echo "${commandline}" | sed -e 's/^fg\> \+//'\` | sed -e 's/^\(\[[[:digit:]]\+\] \+\)[-+]/\1 /' | awk '{print $4}'`
 	case ${TERM} in
-	screen*) echo -n '\ek'`basename "${command}"`'\e\\';;
+	screen*) echo -n '\ek'`basename -- "${command}"`'\e\\';;
 	esac
 }
 add-zsh-hook preexec set_window_title
