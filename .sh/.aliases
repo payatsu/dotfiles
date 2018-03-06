@@ -15,7 +15,6 @@ alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l8
 alias ls="ls -FGlhpX --time-style=long-iso`command ls --group-directories-first /dev/null > /dev/null 2>&1 && echo ' --group-directories-first'`${color}"
 alias l='ls'
 alias lv='lv -c'
-alias od='echo "       00       04       08       0c    "; echo "       -----------------------------------"; od -Ax -tx4z -v --endian=big'
 alias p="ps auxww | command grep -e '^USER\\|^${USER}'"
 alias pstree='pstree -ahnp'
 alias pt='pt --nogroup'
@@ -27,12 +26,12 @@ alias xdvi='xdvi -geometry 900x1100-0+0'
 alias xxd='xxd -g 1'
 for gcc in `find \`echo ${PATH} | tr : ' '\` -executable -regextype posix-basic -regex '^/.\+/\([^-]\+-[^-]\+-\([^-]\+-\)\?\)\?gcc' -exec basename \{\} \; | sort | uniq`; do
 	triplet=`echo ${gcc} | sed -e 's/gcc$//'`
-	alias ${triplet}addr2line="${triplet}addr2line -C -f"
+	alias ${triplet}addr2line="${triplet}addr2line -Cf"
 	alias ${triplet}gcc="${triplet}gcc -std=c11`[ -z ${triplet} ] && echo ' -march=native'` -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command ${triplet}gcc -fsyntax-only -Q --help=warnings,^joined,^separate,c | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
 	which ${ZSH_VERSION:+-p} ${triplet}g++ > /dev/null 2>&1 && alias ${triplet}g++="${triplet}g++ -std=c++14`[ -z ${triplet} ] && echo ' -march=native'` -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command ${triplet}g++ -fsyntax-only -Q --help=warnings,^joined,^separate,c++ | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | xargs echo`"
 	which ${ZSH_VERSION:+-p} ${triplet}gdb > /dev/null 2>&1 && alias ${triplet}gdb="${triplet}gdb -q"
 	alias ${triplet}nm="${triplet}nm -C"
-	alias ${triplet}objdump="${triplet}objdump -C -w"
+	alias ${triplet}objdump="${triplet}objdump -Cw"
 	alias ${triplet}readelf="${triplet}readelf -W"
 	unset triplet
 done
@@ -50,4 +49,10 @@ git()
 	log) shift; command git ${git_opt} log --graph --date='format:%F %R' --pretty='tformat:%C(auto,yellow)%>|(13)%h%Creset %C(auto,blue)%ad%Creset [%C(auto,green)%<(8,trunc)%an%Creset] %C(auto)%s%Creset%C(auto)%d%Creset' "$@";;
 	*) command git ${git_opt} "$@";;
 	esac
+}
+od()
+{
+	echo '       00       04       08       0c'
+	echo '       -----------------------------------'
+	command od -Ax -tx4z -v --endian=big "$@"
 }
