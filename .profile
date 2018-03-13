@@ -10,6 +10,7 @@ which ${ZSH_VERSION:+-p} lesspipe > /dev/null 2>&1 && eval `lesspipe`
 export SCREENRC=${HOME}/.screen/screenrc
 export screen_so_color=${screen_so_color:-bW}
 export screen_caption_color=${screen_caption_color:-bW}
+export screen_hostname_color=${screen_hostname_color:-.b}
 export screen_hardstatus_color=${screen_hardstatus_color:-bw}
 export screen_windowlist_color=${screen_windowlist_color:-.B}
 export FZF_DEFAULT_OPTS='
