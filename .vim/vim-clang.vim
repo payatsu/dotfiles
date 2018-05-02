@@ -1,3 +1,6 @@
+if !filereadable('.clang')
+	finish
+endif
 let g:clang_auto = 0
 let g:clang_c_options   = '-std=c11'
 let g:clang_cpp_options = '-std=c++14 -stdlib=libc++'
