@@ -32,7 +32,7 @@ prompt_symbol()
 		cal=
 		tim=' '
 		mps=
-		ps='$ '
+		ps='$'
 		rps=?
 	}
 	bell=$'\a'
