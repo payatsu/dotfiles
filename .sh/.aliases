@@ -27,18 +27,31 @@ alias xdvi='xdvi -geometry 900x1100-0+0'
 alias xxd='xxd -g 1'
 for gcc in `find \`echo ${PATH} | tr : ' '\` -executable -regextype posix-basic -regex '^/.\+/\([^-]\+-[^-]\+-\([^-]\+-\([^-]\+-\)\?\)\?\)\?gcc' -exec basename \{\} \; | sort | uniq`; do
 	triplet=`echo ${gcc} | sed -e 's/gcc$//'`
-	alias ${triplet}addr2line="${triplet}addr2line -Cf"
+	alias ${triplet}addr2line='${eu_}'"${triplet}addr2line -Cf"
 	alias ${triplet}gcc="${triplet}gcc -std=c11`[ -z ${triplet} ] && echo ' -march=native'` -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command ${triplet}gcc -fsyntax-only -Q --help=warnings,^joined,^separate,c | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | sed -e 's/<[0-9,]\+>//' | xargs echo`"
 	which ${ZSH_VERSION:+-p} ${triplet}g++ > /dev/null 2>&1 && alias ${triplet}g++="${triplet}g++ -std=c++14`[ -z ${triplet} ] && echo ' -march=native'` -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command ${triplet}g++ -fsyntax-only -Q --help=warnings,^joined,^separate,c++ | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtemplates\|-Wtraditional[^-]\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | sed -e 's/<[0-9,]\+>//' | xargs echo`"
 	which ${ZSH_VERSION:+-p} ${triplet}gdb > /dev/null 2>&1 && alias ${triplet}gdb="${triplet}gdb -q"
-	alias ${triplet}nm="${triplet}nm -C"
-	alias ${triplet}objdump="${triplet}objdump -Cw"
-	alias ${triplet}readelf="${triplet}readelf -W"
-	unset triplet
+	alias ${triplet}nm='${eu_}'"${triplet}nm -C"
+	alias ${triplet}objdump='${eu_}'"${triplet}objdump -Cw"
+	alias ${triplet}readelf='${eu_}'"${triplet}readelf -W"
+	[ -n "${triplet}" ] && unset triplet && continue
+	for u in ar ranlib size strings strip; do
+		alias ${u}='${eu_}'${u}
+	done
 done
 alias clang="clang     -std=c11   -march=native -Wpedantic -Weverything`which lld > /dev/null 2>&1 && echo ' -fuse-ld=lld'`"
 alias clang++="clang++ -std=c++14 -march=native -Wpedantic -Weverything`which lld > /dev/null 2>&1 && echo ' -fuse-ld=lld'` -stdlib=libc++ -lc++abi"
 which ${ZSH_VERSION:+-p} git > /dev/null && git_subcommands=`echo \`command git --exec-path\`/git-* | grep -oPe '(?<=core/git-)[\w-]+' | tr '\n' ' ' | sed -e 's/ /\\\\|/g;s/^/\\\\(/;s/\\\\|$/\\\\)/'`
+eu()
+{
+	case ${1} in
+	activate)
+		eu_=eu-;;
+	deactivate)
+		eu_=;;
+	esac
+}
+eu deactivate
 git()
 {
 	[ -n "${BASH_VERSION}${ZSH_VERSION}" ] && local git_opt= || git_opt=
