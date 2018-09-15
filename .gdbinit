@@ -1,6 +1,7 @@
 set history save on
 set history size 1000000
 set history filename ~/.gdb_history
+set listsize 20
 set print array on
 set print array-indexes on
 set print asm-demangle on
