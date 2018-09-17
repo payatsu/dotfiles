@@ -1,3 +1,4 @@
+set backtrace past-main on
 set history save on
 set history size 1000000
 set history filename ~/.gdb_history
