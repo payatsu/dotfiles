@@ -17,6 +17,7 @@ windowlist title  '%{ub '${screen_windowlist_color}'}Num Flags Title%=[0-9] sele
 windowlist string '%3n %f%09= %t%+010= %X'
 bind  w windowlist -b
 bind ^W windowlist -b
+bind  L redisplay
 bind  N colon 'number '
 bind  j focus down
 bind ^J focus down
