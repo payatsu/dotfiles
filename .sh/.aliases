@@ -66,7 +66,18 @@ git()
 }
 od()
 {
-	echo '       00       04       08       0c'
-	echo '       -----------------------------------'
-	command od -Ax -tx4z -v --endian=big "$@"
+	local width=16
+	while getopts :w: arg; do
+		case ${arg} in
+		w) echo ${OPTARG} | grep -qe '^[[:digit:]]\+$' && width=${OPTARG} || width=32;;
+		esac
+	done
+	local max_digit=`printf '%x' \`expr ${width} - 1\` | wc -c`
+	local padding=`echo "4 * 2 - ${max_digit} + 1" | bc`
+	echo -n '       '
+	seq 0 4 `expr ${width} - 1` | xargs printf '%0'${max_digit}'x ' | sed -e "s/ /`printf '%*s' ${padding}`/g;s/ \\+\$//"
+	echo
+	echo -n '       '
+	printf '%*s\n' `echo ${width} '*' 2 + ${width} / 4 - 1 | bc` | sed -e 's/ /-/g'
+	command od -Ax -tx4z -v --endian=big "$@" | sed -e '$d'
 }
