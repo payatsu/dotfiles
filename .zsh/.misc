@@ -32,7 +32,7 @@ zstyle ':completion:*:processes' command "ps -u ${USER} -o pid,stat,%cpu,%mem,cp
 zstyle ':completion:*:*:cdr:*:*' menu selection
 LISTMAX=0
 HISTFILE=${ZDOTDIR}/.zsh_history
-HISTSIZE=10000
+HISTSIZE=100000
 SAVEHIST=500000
 WORDCHARS=''
 zle_highlight=(isearch:underline,bold region:standout,fg=blue special:bold,underline,fg=red suffix:bold paste:bold,fg=green)
