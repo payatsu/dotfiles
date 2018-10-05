@@ -61,7 +61,7 @@ git()
 	done
 	case ${1} in
 	log) shift; command git ${git_opt} log --graph --date='format:%F %R' --pretty='tformat:%C(auto,yellow)%>|(13)%h%Creset %C(auto,blue)%ad%Creset [%C(auto,green)%<(8,trunc)%an%Creset] %C(auto)%s%Creset%C(auto)%d%Creset' "$@";;
-	*) command git ${git_opt} "$@";;
+	*) command git --no-pager ${git_opt} "$@";;
 	esac
 }
 od()
