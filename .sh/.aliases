@@ -25,7 +25,7 @@ alias v='vim'
 alias vimdiff="vimdiff -c 'windo %foldopen!'"
 alias xdvi='xdvi -geometry 900x1100-0+0'
 alias xxd='xxd -g 1'
-for gcc in `find \`echo ${PATH} | tr : ' '\` -executable -regextype posix-basic -regex '^/.\+/\([^-]\+-[^-]\+-\([^-]\+-\([^-]\+-\)\?\)\?\)\?gcc' -exec basename \{\} \; | sort | uniq`; do
+for gcc in `find \`echo ${PATH} | tr : ' '\` -maxdepth 1 -type f -executable -regextype posix-basic -regex '^/.\+/\([^-]\+-[^-]\+-\([^-]\+-\([^-]\+-\)\?\)\?\)\?gcc' -exec basename \{\} \; 2> /dev/null | sort | uniq`; do
 	triplet=`echo ${gcc} | sed -e 's/gcc$//'`
 	alias ${triplet}addr2line='${eu_}'"${triplet}addr2line -Cf"
 	alias ${triplet}gcc="${triplet}gcc -std=c11`[ -z ${triplet} ] && echo ' -march=native'` -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command ${triplet}gcc -fsyntax-only -Q --help=warnings,^joined,^separate,c | grep -v '\[enabled\]\|-Wc90-c99-compat\|-Wtraditional[^-]\|-Wsystem-headers' | grep -oe '-W[[:graph:]]\+' | sed -e 's/<[0-9,]\+>//' | xargs echo`"
