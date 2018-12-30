@@ -10,6 +10,7 @@ set_window_title()
 	[ "${command}" != fg ] && type -- ${command} | grep -Fqe "${command} is a shell builtin" && return
 	commandline=`echo "${commandline}" | sed -e 's/^fg$/& %%/'`
 	[ "${command}" = fg ] && command=`jobs -l \`echo "${commandline}" | sed -e 's/^fg\> \+//'\` | sed -e 's/^\(\[[[:digit:]]\+\] \+\)[-+]/\1 /;s/(tty output)//' | awk '{print $4}'`
+	command=`eval echo ${command}`
 	case ${TERM} in
 	screen*) echo -n '\ek'`basename -- "${command}"`'\e\\';;
 	esac
