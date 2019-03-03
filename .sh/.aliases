@@ -18,12 +18,10 @@ alias lv='lv -c'
 alias p="ps auxww | command grep -e '^USER\\|^${USER}'"
 alias pstree='pstree -ahnp'
 alias pt='pt --nogroup'
-alias tgif='tgif -geometry 960x1000'
 [ -z "${MSYSTEM}${CYGWIN}" ] && which ${ZSH_VERSION:+-p}  vim > /dev/null 2>&1 && command  vim --version | grep -qe '+clientserver' && alias  vim='vim --servername VIM'
 [ -z "${MSYSTEM}${CYGWIN}" ] && which ${ZSH_VERSION:+-p} gvim > /dev/null 2>&1 && command gvim --version | grep -qe '+clientserver' && alias gvim='gvim --servername VIM'
 alias v='vim'
 alias vimdiff="vimdiff -c 'windo %foldopen!'"
-alias xdvi='xdvi -geometry 900x1100-0+0'
 alias xxd='xxd -g 1'
 for gcc in `find \`echo ${PATH} | tr : ' '\` -maxdepth 1 ! -type d -executable -regextype posix-basic -regex '^/.\+/\([^-]\+-[^-]\+-\([^-]\+-\([^-]\+-\)\?\)\?\)\?gcc' -exec basename \{\} \; 2> /dev/null | sort | uniq`; do
 	triplet=`echo ${gcc} | sed -e 's/gcc$//'`
