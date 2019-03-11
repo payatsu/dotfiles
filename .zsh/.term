@@ -5,7 +5,7 @@
 set_window_title()
 {
 	[ "${set_window_title}" = deactivated ] && return
-	commandline=`echo ${2:-zsh} | sed -e 's/[[:alnum:]]\+=\('\''[^'\'']*'\''\|"[^"]*"\|[[:graph:]]\)\+//;s/^ \+//;s/\;.*//;s/|.\+//;s/> *[[:graph:]]\+//'`
+	commandline=`echo ${2:-zsh} | sed -e 's/[[:alnum:]]\+=\('\''[^'\'']*'\''\|"[^"]*"\|[[:graph:]]\)\+//;s/^ \+//;s/\(\;\|&&\|||\).*//;s/|.\+//;s/> *[[:graph:]]\+//'`
 	command=`eval echo "${commandline}" | cut -d ' ' -f 1 | head -n 1`
 	[ "${command}" != fg ] && type -- ${command} | grep -Fqe "${command} is a shell builtin" && return
 	commandline=`echo "${commandline}" | sed -e 's/^fg$/& %%/'`
