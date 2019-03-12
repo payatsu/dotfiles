@@ -24,16 +24,16 @@ alias vimdiff="vimdiff -c 'windo %foldopen!'"
 alias xxd='xxd -g 1'
 for gcc in `find \`echo ${PATH} | tr : ' '\` -maxdepth 1 ! -type d -executable -regextype posix-basic -regex '^/.\+/\([^-]\+-[^-]\+-\([^-]\+-\([^-]\+-\)\?\)\?\)\?gcc' -exec basename \{\} \; 2> /dev/null | sort | uniq`; do
 	triplet=`echo ${gcc} | sed -e 's/gcc$//'`
-	alias ${triplet}addr2line='${eu_}'"${triplet}addr2line -Cf"
+	alias ${triplet}addr2line="${triplet:-${eu_}}addr2line -Cf"
 	alias ${triplet}gcc="${triplet}gcc -std=c11`[ -z ${triplet} ] && echo ' -march=native'` -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command ${triplet}gcc -fsyntax-only -Q --help=warnings,^joined,^separate,c | grep -v '\[enabled\]\|-Wabi[^-]\|-Wc90-c99-compat\|-Wsystem-headers\|-Wtraditional[^-]' | grep -oe '-W[[:graph:]]\+' | sed -e 's/<[0-9,]\+>//' | xargs echo`"
 	which ${ZSH_VERSION:+-p} ${triplet}g++ > /dev/null 2>&1 && alias ${triplet}g++="${triplet}g++ -std=c++14`[ -z ${triplet} ] && echo ' -march=native'` -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command ${triplet}g++ -fsyntax-only -Q --help=warnings,^joined,^separate,c++ | grep -v '\[enabled\]\|-Wabi[^-]\|-Wc90-c99-compat\|-Wsystem-headers\|-Wtraditional[^-]\|-Wnamespaces\|-Wtemplates' | grep -oe '-W[[:graph:]]\+' | sed -e 's/<[0-9,]\+>//' | xargs echo`"
 	which ${ZSH_VERSION:+-p} ${triplet}gdb > /dev/null 2>&1 && alias ${triplet}gdb="${triplet}gdb -q"
-	alias ${triplet}nm='${eu_}'"${triplet}nm -C"
-	alias ${triplet}objdump='${eu_}'"${triplet}objdump"'`[ -z "${eu_}" ] && echo " -Cw"`'
-	alias ${triplet}readelf='${eu_}'"${triplet}readelf -W"
+	alias ${triplet}nm="${triplet:-${eu_}}nm -C"
+	alias ${triplet}objdump="${triplet:-${eu_}}objdump`[ -z "${eu_}" -o -n "${triplet}" ] && echo ' -Cw'`"
+	alias ${triplet}readelf="${triplet:-${eu_}}readelf -W"
 	[ -n "${triplet}" ] && unset triplet && continue
 	for u in ar ranlib size strings strip; do
-		alias ${u}='${eu_}'${u}
+		alias ${u}=${eu_}${u}
 	done
 done
 alias clang="clang     -std=c11   -march=native -Wpedantic -Weverything`which lld > /dev/null 2>&1 && echo ' -fuse-ld=lld'`"
@@ -47,7 +47,6 @@ eu()
 		eu_=;;
 	esac
 }
-eu deactivate
 which ${ZSH_VERSION:+-p} git > /dev/null && git_subcommands=`echo \`command git --exec-path\`/git-* | grep -oPe '(?<=core/git-)[\w-]+' | tr '\n' ' ' | sed -e 's/ /\\\\|/g;s/^/\\\\(/;s/\\\\|$/\\\\)/'`
 git()
 {
