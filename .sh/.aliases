@@ -26,7 +26,7 @@ for gcc in `find \`echo ${PATH} | tr : ' '\` -maxdepth 1 ! -type d -executable -
 	triplet=`echo ${gcc} | sed -e 's/gcc$//'`
 	alias ${triplet}addr2line="${triplet:-${eu_}}addr2line -Cf"
 	alias ${triplet}gcc="${triplet}gcc -std=c11`[ -z ${triplet} ] && echo ' -march=native'` -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command ${triplet}gcc -fsyntax-only -Q --help=warnings,^joined,^separate,c | grep -v '\[enabled\]\|-Wabi[^-]\|-Wc90-c99-compat\|-Wsystem-headers\|-Wtraditional[^-]' | grep -oe '-W[[:graph:]]\+' | sed -e 's/<[0-9,]\+>//' | xargs echo`"
-	which ${ZSH_VERSION:+-p} ${triplet}g++ > /dev/null 2>&1 && alias ${triplet}g++="${triplet}g++ -std=c++14`[ -z ${triplet} ] && echo ' -march=native'` -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command ${triplet}g++ -fsyntax-only -Q --help=warnings,^joined,^separate,c++ | grep -v '\[enabled\]\|-Wabi[^-]\|-Wc90-c99-compat\|-Wsystem-headers\|-Wtraditional[^-]\|-Wnamespaces\|-Wtemplates' | grep -oe '-W[[:graph:]]\+' | sed -e 's/<[0-9,]\+>//' | xargs echo`"
+	which ${ZSH_VERSION:+-p} ${triplet}g++ > /dev/null 2>&1 && alias ${triplet}g++="${triplet}g++ -std=c++17`[ -z ${triplet} ] && echo ' -march=native'` -Wextra -Wcast-align -Wstrict-aliasing -Wshadow `LANG=C command ${triplet}g++ -fsyntax-only -Q --help=warnings,^joined,^separate,c++ | grep -v '\[enabled\]\|-Wabi[^-]\|-Wc90-c99-compat\|-Wsystem-headers\|-Wtraditional[^-]\|-Wnamespaces\|-Wtemplates' | grep -oe '-W[[:graph:]]\+' | sed -e 's/<[0-9,]\+>//' | xargs echo`"
 	which ${ZSH_VERSION:+-p} ${triplet}gdb > /dev/null 2>&1 && alias ${triplet}gdb="${triplet}gdb -q"
 	alias ${triplet}nm="${triplet:-${eu_}}nm -C"
 	alias ${triplet}objdump="${triplet:-${eu_}}objdump`[ -z "${eu_}" -o -n "${triplet}" ] && echo ' -Cw'`"
@@ -36,8 +36,8 @@ for gcc in `find \`echo ${PATH} | tr : ' '\` -maxdepth 1 ! -type d -executable -
 		alias ${u}=${eu_}${u}
 	done
 done
-alias clang="clang     -std=c11   -march=native -Wpedantic -Weverything`which lld > /dev/null 2>&1 && echo ' -fuse-ld=lld'`"
-alias clang++="clang++ -std=c++14 -march=native -Wpedantic -Weverything`which lld > /dev/null 2>&1 && echo ' -fuse-ld=lld'` -stdlib=libc++ -lc++abi"
+alias clang="clang -std=c11 -march=native -Wpedantic -Weverything`which lld > /dev/null 2>&1 && echo ' -fuse-ld=lld'`"
+alias clang++="clang++ -std=c++17 -march=native -Wpedantic -Weverything`which lld > /dev/null 2>&1 && echo ' -fuse-ld=lld'` -stdlib=libc++ -lc++abi"
 eu()
 {
 	case ${1} in
