@@ -15,7 +15,7 @@ alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l8
 alias l="ls -FlhpX --time-style=long-iso`command ls --group-directories-first /dev/null > /dev/null 2>&1 && echo ' --group-directories-first'`${color}"
 alias lv='lv -c'
 alias p="ps auxww | command grep -e '^USER\\|^${USER}'"
-alias pstree='pstree -ahnp'
+alias pstree='pstree -Aahnp'
 alias pt='pt --nogroup'
 [ -z "${MSYSTEM}${CYGWIN}" ] && which ${ZSH_VERSION:+-p}  vim > /dev/null 2>&1 && command  vim --version | grep -qe '+clientserver' && alias  vim='vim --servername VIM'
 [ -z "${MSYSTEM}${CYGWIN}" ] && which ${ZSH_VERSION:+-p} gvim > /dev/null 2>&1 && command gvim --version | grep -qe '+clientserver' && alias gvim='gvim --servername VIM'
