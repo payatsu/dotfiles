@@ -5,7 +5,7 @@ startup_message off
 msgwait 1.5
 vbell off
 bind ^G
-defscrollback 8192
+defscrollback 65536
 defmousetrack on
 defzombie kr onerror
 rendition monitor =ub .y
