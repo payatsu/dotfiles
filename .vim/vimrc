@@ -138,6 +138,7 @@ if has('autocmd')
 	endif
 endif
 runtime vim-quickhl.vim
+runtime vim-gitgutter.vim
 runtime neocomplete.vim
 runtime neosnippet.vim
 runtime vim-clang.vim
