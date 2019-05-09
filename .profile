@@ -19,7 +19,8 @@ export FZF_DEFAULT_OPTS='
 --color info:183,prompt:110,spinner:107,pointer:167,marker:215
 '
 
-export GOPATH=${GOPATH:-${HOME}/.go}
+prepend ${HOME}/.go GOPATH
+export GOPATH
 for p in `echo ${GOPATH} | tr : ' '`; do
 	append ${p}/bin PATH
 done
