@@ -37,7 +37,7 @@ for gcc in `find \`echo ${PATH} | tr : ' '\` -maxdepth 1 ! -type d -executable -
 	done
 done
 alias clang="clang -std=c17 -march=native -Wpedantic -Weverything`which lld > /dev/null 2>&1 && echo ' -fuse-ld=lld'`"
-alias clang++="clang++ -std=c++17 -march=native -Wpedantic -Weverything`which lld > /dev/null 2>&1 && echo ' -fuse-ld=lld'` -stdlib=libc++ -lc++abi"
+alias clang++="clang++ -std=c++17 -march=native -Wpedantic -Weverything`which lld > /dev/null 2>&1 && echo ' -fuse-ld=lld'`"
 eu()
 {
 	case ${1} in
