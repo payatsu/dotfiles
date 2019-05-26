@@ -137,5 +137,6 @@ if has('autocmd')
 endif
 runtime vim-quickhl.vim
 runtime vim-gitgutter.vim
+runtime vim-lsp.vim
 runtime lightline.vim
 runtime vimrc.local.vim
