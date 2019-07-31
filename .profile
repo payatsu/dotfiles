@@ -24,5 +24,6 @@ export GOPATH
 for p in `echo ${GOPATH} | tr : ' '`; do
 	append ${p}/bin PATH
 done
+prepend ${HOME}/.cargo/bin PATH
 
 [ -f ${HOME}/.sh/.profile.local.post ] && . ${HOME}/.sh/.profile.local.post || true
