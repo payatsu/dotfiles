@@ -24,7 +24,7 @@ def prompt_hook(current_prompt):
 			'{}(gdb{}{}){} '.format(
 				 '\[\e[1m\]' if not tui_enabled else '',
 				'@' + str(thread.ptid[1]) if thread else '',
-				':' + frame.name() if frame and frame.name() else '',
+				': ' + frame.name()[-min(40, len(frame.name())):] if frame and frame.name() else '',
 				 '\[\e[0m\]' if not tui_enabled else ''
 			)
 		)
