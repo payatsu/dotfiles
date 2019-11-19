@@ -451,15 +451,6 @@
   (setq guide-key/guide-key-sequence '("C-x r" "C-x 4"))
   (guide-key-mode 1))
 
-; *** prog-mode-hook ***
-(add-hook 'prog-mode-hook
-		  '(lambda ()
-			 (font-lock-add-keywords nil
-									 '(("\\<[A-Z_][A-Z_0-9]+\\>" . 'font-lock-constant-face)
-									   ("\\<0[xXb][0-9A-Fa-f]+\\>" . 'font-lock-constant-face)
-									   ("\\<[\\-+]?[0-9]*\\.?[0-9]+\\([uUlL]+\\|[eE][\\-+]?[0-9]+\\)?\\>" . 'font-lock-constant-face)
-									   ))))
-
 ; *** gdb-mode ***
 (setq gdb-many-windows t)
 
@@ -487,12 +478,5 @@
 							  (make-variable-buffer-local 'dvi2-command)
 							  (setq dvi2-command "xdvi -geo -0+0 -s 5")
 							  ))
-
-; *** Anthy関連 ***
-; 事前にanthy.elインストールする必要あり．
-; (load-library "anthy")
-; (setq default-input-method "japanese-anthy")
-; (anthy-change-hiragana-map "," "，");句読点の設定．
-; (anthy-change-hiragana-map "." "．")
 
 (load "${HOME}/.emacs.d/init.local" t)
