@@ -6,6 +6,14 @@ autocmd User lsp_setup call lsp#register_server({
 		\ })
 endif
 
+if executable('rls')
+autocmd User lsp_setup call lsp#register_server({
+		\ 'name': 'rls',
+		\ 'cmd': {server_info->['rls']},
+		\ 'whitelist': ['rust'],
+		\ })
+endif
+
 let g:lsp_use_event_queue = 1
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
