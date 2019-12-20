@@ -17,7 +17,7 @@ try
 			\ }
 		\ }
 	function! LightlineAttribute()
-		return '[' . printf("%2d", bufnr('%')) . ':' . LightlineReadonly() . LightlineModified() . '][' . LightlineFileencoding() . '|' . LightlineFileformat() . '][' . LightlineFiletype() . ']'
+		return '[' . printf("%2d", bufnr('%')) . ':' . LightlineReadonly() . LightlineModified() . '][' . LightlineFileencoding() . LightlineBomb() . '|' . LightlineFileformat() . '][' . LightlineFiletype() . ']'
 	endfunction
 	function! LightlineModified()
 		return &filetype =~ 'help' ? '' : &modified ? '+' : &modifiable ? ' ' : '-'
@@ -36,6 +36,9 @@ try
 	endfunction
 	function! LightlineFileencoding()
 		return 70 < winwidth(0) ? &fileencoding == '' ? '   ' : &fileencoding : ''
+	endfunction
+	function! LightlineBomb()
+		return &bomb ? '(BOM)' : ''
 	endfunction
 	function! LightlineMode()
 		return 60 < winwidth(0) ? lightline#mode() : ''
