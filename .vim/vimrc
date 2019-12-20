@@ -94,7 +94,7 @@ if has('eval')
 	function! FlagToStr(var, val)
 		if a:var | return a:val | else | return '' | endif
 	endfunction
-	set statusline=%{printf('[%2d:%2s%1s][%3s\|%s][%1s]',bufnr('%'),FlagToStr(&readonly,'RO'),FlagToStr(&modified,'+'),&fileencoding,&fileformat,&filetype)}\ %<%F\ %h%wc:%05b(0x%04B)%=(%l,%3c%V)%3p%%\ of\ %L\ lines%a[%P]
+	set statusline=%{printf('[%2d:%2s%1s][%3s%s\|%s][%1s]',bufnr('%'),FlagToStr(&readonly,'RO'),FlagToStr(&modified,'+'),&fileencoding,FlagToStr(&bomb,'(BOM)'),&fileformat,&filetype)}\ %<%F\ %h%wc:%05b(0x%04B)%=(%l,%3c%V)%3p%%\ of\ %L\ lines%a[%P]
 endif
 function! MyTabLine()
 	let s = ''
