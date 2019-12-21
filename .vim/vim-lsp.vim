@@ -12,6 +12,7 @@ autocmd User lsp_setup call lsp#register_server({
 		\ 'cmd': {server_info->['rls']},
 		\ 'whitelist': ['rust'],
 		\ })
+autocmd FileType rust setlocal omnifunc=lsp#complete
 endif
 
 let g:lsp_use_event_queue = 1

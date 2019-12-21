@@ -59,6 +59,7 @@ set wildoptions=tagfile
 set backspace=indent,eol,start
 set hidden
 set helplang=ja,en
+set nrformats=alpha,hex,bin
 set ignorecase
 set smartcase
 set incsearch
