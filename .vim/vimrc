@@ -2,12 +2,13 @@ source ~/.exrc
 set nocompatible
 if has('eval')
 	let s:runtimepath_first = split(&runtimepath, ',')[0]
-	let s:runtimepath_dein = s:runtimepath_first . '/repos/github.com/Shougo/dein.vim'
+	let s:runtimepath_cache = s:runtimepath_first . '/.cache/' . (has('nvim') ? 'nvim' : 'vim')
+	let s:runtimepath_dein = s:runtimepath_cache . '/repos/github.com/Shougo/dein.vim'
 	if &runtimepath !~# s:runtimepath_dein | let &runtimepath .= ',' . s:runtimepath_dein | endif
 	try
 		if ! isdirectory(s:runtimepath_dein) | execute '!git clone https://github.com/Shougo/dein.vim ' . s:runtimepath_dein | endif
-		if dein#load_state(s:runtimepath_first)
-			call dein#begin(s:runtimepath_first)
+		if dein#load_state(s:runtimepath_cache)
+			call dein#begin(s:runtimepath_cache)
 			call dein#add('Shougo/dein.vim')
 			call dein#add('t9md/vim-quickhl')
 			call dein#add('thinca/vim-quickrun')
@@ -81,10 +82,12 @@ set cindent
 set showfulltag
 set tags=./.tags;,./.TAGS;,./tags;,./TAGS;,.tags;,.TAGS;,tags;,TAGS;
 set path=.,,/usr/local/include,/usr/include
-set clipboard=unnamed,unnamedplus,autoselect
+set clipboard=unnamed,unnamedplus
+if !has('nvim') | set clipboard+=autoselect | endif
 set virtualedit=block
 if $TERMCAP =~# ':\?Co#256:' | set t_Co=256 | endif
-if &viminfo !~# ',n' | let &viminfo .= ',n' . split(&runtimepath, ',')[0] . '/viminfo' | endif
+if &viminfo !~# ',n' | let &viminfo .= ',n' . split(&runtimepath, ',')[0] . '/.cache/' . (has('nvim') ? 'nvim' : 'vim') . '/viminfo' | endif
+let &viewdir = split(&runtimepath, ',')[0] . '/.cache/' . (has('nvim') ? 'nvim' : 'vim') . '/view'
 if executable('hw')
 	set grepprg=hw\ $*\ /dev/null
 elseif executable('pt')
