@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-. ${HOME}/.sh/.functions
 [ -f ${ZDOTDIR}/.zshrc.local.pre ] && . ${ZDOTDIR}/.zshrc.local.pre
 autoload -Uz compinit; compinit
 autoload -Uz add-zsh-hook

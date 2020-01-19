@@ -1,15 +1,15 @@
 @startuml zsh.png
-title zsh起動シーケンス
+title zsh startup sequence
 hide footbox
 
 box "sh-compatible common user's files"
 	entity "${HOME}/.profile"                as .profile
-	entity "${HOME}/.sh/.profile.local.pre"  as .sh_.profile.local.pre
-	entity "${HOME}/.sh/.profile.local.post" as .sh_.profile.local.post
-	entity "${HOME}/.sh/.functions"          as .sh_.functions
-	entity "${HOME}/.sh/.term"               as .sh_.term
-	entity "${HOME}/.sh/.prompt"             as .sh_.prompt
-	entity "${HOME}/.sh/.aliases"            as .sh_.aliases
+	entity "${HOME}/.sh/.profile.local.pre"  as .sh.profile.local.pre
+	entity "${HOME}/.sh/.profile.local.post" as .sh.profile.local.post
+	entity "${HOME}/.sh/.functions"          as .sh.functions
+	entity "${HOME}/.sh/.term"               as .sh.term
+	entity "${HOME}/.sh/.prompt"             as .sh.prompt
+	entity "${HOME}/.sh/.aliases"            as .sh.aliases
 end box
 
 participant zsh
@@ -39,201 +39,200 @@ end box
 [->> zsh : exec()
 activate zsh #Salmon
 
-== .zshenv 読み込み==
+== read .zshenv ==
 
-create etc.zshenv
-zsh ->  etc.zshenv : source
-note right : 最初に必ず読み込まれる
+create     etc.zshenv
+zsh ->     etc.zshenv : source
+note right : always read
 activate   etc.zshenv #LightPink
-zsh <-- etc.zshenv
+zsh <--    etc.zshenv
 deactivate etc.zshenv
-destroy etc.zshenv
+destroy    etc.zshenv
 
-create zdotdir.zshenv
-zsh ->  zdotdir.zshenv : source
+create     zdotdir.zshenv
+zsh ->     zdotdir.zshenv : source
 activate   zdotdir.zshenv #LightPink
-zsh <-- zdotdir.zshenv
+	create             .sh.functions
+	zdotdir.zshenv ->  .sh.functions : source
+	activate           .sh.functions
+	zdotdir.zshenv <-- .sh.functions
+	deactivate         .sh.functions
+	destroy            .sh.functions
+zsh <--    zdotdir.zshenv
 deactivate zdotdir.zshenv
-destroy zdotdir.zshenv
+destroy    zdotdir.zshenv
 
-== .zprofile 読み込み（ログインシェル限定）==
+== read .zprofile(login shell only) ==
 
-create etc.zprofile
-zsh ->  etc.zprofile : source
+create     etc.zprofile
+zsh ->     etc.zprofile : source
 activate   etc.zprofile #LightPink
-zsh <-- etc.zprofile
+zsh <--    etc.zprofile
 deactivate etc.zprofile
-destroy etc.zprofile
+destroy    etc.zprofile
 
-create zdotdir.zprofile
-zsh ->  zdotdir.zprofile : source
+create     zdotdir.zprofile
+zsh ->     zdotdir.zprofile : source
 activate   zdotdir.zprofile #LightPink
-zsh <-- zdotdir.zprofile
+zsh <--    zdotdir.zprofile
 deactivate zdotdir.zprofile
-destroy zdotdir.zprofile
+destroy    zdotdir.zprofile
 
-== .zshrc 読み込み（インタラクティブシェル限定）==
+== read .zshrc(interactive shell only) ==
 
-create etc.zshrc
-zsh ->  etc.zshrc : source
+create     etc.zshrc
+zsh ->     etc.zshrc : source
 activate   etc.zshrc #LightPink
-zsh <-- etc.zshrc
+zsh <--    etc.zshrc
 deactivate etc.zshrc
-destroy etc.zshrc
+destroy    etc.zshrc
 
-create zdotdir.zshrc
-zsh -> zdotdir.zshrc : source
+create   zdotdir.zshrc
+zsh ->   zdotdir.zshrc : source
 activate zdotdir.zshrc #LightPink
 
-	create .sh_.functions
-	zdotdir.zshrc ->  .sh_.functions : source
-	activate   .sh_.functions
-	zdotdir.zshrc <-- .sh_.functions
-	deactivate .sh_.functions
-	destroy .sh_.functions
-
-	opt ${ZDOTDIR}/.zshrc.local.pre が存在
-		create zdotdir.zshrc.local.pre
+	opt if ${ZDOTDIR}/.zshrc.local.pre exists
+		create            zdotdir.zshrc.local.pre
 		zdotdir.zshrc ->  zdotdir.zshrc.local.pre : source
-		activate   zdotdir.zshrc.local.pre
+		activate          zdotdir.zshrc.local.pre
 		zdotdir.zshrc <-- zdotdir.zshrc.local.pre
-		deactivate zdotdir.zshrc.local.pre
-		destroy zdotdir.zshrc.local.pre
+		deactivate        zdotdir.zshrc.local.pre
+		destroy           zdotdir.zshrc.local.pre
 	end
 
 	create zdotdir.misc
 	zdotdir.zshrc ->  zdotdir.misc : source
-	activate   zdotdir.misc
+	activate          zdotdir.misc
 	zdotdir.zshrc <-- zdotdir.misc
-	deactivate zdotdir.misc
-	destroy zdotdir.misc
+	deactivate        zdotdir.misc
+	destroy           zdotdir.misc
 
-	create zdotdir.term
+	create            zdotdir.term
 	zdotdir.zshrc ->  zdotdir.term : source
-	activate   zdotdir.term
-		create .sh_.term
-		zdotdir.term ->  .sh_.term : source
-		activate   .sh_.term
-		zdotdir.term <-- .sh_.term
-		deactivate .sh_.term
-		destroy .sh_.term
+	activate          zdotdir.term
+		create           .sh.term
+		zdotdir.term ->  .sh.term : source
+		activate         .sh.term
+		zdotdir.term <-- .sh.term
+		deactivate       .sh.term
+		destroy          .sh.term
 	zdotdir.zshrc <-- zdotdir.term
-	deactivate zdotdir.term
-	destroy zdotdir.term
+	deactivate        zdotdir.term
+	destroy           zdotdir.term
 
-	create zdotdir.prompt
+	create            zdotdir.prompt
 	zdotdir.zshrc ->  zdotdir.prompt : source
-	activate   zdotdir.prompt
-		create .sh_.prompt
-		zdotdir.prompt ->  .sh_.prompt : source
-		activate   .sh_.prompt
-		zdotdir.prompt <-- .sh_.prompt
-		deactivate .sh_.prompt
-		destroy .sh_.prompt
+	activate          zdotdir.prompt
+		create             .sh.prompt
+		zdotdir.prompt ->  .sh.prompt : source
+		activate           .sh.prompt
+		zdotdir.prompt <-- .sh.prompt
+		deactivate         .sh.prompt
+		destroy            .sh.prompt
 	zdotdir.zshrc <-- zdotdir.prompt
-	deactivate zdotdir.prompt
-	destroy zdotdir.prompt
+	deactivate        zdotdir.prompt
+	destroy           zdotdir.prompt
 
-	create zdotdir.aliases
+	create            zdotdir.aliases
 	zdotdir.zshrc ->  zdotdir.aliases : source
-	activate   zdotdir.aliases
-		create .sh_.aliases
-		zdotdir.aliases ->  .sh_.aliases : source
-		activate   .sh_.aliases
-		zdotdir.aliases <-- .sh_.aliases
-		deactivate .sh_.aliases
-		destroy .sh_.aliases
+	activate          zdotdir.aliases
+		create              .sh.aliases
+		zdotdir.aliases ->  .sh.aliases : source
+		activate            .sh.aliases
+		zdotdir.aliases <-- .sh.aliases
+		deactivate          .sh.aliases
+		destroy             .sh.aliases
 	zdotdir.zshrc <-- zdotdir.aliases
-	deactivate zdotdir.aliases
-	destroy zdotdir.aliases
+	deactivate        zdotdir.aliases
+	destroy           zdotdir.aliases
 
-	opt ${ZDOTDIR}/.zshrc.local.post が存在
-		create zdotdir.zshrc.local.post
+	opt if ${ZDOTDIR}/.zshrc.local.post exists
+		create            zdotdir.zshrc.local.post
 		zdotdir.zshrc ->  zdotdir.zshrc.local.post : source
-		activate   zdotdir.zshrc.local.post
+		activate          zdotdir.zshrc.local.post
 		zdotdir.zshrc <-- zdotdir.zshrc.local.post
-		deactivate zdotdir.zshrc.local.post
-		destroy zdotdir.zshrc.local.post
+		deactivate        zdotdir.zshrc.local.post
+		destroy           zdotdir.zshrc.local.post
 	end
 
-zsh <-- zdotdir.zshrc
+zsh <--    zdotdir.zshrc
 deactivate zdotdir.zshrc
-destroy zdotdir.zshrc
+destroy    zdotdir.zshrc
 
-== .zlogin 読み込み（ログインシェル限定）==
+== read .zlogin(login shell only) ==
 
-create etc.zlogin
-zsh ->  etc.zlogin : source
+create     etc.zlogin
+zsh ->     etc.zlogin : source
 activate   etc.zlogin #LightPink
-zsh <-- etc.zlogin
+zsh <--    etc.zlogin
 deactivate etc.zlogin
-destroy etc.zlogin
+destroy    etc.zlogin
 
-create zdotdir.zlogin
-zsh -> zdotdir.zlogin : source
+create   zdotdir.zlogin
+zsh ->   zdotdir.zlogin : source
 activate zdotdir.zlogin #LightPink
 
-	create .profile
+	create             .profile
 	zdotdir.zlogin ->  .profile : source
-	activate   .profile #LightPink
-		opt ${HOME}/.sh/.profile.local.pre が存在
-			create .sh_.profile.local.pre
-			.profile ->  .sh_.profile.local.pre : source
-			activate   .sh_.profile.local.pre
-			.profile <-- .sh_.profile.local.pre
-			deactivate .sh_.profile.local.pre
-			destroy .sh_.profile.local.pre
+	activate           .profile #LightPink
+		opt if ${HOME}/.sh/.profile.local.pre exists
+			create       .sh.profile.local.pre
+			.profile ->  .sh.profile.local.pre : source
+			activate     .sh.profile.local.pre
+			.profile <-- .sh.profile.local.pre
+			deactivate   .sh.profile.local.pre
+			destroy      .sh.profile.local.pre
 		end
 
-		opt ${HOME}/.sh/.profile.local.post が存在
-			create .sh_.profile.local.post
-			.profile ->  .sh_.profile.local.post : source
-			activate   .sh_.profile.local.post
-			.profile <-- .sh_.profile.local.post
-			deactivate .sh_.profile.local.post
-			destroy .sh_.profile.local.post
+		opt if ${HOME}/.sh/.profile.local.post exists
+			create       .sh.profile.local.post
+			.profile ->  .sh.profile.local.post : source
+			activate     .sh.profile.local.post
+			.profile <-- .sh.profile.local.post
+			deactivate   .sh.profile.local.post
+			destroy      .sh.profile.local.post
 		end
 	zdotdir.zlogin <-- .profile
-	deactivate .profile
-	destroy .profile
+	deactivate         .profile
+	destroy            .profile
 
-	opt ${ZDOTDIR}/.zlogin.local.pre が存在
-		create zdotdir.zlogin.local.pre
+	opt if ${ZDOTDIR}/.zlogin.local.pre exists
+		create             zdotdir.zlogin.local.pre
 		zdotdir.zlogin ->  zdotdir.zlogin.local.pre : source
-		activate   zdotdir.zlogin.local.pre
+		activate           zdotdir.zlogin.local.pre
 		zdotdir.zlogin <-- zdotdir.zlogin.local.pre
-		deactivate zdotdir.zlogin.local.pre
-		destroy zdotdir.zlogin.local.pre
+		deactivate         zdotdir.zlogin.local.pre
+		destroy            zdotdir.zlogin.local.pre
 	end
 
-	opt ${ZDOTDIR}/.zlogin.local.post が存在
-		create zdotdir.zlogin.local.post
+	opt if ${ZDOTDIR}/.zlogin.local.post exists
+		create             zdotdir.zlogin.local.post
 		zdotdir.zlogin ->  zdotdir.zlogin.local.post : source
-		activate   zdotdir.zlogin.local.post
+		activate           zdotdir.zlogin.local.post
 		zdotdir.zlogin <-- zdotdir.zlogin.local.post
-		deactivate zdotdir.zlogin.local.post
-		destroy zdotdir.zlogin.local.post
+		deactivate         zdotdir.zlogin.local.post
+		destroy            zdotdir.zlogin.local.post
 	end
 
-zsh <-- zdotdir.zlogin
+zsh <--    zdotdir.zlogin
 deactivate zdotdir.zlogin
-destroy zdotdir.zlogin
+destroy    zdotdir.zlogin
 |||
 
 @enduml
 
 @startuml bash.png
-title bash起動シーケンス
+title bash startup sequence
 hide footbox
 
 box "sh-compatible common user's files"
 	entity "${HOME}/.profile"                as .profile
-	entity "${HOME}/.sh/.profile.local.pre"  as .sh_.profile.local.pre
-	entity "${HOME}/.sh/.profile.local.post" as .sh_.profile.local.post
-	entity "${HOME}/.sh/.functions"          as .sh_.functions
-	entity "${HOME}/.sh/.term"               as .sh_.term
-	entity "${HOME}/.sh/.prompt"             as .sh_.prompt
-	entity "${HOME}/.sh/.aliases"            as .sh_.aliases
+	entity "${HOME}/.sh/.profile.local.pre"  as .sh.profile.local.pre
+	entity "${HOME}/.sh/.profile.local.post" as .sh.profile.local.post
+	entity "${HOME}/.sh/.functions"          as .sh.functions
+	entity "${HOME}/.sh/.term"               as .sh.term
+	entity "${HOME}/.sh/.prompt"             as .sh.prompt
+	entity "${HOME}/.sh/.aliases"            as .sh.aliases
 end box
 
 participant bash
@@ -255,121 +254,120 @@ end box
 [->> bash : exec()
 activate bash #Cyan
 
-create .bash_profile
-bash ->  .bash_profile : source
+create     .bash_profile
+bash ->    .bash_profile : source
 activate   .bash_profile #LightBlue
 	create .bashrc
-	.bash_profile ->  .bashrc : source
-	activate   .bashrc #LightBlue
-		create .sh_.functions
-		.bashrc ->  .sh_.functions : source
-		activate   .sh_.functions
-		.bashrc <-- .sh_.functions
-		deactivate .sh_.functions
-		destroy .sh_.functions
+	.bash_profile -> .bashrc : source
+	activate         .bashrc #LightBlue
+		create      .sh.functions
+		.bashrc ->  .sh.functions : source
+		activate    .sh.functions
+		.bashrc <-- .sh.functions
+		deactivate  .sh.functions
+		destroy     .sh.functions
 
-		opt ${BASHDOTDIR}/.bashrc.local.pre が存在
-			create bashdotdir.bashrc.local.pre
+		opt if ${BASHDOTDIR}/.bashrc.local.pre exists
+			create      bashdotdir.bashrc.local.pre
 			.bashrc ->  bashdotdir.bashrc.local.pre : source
-			activate   bashdotdir.bashrc.local.pre
+			activate    bashdotdir.bashrc.local.pre
 			.bashrc <-- bashdotdir.bashrc.local.pre
-			deactivate bashdotdir.bashrc.local.pre
-			destroy bashdotdir.bashrc.local.pre
+			deactivate  bashdotdir.bashrc.local.pre
+			destroy     bashdotdir.bashrc.local.pre
 		end
 
-		create bashdotdir.misc
+		create      bashdotdir.misc
 		.bashrc ->  bashdotdir.misc : source
-		activate   bashdotdir.misc
+		activate    bashdotdir.misc
 		.bashrc <-- bashdotdir.misc
-		deactivate bashdotdir.misc
-		destroy bashdotdir.misc
+		deactivate  bashdotdir.misc
+		destroy     bashdotdir.misc
 
-		create .sh_.term
-		.bashrc ->  .sh_.term : source
-		activate   .sh_.term
-		.bashrc <-- .sh_.term
-		deactivate .sh_.term
-		destroy .sh_.term
+		create      .sh.term
+		.bashrc ->  .sh.term : source
+		activate    .sh.term
+		.bashrc <-- .sh.term
+		deactivate  .sh.term
+		destroy     .sh.term
 
-		create bashdotdir.prompt
+		create      bashdotdir.prompt
 		.bashrc ->  bashdotdir.prompt : source
-		activate   bashdotdir.prompt
-			create .sh_.prompt
-			bashdotdir.prompt ->  .sh_.prompt : source
-			activate   .sh_.prompt
-			bashdotdir.prompt <-- .sh_.prompt
-			deactivate .sh_.prompt
-			destroy .sh_.prompt
+		activate    bashdotdir.prompt
+			create                .sh.prompt
+			bashdotdir.prompt ->  .sh.prompt : source
+			activate              .sh.prompt
+			bashdotdir.prompt <-- .sh.prompt
+			deactivate            .sh.prompt
+			destroy               .sh.prompt
 		.bashrc <-- bashdotdir.prompt
-		deactivate bashdotdir.prompt
-		destroy bashdotdir.prompt
+		deactivate  bashdotdir.prompt
+		destroy     bashdotdir.prompt
 
-		create .sh_.aliases
-		.bashrc ->  .sh_.aliases : source
-		activate   .sh_.aliases
-		.bashrc <-- .sh_.aliases
-		deactivate .sh_.aliases
-		destroy .sh_.aliases
+		create      .sh.aliases
+		.bashrc ->  .sh.aliases : source
+		activate    .sh.aliases
+		.bashrc <-- .sh.aliases
+		deactivate  .sh.aliases
+		destroy     .sh.aliases
 
-		opt ${BASHDOTDIR}/.bashrc.local.post が存在
-			create bashdotdir.bashrc.local.post
+		opt if ${BASHDOTDIR}/.bashrc.local.post exists
+			create      bashdotdir.bashrc.local.post
 			.bashrc ->  bashdotdir.bashrc.local.post : source
-			activate   bashdotdir.bashrc.local.post
+			activate    bashdotdir.bashrc.local.post
 			.bashrc <-- bashdotdir.bashrc.local.post
-			deactivate bashdotdir.bashrc.local.post
-			destroy bashdotdir.bashrc.local.post
+			deactivate  bashdotdir.bashrc.local.post
+			destroy     bashdotdir.bashrc.local.post
 		end
 
 	.bash_profile <-- .bashrc
-	deactivate .bashrc
-	destroy .bashrc
+	deactivate        .bashrc
+	destroy           .bashrc
 
-	create .profile
+	create            .profile
 	.bash_profile ->  .profile : source
-	activate   .profile #LightBlue
-		opt ${HOME}/.sh/.profile.local.pre が存在
-			create .sh_.profile.local.pre
-			.profile ->  .sh_.profile.local.pre : source
-			activate   .sh_.profile.local.pre
-			.profile <-- .sh_.profile.local.pre
-			deactivate .sh_.profile.local.pre
-			destroy .sh_.profile.local.pre
+	activate          .profile #LightBlue
+		opt if ${HOME}/.sh/.profile.local.pre exists
+			create       .sh.profile.local.pre
+			.profile ->  .sh.profile.local.pre : source
+			activate     .sh.profile.local.pre
+			.profile <-- .sh.profile.local.pre
+			deactivate   .sh.profile.local.pre
+			destroy      .sh.profile.local.pre
 		end
 
-		opt ${HOME}/.sh/.profile.local.post が存在
-			create .sh_.profile.local.post
-			.profile ->  .sh_.profile.local.post : source
-			activate   .sh_.profile.local.post
-			.profile <-- .sh_.profile.local.post
-			deactivate .sh_.profile.local.post
-			destroy .sh_.profile.local.post
+		opt if ${HOME}/.sh/.profile.local.post exists
+			create       .sh.profile.local.post
+			.profile ->  .sh.profile.local.post : source
+			activate     .sh.profile.local.post
+			.profile <-- .sh.profile.local.post
+			deactivate   .sh.profile.local.post
+			destroy      .sh.profile.local.post
 		end
 	.bash_profile <-- .profile
-	deactivate .profile
-	destroy .profile
+	deactivate        .profile
+	destroy           .profile
 
-	opt ${BASHDOTDIR}/.bash_profile.local.pre が存在
-		create bashdotdir.bash_profile.local.pre
+	opt if ${BASHDOTDIR}/.bash_profile.local.pre exists
+		create            bashdotdir.bash_profile.local.pre
 		.bash_profile ->  bashdotdir.bash_profile.local.pre : source
-		activate   bashdotdir.bash_profile.local.pre
+		activate          bashdotdir.bash_profile.local.pre
 		.bash_profile <-- bashdotdir.bash_profile.local.pre
-		deactivate bashdotdir.bash_profile.local.pre
-		destroy bashdotdir.bash_profile.local.pre
+		deactivate        bashdotdir.bash_profile.local.pre
+		destroy           bashdotdir.bash_profile.local.pre
 	end
 
-	opt ${BASHDOTDIR}/.bash_profile.local.post が存在
-		create bashdotdir.bash_profile.local.post
+	opt if ${BASHDOTDIR}/.bash_profile.local.post exists
+		create            bashdotdir.bash_profile.local.post
 		.bash_profile ->  bashdotdir.bash_profile.local.post : source
-		activate   bashdotdir.bash_profile.local.post
+		activate          bashdotdir.bash_profile.local.post
 		.bash_profile <-- bashdotdir.bash_profile.local.post
-		deactivate bashdotdir.bash_profile.local.post
-		destroy bashdotdir.bash_profile.local.post
+		deactivate        bashdotdir.bash_profile.local.post
+		destroy           bashdotdir.bash_profile.local.post
 	end
 
-
-bash <-- .bash_profile
+bash <--   .bash_profile
 deactivate .bash_profile
-destroy .bash_profile
+destroy    .bash_profile
 |||
 
 @enduml
