@@ -335,6 +335,13 @@ activate   .bash_profile #LightBlue
 			destroy      .sh.profile.local.pre
 		end
 
+		create      .sh.functions
+		.profile ->  .sh.functions : source
+		activate    .sh.functions
+		.profile <-- .sh.functions
+		deactivate  .sh.functions
+		destroy     .sh.functions
+
 		opt if ${HOME}/.sh/.profile.local.post exists
 			create       .sh.profile.local.post
 			.profile ->  .sh.profile.local.post : source
