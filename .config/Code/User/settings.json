@@ -1,0 +1,14 @@
+{
+    "editor.fontSize": 20,
+    "editor.fontFamily": "'Ricty', 'Ricty Diminished', Consolas, 'Courier New', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.lineHeight": 0,
+    "editor.renderWhitespace": "boundary",
+    "editor.insertSpaces": false,
+    "editor.mouseWheelZoom": true,
+    "editor.find.seedSearchStringFromSelection": false,
+    "files.insertFinalNewline": true,
+    "search.showLineNumbers": true,
+    "window.menuBarVisibility": "toggle",
+    "window.restoreWindows": "all",
+    "workbench.editor.tabSizing": "shrink",
+}
