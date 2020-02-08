@@ -15,7 +15,6 @@
     "terminal.integrated.fontSize": 20,
     "terminal.integrated.scrollback": 100000,
     "window.menuBarVisibility": "toggle",
-    "window.restoreWindows": "all",
     "workbench.editor.tabSizing": "shrink",
     "workbench.settings.editor": "json",
     "workbench.startupEditor": "none",
