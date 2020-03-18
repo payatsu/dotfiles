@@ -14,7 +14,7 @@ alias hw='hw --no-group'
 alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l80 -lp -ncs -nfc1 -npcs -nprs -npsl -nsaf -nsai -nsaw -nss -sc -ts4'
 alias l="ls -FlhpX --time-style=long-iso`command ls --group-directories-first /dev/null > /dev/null 2>&1 && echo ' --group-directories-first'`${color}"
 alias lv='lv -c'
-alias p="ps auxww | command grep -e '^USER\\|^${USER}'"
+alias p='ps xwwU${USER} ouser,pid,ppid,pcpu,pmem,vsz:7,rss:6,pri,ni,tname:5,stat,bsdstart,bsdtime,command'
 alias pstree='pstree -Aahnp'
 alias pt='pt --nogroup'
 [ -z "${MSYSTEM}${CYGWIN}" ] && which ${ZSH_VERSION:+-p}  vim > /dev/null 2>&1 && command  vim --version | grep -qe '+clientserver' && alias  vim='vim --servername VIM'
