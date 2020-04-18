@@ -45,6 +45,7 @@ endif
 set notitle
 set ruler
 set nowrap
+set belloff=all
 set cursorline
 set showtabline=1
 set ambiwidth=double
