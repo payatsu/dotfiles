@@ -25,6 +25,6 @@ zstyle ':vcs_info:git:*'   stagedstr "%B%K{cyan}${stagedstr}%k%b"
 zstyle ':vcs_info:git:*' unstagedstr "%B%K{red}${unstagedstr}%k%b"
 _update_vcs_info(){ LANG=C vcs_info; psvar=("${vcs_info_msg_0_}");}
 add-zsh-hook precmd _update_vcs_info
-_set_alarm(){ TMOUT=60; prompt prev;}
+_set_alarm(){ TMOUT=180; prompt prev;}
 add-zsh-hook precmd _set_alarm
 TRAPALRM(){ unset TMOUT; prompt_idle; zle .reset-prompt;}
