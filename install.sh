@@ -12,5 +12,12 @@ shift `expr ${OPTIND} - 1`
 
 dir=`dirname \`readlink -f $0\``
 cmd=`basename $0`
-LANG=C find ${dir} -mindepth 1 -name .git -prune -o -type d -print | sed -e "s%^${dir}%${HOME}%" | xargs mkdir -pv
-LANG=C find ${dir} -mindepth 1 \( -name ${cmd} -o -name .git -o -name '*.swp' -o -name seq.puml -o -name '*.png' -o -name LICENSE \) -prune -o -empty -prune -o -type f -exec sh -c "${yes}"'cp -i'${s}'uv {} `echo {} | sed -e s%^'${dir}'%${HOME}%`' \;
+LANG=C find ${dir} -mindepth 1 \( -name .git -o -name .github \) -prune -o -type d -print | sed -e "s%^${dir}%${HOME}%" | xargs mkdir -pv
+LANG=C find ${dir} -mindepth 1 \( \
+	-name ${cmd} -o \
+	-name .git -o \
+	-name .github -o \
+	-name seq.puml -o \
+	-name '*.swp' -o \
+	-name '*.png' -o \
+	-name LICENSE \) -prune -o -empty -prune -o -type f -exec sh -c "${yes}"'cp -i'${s}'uv {} `echo {} | sed -e s%^'${dir}'%${HOME}%`' \;
