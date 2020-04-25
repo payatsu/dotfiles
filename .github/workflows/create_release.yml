@@ -2,6 +2,8 @@ name: Create Release
 
 on:
   push:
+    branches:
+      - master
     tags:
       - 'v*'
 
@@ -10,10 +12,12 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Create Release
-        id: create_release
+      - uses: actions/checkout@v2
+
+      - name: Package code
+        run: tar czf dotfiles.tar.gz --exclude-vcs --exclude . --exclude .. --exclude .github .*
+
+      - id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -23,3 +27,15 @@ jobs:
           body: ''
           draft: false
           prerelease: false
+
+      - id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./dotfiles.tar.gz
+          asset_name: dotfiles.tar.gz
+          asset_content_type: application/x-tar
+
+# vim: set expandtab shiftwidth=0 tabstop=2 :
