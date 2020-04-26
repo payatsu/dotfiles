@@ -5,5 +5,5 @@ dotfiles
 
 ### How to Install
 ```sh
-$ wget -O- https://github.com/payatsu/dotfiles/releases/download/v1.0.2/dotfiles.tar.gz | (cd; tar xzf -)
+$ wget -O- https://github.com/payatsu/dotfiles/releases/latest/download/dotfiles.tar.gz | (cd; tar xzf -)
 ```
