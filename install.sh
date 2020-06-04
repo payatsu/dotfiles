@@ -20,4 +20,5 @@ LANG=C find ${dir} -mindepth 1 \( \
 	-name seq.puml -o \
 	-name '*.swp' -o \
 	-name '*.png' -o \
-	-name LICENSE \) -prune -o -empty -prune -o -type f -exec sh -c "${yes}"'cp -i'${s}'uv {} `echo {} | sed -e s%^'${dir}'%${HOME}%`' \;
+	-name LICENSE -o \
+	-name README.md \) -prune -o -empty -prune -o -type f -exec sh -c "${yes}"'cp -i'${s}'uv {} `echo {} | sed -e s%^'${dir}'%${HOME}%`' \;
