@@ -36,8 +36,8 @@ for gcc in `find \`echo ${PATH} | tr : ' '\` -maxdepth 1 ! -type d -executable -
 		alias ${u}=${eu_}${u}
 	done
 done
-alias clang='clang -std=c17 -march=native -Wpedantic -Weverything'
-alias clang++='clang++ -std=c++17 -march=native -Wpedantic -Weverything'
+alias clang='clang -std=c17 -Wpedantic -Weverything'
+alias clang++='clang++ -std=c++17 -Wpedantic -Weverything'
 alias rust-gdb='rust-gdb -q'
 eu()
 {
