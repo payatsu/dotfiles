@@ -70,11 +70,11 @@ od()
 		esac
 	done
 	local max_digit=`printf '%x' \`expr ${width} - 1\` | wc -c`
-	local padding=`echo "4 * 2 - ${max_digit} + 1" | bc`
+	local padding=$((4 * 2 - ${max_digit} + 1))
 	echo -n '       '
 	seq 0 4 `expr ${width} - 1` | xargs printf '%0'${max_digit}'x ' | sed -e "s/ /`printf '%*s' ${padding}`/g;s/ \\+\$//"
 	echo
 	echo -n '       '
-	printf '%*s\n' `echo ${width} '*' 2 + ${width} / 4 - 1 | bc` | sed -e 's/ /-/g'
+	printf '%*s\n' $((${width} * 2 + ${width} / 4 - 1)) | sed -e 's/ /-/g'
 	command od -Ax -tx4z -v --endian=big "$@" | sed -e '$d'
 }
