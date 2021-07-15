@@ -89,7 +89,9 @@ set virtualedit=block
 if $TERMCAP =~# ':\?Co#256:' | set t_Co=256 | endif
 if &viminfo !~# ',n' | let &viminfo .= ',n' . split(&runtimepath, ',')[0] . '/.cache/' . (has('nvim') ? 'nvim' : 'vim') . '/viminfo' | endif
 let &viewdir = split(&runtimepath, ',')[0] . '/.cache/' . (has('nvim') ? 'nvim' : 'vim') . '/view'
-if executable('hw')
+if executable('rg')
+	set grepprg=rg\ --vimgrep\ $*\ /dev/null
+elseif executable('hw')
 	set grepprg=hw\ $*\ /dev/null
 elseif executable('pt')
 	set grepprg=pt\ $*\ /dev/null
