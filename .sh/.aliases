@@ -43,9 +43,9 @@ alias rust-gdb='rust-gdb -q'
 eu()
 {
 	case ${1} in
-	activate)
+	enable|activate)
 		eu_=eu-;;
-	deactivate)
+	disable|deactivate)
 		eu_=;;
 	esac
 }

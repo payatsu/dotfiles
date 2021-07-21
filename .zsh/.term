@@ -19,9 +19,9 @@ add-zsh-hook precmd set_window_title
 title()
 {
 	case ${1} in
-	activate)
+	enable|activate)
 		set_window_title=activated;;
-	deactivate)
+	disable|deactivate)
 		set_window_title=deactivated
 		case ${TERM} in
 		screen*) echo -n '\ek'`basename ${SHELL}`'\e\\';;
