@@ -26,5 +26,7 @@ title()
 		case ${TERM} in
 		screen*) echo -n '\ek'`basename ${SHELL}`'\e\\';;
 		esac;;
+	--help) which ${0};;
+	*) echo error: unknown option: \'${1}\'. try \'--help\'.>&2; return 1;;
 	esac
 }

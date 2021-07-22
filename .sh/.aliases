@@ -43,10 +43,10 @@ alias rust-gdb='rust-gdb -q'
 eu()
 {
 	case ${1} in
-	enable|activate)
-		eu_=eu-;;
-	disable|deactivate)
-		eu_=;;
+	enable|activate)    eu_=eu-;;
+	disable|deactivate) eu_=;;
+	--help) [ -n "${BASH_VERSION}" ] && type ${FUNCNAME[0]} || which ${0};;
+	*) echo error: unknown option: \'${1}\'. try \'--help\'.>&2; return 1;;
 	esac
 }
 which ${ZSH_VERSION:+-p} git > /dev/null && git_subcommands=`echo \`command git --exec-path\`/git-* | grep -oPe '(?<=core/git-)[\w-]+' | tr '\n' ' ' | sed -e 's/ /\\\\|/g;s/^/\\\\(/;s/\\\\|$/\\\\)/'`
