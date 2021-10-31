@@ -14,6 +14,14 @@ if executable('rls')
 		\ })
 endif
 
+if executable('pyls')
+	autocmd User lsp_setup call lsp#register_server({
+		\ 'name': 'pyls',
+		\ 'cmd': {server_info->['pyls']},
+		\ 'whitelist': ['python'],
+		\ })
+endif
+
 function! s:on_lsp_buffer_enabled() abort
 	setlocal omnifunc=lsp#complete
 	setlocal signcolumn=yes
@@ -25,6 +33,9 @@ function! s:on_lsp_buffer_enabled() abort
 	nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
 	nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
 	nmap <buffer> K <plug>(lsp-hover)
+	set foldmethod=expr
+		\ foldexpr=lsp#ui#vim#folding#foldexpr()
+		\ foldtext=lsp#ui#vim#folding#foldtext()
 endfunction
 
 augroup LspInstall
