@@ -14,10 +14,10 @@ if executable('rls')
 		\ })
 endif
 
-if executable('pyls')
+if executable('pylsp')
 	autocmd User lsp_setup call lsp#register_server({
-		\ 'name': 'pyls',
-		\ 'cmd': {server_info->['pyls']},
+		\ 'name': 'pylsp',
+		\ 'cmd': {server_info->['pylsp']},
 		\ 'whitelist': ['python'],
 		\ })
 endif
