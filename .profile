@@ -16,9 +16,7 @@ export screen_hostname_color=${screen_hostname_color:-.b}
 export screen_hardstatus_color=${screen_hardstatus_color:-bw}
 export screen_windowlist_color=${screen_windowlist_color:-.B}
 export FZF_DEFAULT_OPTS=\
-'--ansi --cycle --multi --reverse --select-1 --exit-0
---color fg:188,bg:233,hl:103,fg+:222,bg+:234,hl+:104
---color info:183,prompt:110,spinner:107,pointer:167,marker:215'
+'--ansi --cycle --multi --reverse --select-1 --exit-0 --color fg:188,bg:233,hl:103,fg+:222,bg+:234,hl+:104 --color info:183,prompt:110,spinner:107,pointer:167,marker:215'
 
 prepend ${HOME}/.go GOPATH
 export GOPATH
