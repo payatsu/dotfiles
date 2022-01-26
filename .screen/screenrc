@@ -15,7 +15,7 @@ rendition so      =b  ${screen_so_color}
 caption always '%?%F%{=b '${screen_caption_color}'}%:%{= Kk}%?%2n%f%07=%t %?%P[copy mode]%:%?%='
 hardstatus alwayslastline '%{=b}%m/%d %02c:%s %S%{-}(%p)@%{=b '${screen_hostname_color}'}%H%{-} %L=%-w%45L>%{=ub '${screen_hardstatus_color}'}%n %t%{-}%+w %-17<%=%{= ..}[%l]'
 windowlist title  '%{ub '${screen_windowlist_color}'}Num Flags Title%=[0-9] select the number [movement] j,C-n:Down k,C-p:Up (C-)f:PageDown (C-)b:PageUp'
-windowlist string '%3n %f%09= %t%+010= %X'
+windowlist string '%3n %f%09= %t%+024= %X'
 bind  w windowlist -b
 bind ^W windowlist -b
 bind  L redisplay
