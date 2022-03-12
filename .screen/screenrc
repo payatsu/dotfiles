@@ -2,7 +2,7 @@ escape ^z^z
 shell -${SHELL}
 altscreen on
 startup_message off
-msgwait 1.5
+msgwait 5
 maptimeout 100
 vbell off
 bind ^G
