@@ -20,7 +20,7 @@ alias pt='pt --nogroup'
 alias rg='rg --no-heading'
 alias v='vim'
 alias vimdiff="vimdiff -c 'windo %foldopen!'"
-alias vmstat='vmstat -twSK'
+alias vmstat='vmstat -SM'
 alias xxd='xxd -g 1'
 for gcc in `find \`echo ${PATH} | tr : ' '\` -maxdepth 1 ! -type d -executable -regextype posix-basic -regex '^/.\+/\([^-]\+-[^-]\+-\([^-]\+-\([^-]\+-\)\?\)\?\)\?gcc' -exec basename \{\} \; 2> /dev/null | sort | uniq`; do
 	triplet=`echo ${gcc} | sed -e 's/gcc$//'`
