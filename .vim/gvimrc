@@ -25,7 +25,7 @@ set guioptions+=aci
 let g:guifonts='Ricty:h14,MS_Gothic:h14'
 if has('win32')
 	set guioptions-=mrLT
-	set renderoptions=type:directx,renmode:5
+	if !has('nvim') | set renderoptions=type:directx,renmode:5 | endif
 	augroup SetGuiFonts
 		autocmd!
 		autocmd GUIEnter *     let &guifont = g:guifonts
