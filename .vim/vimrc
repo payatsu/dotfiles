@@ -54,6 +54,7 @@ set modeline
 set modelines=5
 set history=10000
 set scrolloff=0
+set nostartofline
 set wildmenu
 set wildmode=longest,list:longest,list:full
 set wildoptions=tagfile
