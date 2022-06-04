@@ -46,6 +46,7 @@ set nowrap
 set belloff=all
 set cursorline
 set showtabline=1
+set tabpagemax=50
 set ambiwidth=double
 set showcmd
 set laststatus=2
