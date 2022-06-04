@@ -47,7 +47,7 @@ set belloff=all
 set cursorline
 set showtabline=1
 set tabpagemax=50
-set ambiwidth=double
+if !exists('g:vscode') | set ambiwidth=double | endif
 set showcmd
 set laststatus=2
 set shortmess+=mrwI
