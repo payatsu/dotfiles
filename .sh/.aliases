@@ -14,9 +14,9 @@ alias hw='hw --no-group'
 alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l80 -lp -ncs -nfc1 -npcs -nprs -npsl -nsaf -nsai -nsaw -nss -sc -ts4'
 
 for opt in -X --time-style=long-iso --group-directories-first; do
-	command ls ${opt} /dev/null > /dev/null 2>&1 && ls_opt="${ls_opt:+${ls_opt} }${opt}"
+	command ls ${opt} /dev/null > /dev/null 2>&1 && ls_opt="${ls_opt} ${opt}"
 done
-alias l="ls -Flhp ${ls_opt}${color}"
+alias l="ls -Flhp${ls_opt}${color}"
 unset opt ls_opt
 
 alias lv='lv -c'
