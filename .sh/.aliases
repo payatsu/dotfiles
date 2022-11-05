@@ -12,7 +12,13 @@ alias gtags='gtags -c'
 alias h='history'
 alias hw='hw --no-group'
 alias indent='indent -bad -bap -bbb -bbo -bc -br -brs -cdb -cdw -ce -hnl -i4 -l80 -lp -ncs -nfc1 -npcs -nprs -npsl -nsaf -nsai -nsaw -nss -sc -ts4'
-alias l="ls -FlhpX --time-style=long-iso`command ls --group-directories-first /dev/null > /dev/null 2>&1 && echo ' --group-directories-first'`${color}"
+
+for opt in -X --time-style=long-iso --group-directories-first; do
+	command ls ${opt} /dev/null > /dev/null 2>&1 && ls_opt="${ls_opt:+${ls_opt} }${opt}"
+done
+alias l="ls -Flhp ${ls_opt}${color}"
+unset opt ls_opt
+
 alias lv='lv -c'
 alias p='ps xwwU${USER} ouser,pid,ppid,pcpu,pmem,vsz:7,rss:6,pri,ni,tname:5,stat,bsdstart,bsdtime,command'
 alias pstree='pstree -Aahnp'
