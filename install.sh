@@ -21,4 +21,4 @@ LANG=C find ${dir} -mindepth 1 \( \
 	-name '*.swp' -o \
 	-name '*.png' -o \
 	-name LICENSE -o \
-	-name README.md \) -prune -o -empty -prune -o -type f -exec sh -c "${yes}"'cp -i'${s}'uv {} `echo {} | sed -e s%^'${dir}'%${HOME}%`' \;
+	-name README.md \) -prune -o -empty -prune -o -type f -exec sh -c "${yes}"'cp -i'${s}'v {} `echo {} | sed -e s%^'${dir}'%${HOME}%`' \;
