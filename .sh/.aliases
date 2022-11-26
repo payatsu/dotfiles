@@ -22,7 +22,7 @@ unset opt ls_opt
 alias lv='lv -c'
 
 if [ "`uname -s`" = Darwin ]; then
-	alias p='ps xwwU${USER} ouser,pid,ppid,pcpu,pmem,vsz,rss,pri,ni,tty,stat,start,time,command'
+	alias p='ps xwwU${USER} -ouser,pid,ppid,pcpu,pmem,vsz,rss,pri,ni,tty,stat,start,time,command'
 else
 	alias p='ps xwwU${USER} ouser,pid,ppid,pcpu,pmem,vsz:7,rss:6,pri,ni,tname:5,stat,bsdstart,bsdtime,command'
 fi
