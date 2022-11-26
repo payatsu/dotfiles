@@ -9,7 +9,7 @@ set_window_title()
 	command=`echo "${commandline}" | cut -d ' ' -f 1 | head -n 1`
 	[ "${command}" != fg ] && type -- ${command} | grep -Fqe "${command} is a shell builtin" && return
 	commandline=`echo "${commandline}" | sed -e 's/^fg$/& %%/'`
-	[ "${command}" = fg ] && command=`jobs -l \`echo "${commandline}" | sed -e 's/^fg\> \+//'\` | sed -e 's/^\(\[[[:digit:]]\+\] \+\)[-+]/\1 /;s/(tty output)//' | awk '{print $4}'`
+	[ "${command}" = fg ] && command=`jobs -l \`echo "${commandline}" | sed -e 's/^fg \{1,\}//'\` | sed -e 's/^\(\[[[:digit:]]\{1,\}\] \{1,\}\)[-+]/\1 /;s/(tty output)//' | awk '{print $4}'`
 	case ${TERM} in
 	screen*) echo -n '\ek'`basename -- "${command}"`'\e\\';;
 	esac
