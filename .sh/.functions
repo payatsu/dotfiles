@@ -1,8 +1,8 @@
 #!/bin/sh
 
-prepend(){ [ -d "${1}" -a -n "${2}" ] || return; eval [ -z \"\${${2}}\" ] && export ${2}=${1} && return; set `realpath ${1}` ${2}; eval echo \${${2}} | tr : '\n' | grep -qe ^${1}\$ || eval ${2}=${1}:\${${2}};}
-append() { [ -d "${1}" -a -n "${2}" ] || return; eval [ -z \"\${${2}}\" ] && export ${2}=${1} && return; set `realpath ${1}` ${2}; eval echo \${${2}} | tr : '\n' | grep -qe ^${1}\$ || eval ${2}=\${${2}}:${1};}
-remove() { [ -d "${1}" -a -n "${2}" ] || return; set `realpath ${1}` ${2}; eval ${2}=`eval echo \\\${${2}} | sed -e "s%\(^\|:\)${1}\(:\|\$\)%\\1\\2%g;s/::/:/g;s/^://;s/:\$//"`;}
+prepend(){ [ -d "${1}" -a -n "${2}" ] || return; eval [ -z \"\${${2}}\" ] && export ${2}=${1} && return; set `readlink -f ${1}` ${2}; eval echo \${${2}} | tr : '\n' | grep -qe ^${1}\$ || eval ${2}=${1}:\${${2}};}
+append() { [ -d "${1}" -a -n "${2}" ] || return; eval [ -z \"\${${2}}\" ] && export ${2}=${1} && return; set `readlink -f ${1}` ${2}; eval echo \${${2}} | tr : '\n' | grep -qe ^${1}\$ || eval ${2}=\${${2}}:${1};}
+remove() { [ -d "${1}" -a -n "${2}" ] || return; set `readlink -f ${1}` ${2}; eval ${2}=`eval echo \\\${${2}} | sed -e "s%\(^\|:\)${1}\(:\|\$\)%\\1\\2%g;s/::/:/g;s/^://;s/:\$//"`;}
 squash() { [ -n "${1}" ] || return; eval ${1}=`eval echo \\\${${1}} | tr : '\n' | xargs -I \{\} find \{\} -maxdepth 0 2> /dev/null | xargs echo | tr ' ' :`;}
 lrotate(){ [ -n "${1}" ] || return; eval ${1}=`eval echo \\\${${1}} | sed -e 's/^\([^:]\+\):\(.\+\)$/\2:\1/;s/::/:/g;s/^://;s/:$//'`;}
 rrotate(){ [ -n "${1}" ] || return; eval ${1}=`eval echo \\\${${1}} | sed -e 's/^\(.\+\):\([^:]\+\)$/\2:\1/;s/::/:/g;s/^://;s/:$//'`;}
