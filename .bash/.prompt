@@ -11,7 +11,7 @@ magenta=`tput setaf 5`
 yellow=`tput setaf 3`
 colors=(red green blue cyan magenta yellow)
 hostname_color=${colors[((0x`hostname | shasum - | grep -oe '[[:xdigit:]] '` % ${#colors[@]}))]}
-abbrev_host=`echo ${HOSTNAME} | sed -e 's/\(^.\{6\}\)...\+/\1../'`
+abbrev_host=`echo ${HOSTNAME} | sed -e 's/\(^.\{6\}\)...\{1,\}/\1../'`
 PROMPT_DIRTRIM=4
 prompt_command(){ [ $? = 0 ] && last_status=${green}${ok}${reset} || last_status=${red}${ng}${reset}$'\a';}
 PROMPT_COMMAND=prompt_command
