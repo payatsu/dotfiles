@@ -20,7 +20,13 @@ alias l="ls -Flhp${ls_opt}${color}"
 unset opt ls_opt
 
 alias lv='lv -c'
-alias p='ps xwwU${USER} ouser,pid,ppid,pcpu,pmem,vsz:7,rss:6,pri,ni,tname:5,stat,bsdstart,bsdtime,command'
+
+if [ "`uname -s`" = Darwin ]; then
+	alias p='ps xwwU${USER} ouser,pid,ppid,pcpu,pmem,vsz,rss,pri,ni,tty,stat,start,time,command'
+else
+	alias p='ps xwwU${USER} ouser,pid,ppid,pcpu,pmem,vsz:7,rss:6,pri,ni,tname:5,stat,bsdstart,bsdtime,command'
+fi
+
 alias pstree='pstree -Aahnp'
 alias pt='pt --nogroup'
 alias rg='rg --no-heading'
