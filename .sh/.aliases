@@ -73,7 +73,7 @@ git()
 	*) command git --no-pager ${git_opt} "$@";;
 	esac
 }
-od()
+[ `uname -s` = Darwin ] || od()
 {
 	local width=16
 	while getopts :w: arg; do
