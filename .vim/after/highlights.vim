@@ -7,11 +7,11 @@ highlight Todo term=standout cterm=bold ctermfg=Gray ctermbg=Yellow gui=bold gui
 highlight Grayout        ctermfg=Gray         ctermbg=NONE   cterm=NONE           guifg=Gray40      guibg=NONE   gui=NONE
 highlight Caption        ctermfg=NONE         ctermbg=NONE   cterm=bold,underline guifg=NONE        guibg=NONE   gui=bold,underline
 highlight Star           ctermfg=Yellow       ctermbg=NONE   cterm=bold           guifg=Yellow      guibg=NONE   gui=bold
-highlight Circle         ctermfg=Red          ctermbg=NONE   cterm=bold           guifg=Red         guibg=NONE   gui=bold
-highlight Square         ctermfg=LightMagenta ctermbg=NONE   cterm=bold           guifg=Violet      guibg=NONE   gui=bold
-highlight Diamond        ctermfg=Green        ctermbg=NONE   cterm=bold           guifg=Green       guibg=NONE   gui=bold
-highlight Triangle       ctermfg=DarkRed      ctermbg=NONE   cterm=bold           guifg=DarkRed     guibg=NONE   gui=bold
-highlight DTriangle      ctermfg=LightBlue    ctermbg=NONE   cterm=bold           guifg=LightBlue   guibg=NONE   gui=bold
+highlight Circle         ctermfg=Cyan         ctermbg=NONE   cterm=bold           guifg=Cyan        guibg=NONE   gui=bold
+highlight Square         ctermfg=Red          ctermbg=NONE   cterm=bold           guifg=Red         guibg=NONE   gui=bold
+highlight Diamond        ctermfg=Blue         ctermbg=NONE   cterm=bold           guifg=Blue        guibg=NONE   gui=bold
+highlight Triangle       ctermfg=Green        ctermbg=NONE   cterm=bold           guifg=Green       guibg=NONE   gui=bold
+highlight DTriangle      ctermfg=Red          ctermbg=NONE   cterm=bold           guifg=Red         guibg=NONE   gui=bold
 highlight EnclosedNumber ctermfg=Magenta      ctermbg=NONE   cterm=bold           guifg=DarkMagenta guibg=NONE   gui=bold
 highlight Attention      ctermfg=Black        ctermbg=Red    cterm=NONE           guifg=Black       guibg=Red    gui=bold
 highlight AttentionStr   ctermfg=Red          ctermbg=NONE   cterm=bold,underline guifg=Red         guibg=NONE   gui=bold,underline
