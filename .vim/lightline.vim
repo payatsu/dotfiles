@@ -10,6 +10,9 @@ try
 			\ },
 		\ 'separator': {'left': '', 'right': ''},
 		\ 'subseparator': {'left': '', 'right': ''},
+		\ 'component': {
+			\ 'percent': '%o - %p%%'
+		\ },
 		\ 'component_function': {
 			\ 'attribute': 'LightlineAttribute',
 			\ 'filename': 'LightlineFilename',
