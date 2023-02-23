@@ -52,7 +52,7 @@ highlight link Hi10 LightYellow
 call matchadd('Grayout'       , '前記\|該')
 call matchadd('Attention'     , 'A\.I\.')
 call matchadd('AttentionStr'  , 'A\.I\.\zs[^。]\+\(。\|$\)')
-call matchadd('Caption'       , '【[^】]*】\|『[^』]*』\|「[^」]*」\|＜[^＞]*＞\|〈[^〉]*〉\|《[^》]*》\|（[^）]*）\|｛[^｝]*｝\|［[^］]*］\|〔[^〕]*〕')
+call matchadd('Caption'       , '【[^】]*】\|『[^』]*』\|＜[^＞]*＞\|〈[^〉]*〉\|《[^》]*》\|［[^］]*］\|〔[^〕]*〕')
 call matchadd('Star'          , '☆\|★')
 call matchadd('Circle'        , '○\|●\|◎\|◯')
 call matchadd('Square'        , '□\|■')
