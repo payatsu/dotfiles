@@ -77,7 +77,7 @@ set browsedir=buffer
 set matchtime=1
 set updatetime=100
 set list
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+set listchars=eol:↲,tab::-»,space:␣,extends:»,precedes:«,nbsp:%
 set splitbelow
 set splitright
 set smarttab
