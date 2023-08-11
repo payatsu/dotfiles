@@ -77,7 +77,11 @@ set browsedir=buffer
 set matchtime=1
 set updatetime=100
 set list
-set listchars=eol:↲,tab::-»,space:␣,extends:»,precedes:«,nbsp:%
+if has('patch-8.1.0759')
+	set listchars=eol:↲,tab::-»,space:␣,extends:»,precedes:«,nbsp:%
+else
+	set listchars=eol:↲,tab:-»,space:␣,extends:»,precedes:«,nbsp:%
+endif
 set splitbelow
 set splitright
 set smarttab
