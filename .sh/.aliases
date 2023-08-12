@@ -61,7 +61,7 @@ eu()
 	esac
 }
 
-if which ${ZSH_VERSION:+-p} git > /dev/null && ! git config --global core.pager; then
+if which ${ZSH_VERSION:+-p} git > /dev/null && ! git config --global core.pager > /dev/null; then
 	git config --global core.pager ''
 	git config --global log.date iso-local
 	git config --global format.pretty 'tformat:%C(auto,yellow)%>|(13)%h%Creset %C(auto,blue)%ad%Creset [%C(auto,green)%<(8,trunc)%an%Creset] %C(auto)%s%Creset%C(auto)%d%Creset'
