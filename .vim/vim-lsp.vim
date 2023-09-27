@@ -52,4 +52,4 @@ let g:lsp_diagnostics_signs_delay = 100
 let g:lsp_document_code_action_signs_delay = 100
 let g:lsp_use_event_queue = 1
 let g:lsp_document_highlight_delay = 200
-let g:lsp_highlight_references_enabled = 1
+let g:lsp_document_highlight_enabled = 1
