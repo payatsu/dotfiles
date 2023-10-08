@@ -1,1 +1,1 @@
-set signcolumn=yes
+if ('+signcolumn') | set signcolumn=yes | endif
