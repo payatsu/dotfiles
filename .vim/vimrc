@@ -92,7 +92,11 @@ set clipboard=unnamed,unnamedplus
 if !has('nvim') | set clipboard+=autoselect | endif
 set virtualedit=block
 if $TERMCAP =~# ':\?Co#256:' | set t_Co=256 | endif
-if &viminfo !~# ',n' | let &viminfo .= ',n' . split(&runtimepath, ',')[0] . '/.cache/' . (has('nvim') ? 'nvim' : 'vim') . '/viminfo' | endif
+let s:viminfodir = split(&runtimepath, ',')[0] . '/.cache/' . (has('nvim') ? 'nvim' : 'vim')
+if &viminfo !~# ',n'
+	let &viminfo .= ',n' . s:viminfodir . '/viminfo'
+	if !isdirectory(s:viminfodir) | call mkdir(s:viminfodir, "p") | endif
+endif
 let &viewdir = split(&runtimepath, ',')[0] . '/.cache/' . (has('nvim') ? 'nvim' : 'vim') . '/view'
 if executable('rg')
 	set grepprg=rg\ --vimgrep\ $*\ /dev/null
