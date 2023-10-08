@@ -64,7 +64,8 @@ set wildoptions=tagfile
 set backspace=indent,eol,start
 set hidden
 set helplang=ja,en
-set nrformats=alpha,hex,bin
+set nrformats=alpha,hex
+if ('patch-7.4.1027') | set nrformats+=bin | endif
 set ignorecase
 set smartcase
 set incsearch
