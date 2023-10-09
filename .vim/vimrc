@@ -93,10 +93,9 @@ set clipboard=unnamed,unnamedplus
 if !has('nvim') | set clipboard+=autoselect | endif
 set virtualedit=block
 if $TERMCAP =~# ':\?Co#256:' | set t_Co=256 | endif
-if &viminfo !~# ',n'
-	let &viminfo .= ',n' . s:runtimepath_cache . '/viminfo'
-	if !isdirectory(s:runtimepath_cache) | call mkdir(s:runtimepath_cache, "p") | endif
-endif
+if !isdirectory(s:runtimepath_cache) | call mkdir(s:runtimepath_cache, "p") | endif
+let &directory = s:runtimepath_cache . "//"
+if &viminfo !~# ',n' | let &viminfo .= ',n' . s:runtimepath_cache . '/viminfo' | endif
 let &viewdir = s:runtimepath_cache . '/view'
 if executable('rg')
 	set grepprg=rg\ --vimgrep\ $*\ /dev/null
