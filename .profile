@@ -9,7 +9,7 @@ which ${ZSH_VERSION:+-p} vim > /dev/null 2>&1 && export EDITOR=vim || export EDI
 which less > /dev/null 2>&1 && export PAGER=less
 export LESS=MRS\#1
 which ${ZSH_VERSION:+-p} lesspipe > /dev/null 2>&1 && eval `lesspipe`
-export SCREENRC=${HOME}/.screen/screenrc
+export SCREENRC=${HOME}/.screenrc/screenrc
 export screen_so_color=${screen_so_color:-bW}
 export screen_caption_color=${screen_caption_color:-bW}
 export screen_hostname_color=${screen_hostname_color:-.b}
