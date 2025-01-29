@@ -1,3 +1,4 @@
+set auto-load local-gdbinit off
 set backtrace past-main on
 set history save on
 set history size 1000000
