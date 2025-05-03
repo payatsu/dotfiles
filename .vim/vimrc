@@ -12,6 +12,9 @@ setglobal ruler
 " show (partial) command in the last line of the screen
 setglobal showcmd
 
+" show always('2') status line
+setglobal laststatus=2
+
 " highlight the text line of the cursor
 set cursorline
 
@@ -26,6 +29,9 @@ endif
 if !exists('g:vscode')
 	setglobal ambiwidth=double
 endif
+
+" maximum number of tab pages to be opened by the -p command line argument or the ":tab all" command
+setglobal tabpagemax=50
 
 if has('eval')
 	let s:runtimepath_first = split(&runtimepath, ',')[0]
@@ -70,9 +76,6 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-set showtabline=1
-set tabpagemax=50
-set laststatus=2
 set shortmess+=mrwI
 set modeline
 set modelines=5
