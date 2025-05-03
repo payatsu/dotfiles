@@ -20,6 +20,10 @@ if exists('+belloff')
 	setglobal belloff=all
 endif
 
+if !exists('g:vscode')
+	setglobal ambiwidth=double
+endif
+
 if has('eval')
 	let s:runtimepath_first = split(&runtimepath, ',')[0]
 	let s:runtimepath_cache = s:runtimepath_first . '/.cache/' . (has('nvim') ? 'nvim' : 'vim')
@@ -65,7 +69,6 @@ if has('eval')
 endif
 set showtabline=1
 set tabpagemax=50
-if !exists('g:vscode') | set ambiwidth=double | endif
 set showcmd
 set laststatus=2
 set shortmess+=mrwI
