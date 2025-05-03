@@ -9,6 +9,9 @@ setglobal notitle
 " show the line and column number of the cursor position
 setglobal ruler
 
+" show (partial) command in the last line of the screen
+setglobal showcmd
+
 " highlight the text line of the cursor
 set cursorline
 
@@ -69,7 +72,6 @@ if has('eval')
 endif
 set showtabline=1
 set tabpagemax=50
-set showcmd
 set laststatus=2
 set shortmess+=mrwI
 set modeline
