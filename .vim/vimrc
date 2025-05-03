@@ -21,6 +21,9 @@ set cursorline
 " don't wrap
 set nowrap
 
+" enable modeline feature
+set modeline
+
 " disable bell for all events
 if exists('+belloff')
 	setglobal belloff=all
@@ -77,8 +80,6 @@ if has('eval')
 	endtry
 endif
 set shortmess+=mrwI
-set modeline
-set modelines=5
 set history=10000
 set scrolloff=0
 set nostartofline
