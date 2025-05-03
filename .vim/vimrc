@@ -1,4 +1,22 @@
 source ~/.exrc
+
+" don't set window title
+setglobal notitle
+
+" show the line and column number of the cursor position
+setglobal ruler
+
+" highlight the text line of the cursor
+set cursorline
+
+" don't wrap
+set nowrap
+
+" disable bell for all events
+if exists('+belloff')
+	setglobal belloff=all
+endif
+
 set nocompatible
 if has('eval')
 	let s:runtimepath_first = split(&runtimepath, ',')[0]
@@ -43,11 +61,6 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-set notitle
-set ruler
-set nowrap
-if exists('+belloff') | set belloff=all | endif
-set cursorline
 set showtabline=1
 set tabpagemax=50
 if !exists('g:vscode') | set ambiwidth=double | endif
