@@ -1,5 +1,8 @@
 source ~/.exrc
 
+" compatible option should be modified (set/reset) at the very start of vimrc
+setglobal nocompatible
+
 " don't set window title
 setglobal notitle
 
@@ -17,7 +20,6 @@ if exists('+belloff')
 	setglobal belloff=all
 endif
 
-set nocompatible
 if has('eval')
 	let s:runtimepath_first = split(&runtimepath, ',')[0]
 	let s:runtimepath_cache = s:runtimepath_first . '/.cache/' . (has('nvim') ? 'nvim' : 'vim')
