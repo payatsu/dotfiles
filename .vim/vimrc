@@ -85,6 +85,12 @@ map  :nohlsearch
 setglobal showfulltag
 setglobal tags=./tags;,./TAGS;,tags;,TAGS;
 
+" set clipboard behavior
+setglobal clipboard=unnamed,unnamedplus
+
+" set virtual editing behavior
+setglobal virtualedit=block
+
 " modify split window behavior
 setglobal splitbelow
 setglobal splitright
@@ -166,9 +172,6 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-set path=.,,/usr/local/include,/usr/include
-set clipboard=unnamed,unnamedplus
-set virtualedit=block
 if $TERMCAP =~# ':\?Co#256:' | set t_Co=256 | endif
 if !isdirectory(s:runtimepath_cache) | call mkdir(s:runtimepath_cache, "p") | endif
 let &directory = s:runtimepath_cache . "//"
