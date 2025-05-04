@@ -6,6 +6,9 @@ setglobal nocompatible
 " enable syntax highlighting
 syntax on
 
+" enable filetype detection with plugin and indent
+filetype plugin indent on
+
 " don't set window title
 setglobal notitle
 
@@ -143,6 +146,12 @@ if $TERMCAP =~# ':\?Co#256:'
 	set t_Co=256
 endif
 
+" option settings for diff mode
+setglobal diffopt+=vertical
+
+" option settings for Insert mode completion
+setglobal completeopt=menu,preview,longest
+
 " set grep program to use
 if executable('rg')
 	setglobal grepprg=rg\ --vimgrep\ $*\ /dev/null
@@ -224,10 +233,6 @@ function! MyTabLabel(n)
 	return printf('%5.20S', bufname(buflist[winnr - 1]))
 endfunction
 set tabline=%!MyTabLine()
-if has('filetype') | filetype plugin indent on | endif
-if has('insert_expand') | set completeopt=menu,preview,longest | endif
-if has('windows') && has('folding') | set fillchars=diff:\  | endif
-if has('diff') | set diffopt=filler,vertical,foldcolumn:2 | endif
 if has('autocmd')
 	augroup MkViewLoadView
 		autocmd!
