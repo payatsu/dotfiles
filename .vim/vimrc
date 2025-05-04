@@ -15,6 +15,11 @@ setglobal showcmd
 " shorten some types of messages
 setglobal shortmess+=mrwI
 
+" enhance command-line completion
+setglobal wildmenu
+setglobal wildoptions=fuzzy,pum,tagfile
+setglobal wildmode=longest,full
+
 " show always('2') status line
 setglobal laststatus=2
 
@@ -91,9 +96,6 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-set wildmenu
-set wildmode=longest,list:longest,list:full
-set wildoptions=tagfile
 set backspace=indent,eol,start
 set hidden
 set helplang=ja,en
