@@ -12,12 +12,13 @@ setglobal ruler
 " show (partial) command in the last line of the screen
 setglobal showcmd
 
+" show punctuation marks
 set list
-set listchars=eol:↲,space:␣,extends:»,precedes:«,nbsp:%
+set listchars=eol:↲,space:␣,leadmultispace:¦␣␣␣,extends:»,precedes:«,nbsp:%
 if has('patch-8.1.0759')
-	set listchars+=tab::-»
+	set listchars+=tab:¦･»
 else
-	set listchars+=tab:-»
+	set listchars+=tab:･»
 endif
 
 " shorten some types of messages
