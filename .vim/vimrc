@@ -38,6 +38,9 @@ setglobal hidden
 " modify backspace behavior in Insert mode
 setglobal backspace=indent,eol,start
 
+" preferred language for help
+setglobal helplang=ja
+
 " highlight the text line of the cursor
 set cursorline
 
@@ -102,8 +105,6 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-
-set helplang=ja,en
 set nrformats=alpha,hex
 if ('patch-7.4.1027') | set nrformats+=bin | endif
 set ignorecase
