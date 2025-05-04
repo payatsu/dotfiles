@@ -14,7 +14,10 @@ setglobal showcmd
 
 " show punctuation marks
 set list
-set listchars=eol:↲,space:␣,leadmultispace:¦␣␣␣,extends:»,precedes:«,nbsp:%
+set listchars=eol:↲,space:␣,extends:»,precedes:«,nbsp:%
+if has('patch-8.2.5066')
+	set listchars+=leadmultispace:¦␣␣␣
+endif
 if has('patch-8.1.0759')
 	set listchars+=tab:¦･»
 else
