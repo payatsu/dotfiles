@@ -32,6 +32,12 @@ setglobal scrolloff=0
 " keep the cursor in the same column (if possible) in some commands
 setglobal nostartofline
 
+" allow buffers to become hidden when it is abandoned
+setglobal hidden
+
+" modify backspace behavior in Insert mode
+setglobal backspace=indent,eol,start
+
 " highlight the text line of the cursor
 set cursorline
 
@@ -40,9 +46,6 @@ set nowrap
 
 " enable modeline feature
 set modeline
-
-" modify backspace behavior in Insert mode
-setglobal backspace=indent,eol,start
 
 " disable bell for all events
 if exists('+belloff')
@@ -99,7 +102,7 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-set hidden
+
 set helplang=ja,en
 set nrformats=alpha,hex
 if ('patch-7.4.1027') | set nrformats+=bin | endif
