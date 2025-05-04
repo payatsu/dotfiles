@@ -22,13 +22,13 @@ setglobal showcmd
 setglobal laststatus=2
 
 " highlight the text line of the cursor
-setglobal cursorline
+set cursorline
 
 " don't wrap
-setglobal nowrap
+set nowrap
 
 " show punctuation marks
-setglobal list
+set list
 setglobal listchars=eol:↲,space:␣,extends:»,precedes:«,nbsp:%
 if has('patch-8.2.5066')
 	setglobal listchars+=leadmultispace:¦␣␣␣
@@ -72,7 +72,7 @@ setglobal backspace=indent,eol,start
 setglobal smarttab
 
 " enable automatic C program indenting
-setglobal cindent
+set cindent
 
 " ignore case in search patterns, command-line completions, and so on
 setglobal ignorecase
@@ -102,7 +102,7 @@ setglobal splitbelow
 setglobal splitright
 
 " disable undo file
-setglobal noundofile
+set noundofile
 
 " disable backup file
 setglobal nobackup
@@ -115,12 +115,12 @@ setglobal matchtime=1
 setglobal helplang=ja
 
 " enable modeline feature
-setglobal modeline
+set modeline
 
 " define bases for CTRL-A and CTRL-X
-setglobal nrformats=alpha,hex,bin
+set nrformats=alpha,hex,bin
 if has('patch-9.1.0537')
-	setglobal nrformats+=blank
+	set nrformats+=blank
 endif
 
 " disable bell for all events
@@ -133,7 +133,7 @@ if !exists('g:vscode')
 endif
 
 " column width indicating folds
-setglobal foldcolumn=2
+set foldcolumn=2
 
 " enable mouse
 setglobal mouse+=ar
