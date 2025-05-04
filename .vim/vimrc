@@ -12,6 +12,9 @@ setglobal ruler
 " show (partial) command in the last line of the screen
 setglobal showcmd
 
+" shorten some types of messages
+setglobal shortmess+=mrwI
+
 " show always('2') status line
 setglobal laststatus=2
 
@@ -88,7 +91,6 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-set shortmess+=mrwI
 set wildmenu
 set wildmode=longest,list:longest,list:full
 set wildoptions=tagfile
