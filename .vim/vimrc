@@ -163,6 +163,18 @@ elseif executable('ag')
 	setglobal grepprg=ag\ $*\ /dev/null
 endif
 
+" set status line
+if has('eval')
+	function! FlagToStr(var, val)
+		if a:var
+			return a:val
+		else
+			return ''
+		endif
+	endfunction
+	setglobal statusline=%{printf('[%2d:%2s%1s][%3s%s\|%s][%1s]',bufnr('%'),FlagToStr(&readonly,'RO'),FlagToStr(&modified,'+'),&fileencoding,FlagToStr(&bomb,'(BOM)'),&fileformat,&filetype)}\ %<%F\ %h%wc:%05b(0x%04B)%=(%l,%3c%V)%3p%%\ of\ %L\ lines%a[%P]
+endif
+
 if has('eval')
 	let s:runtimepath_first = split(&runtimepath, ',')[0]
 	let s:runtimepath_cache = s:runtimepath_first . '/.cache/' . (has('nvim') ? 'nvim' : 'vim')
@@ -210,12 +222,7 @@ if !isdirectory(s:runtimepath_cache) | call mkdir(s:runtimepath_cache, "p") | en
 let &directory = s:runtimepath_cache . "//"
 if &viminfo !~# ',n' | let &viminfo .= ',n' . s:runtimepath_cache . '/viminfo' | endif
 let &viewdir = s:runtimepath_cache . '/view'
-if has('eval')
-	function! FlagToStr(var, val)
-		if a:var | return a:val | else | return '' | endif
-	endfunction
-	set statusline=%{printf('[%2d:%2s%1s][%3s%s\|%s][%1s]',bufnr('%'),FlagToStr(&readonly,'RO'),FlagToStr(&modified,'+'),&fileencoding,FlagToStr(&bomb,'(BOM)'),&fileformat,&filetype)}\ %<%F\ %h%wc:%05b(0x%04B)%=(%l,%3c%V)%3p%%\ of\ %L\ lines%a[%P]
-endif
+
 function! MyTabLine()
 	let s = ''
 	for i in range(tabpagenr('$'))
