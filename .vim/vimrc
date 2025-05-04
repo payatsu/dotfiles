@@ -38,6 +38,19 @@ setglobal hidden
 " modify backspace behavior in Insert mode
 setglobal backspace=indent,eol,start
 
+" ignore case in search patterns, command-line completions, and so on
+setglobal ignorecase
+
+" override the 'ignorecase' option if the search pattern contains upper case characters
+setglobal smartcase
+
+" enable incremental search
+setglobal incsearch
+
+" highlight all the search pattern matches
+setglobal hlsearch
+map  :nohlsearch
+
 " preferred language for help
 setglobal helplang=ja
 
@@ -108,11 +121,6 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-set ignorecase
-set smartcase
-set incsearch
-set hlsearch
-map  :nohl
 set noundofile
 set nobackup
 set nowritebackup
