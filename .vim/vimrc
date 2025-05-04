@@ -29,7 +29,13 @@ setglobal shortmess+=mrwI
 
 " enhance command-line completion
 setglobal wildmenu
-setglobal wildoptions=fuzzy,pum,tagfile
+setglobal wildoptions=tagfile
+if has('patch-8.2.4325')
+	setglobal wildoptions+=pum
+endif
+if has('patch-8.2.4463')
+	setglobal wildoptions+=fuzzy
+endif
 setglobal wildmode=longest,full
 
 " show always('2') status line
