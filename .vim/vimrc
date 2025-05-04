@@ -92,7 +92,10 @@ set nowrap
 set modeline
 
 " define bases for CTRL-A and CTRL-X
-set nrformats=alpha,hex,bin,blank
+set nrformats=alpha,hex,bin
+if has('patch-8.2.4325')
+	set nrformats+=blank
+endif
 
 " disable bell for all events
 if exists('+belloff')
