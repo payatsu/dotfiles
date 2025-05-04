@@ -93,7 +93,7 @@ set modeline
 
 " define bases for CTRL-A and CTRL-X
 set nrformats=alpha,hex,bin
-if has('patch-8.2.4325')
+if has('patch-9.1.0537')
 	set nrformats+=blank
 endif
 
