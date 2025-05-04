@@ -12,6 +12,14 @@ setglobal ruler
 " show (partial) command in the last line of the screen
 setglobal showcmd
 
+set list
+set listchars=eol:↲,space:␣,extends:»,precedes:«,nbsp:%
+if has('patch-8.1.0759')
+	set listchars+=tab::-»
+else
+	set listchars+=tab:-»
+endif
+
 " shorten some types of messages
 setglobal shortmess+=mrwI
 
@@ -131,10 +139,6 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-set list
-set listchars=eol:↲,extends:»,precedes:«,nbsp:%
-if has('patch-7.4.710') | set listchars+=space:␣ | endif
-if has('patch-8.1.0759') | set listchars+=tab::-» | else | set listchars+=tab:-» | endif
 set splitbelow
 set splitright
 set smarttab
