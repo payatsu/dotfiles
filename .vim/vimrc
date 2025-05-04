@@ -51,6 +51,13 @@ setglobal incsearch
 setglobal hlsearch
 map  :nohlsearch
 
+" disable undo file
+set noundofile
+
+" disable backup file
+setglobal nobackup
+setglobal nowritebackup
+
 " preferred language for help
 setglobal helplang=ja
 
@@ -121,9 +128,6 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-set noundofile
-set nobackup
-set nowritebackup
 set browsedir=buffer
 set matchtime=1
 set updatetime=100
