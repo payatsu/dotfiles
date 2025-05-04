@@ -143,7 +143,7 @@ setglobal mousemodel=popup_setpos
 setglobal tabpagemax=50
 
 if $TERMCAP =~# ':\?Co#256:'
-	set t_Co=256
+	setglobal t_Co=256
 endif
 
 " option settings for diff mode
@@ -173,6 +173,49 @@ if has('eval')
 		endif
 	endfunction
 	setglobal statusline=%{printf('[%2d:%2s%1s][%3s%s\|%s][%1s]',bufnr('%'),FlagToStr(&readonly,'RO'),FlagToStr(&modified,'+'),&fileencoding,FlagToStr(&bomb,'(BOM)'),&fileformat,&filetype)}\ %<%F\ %h%wc:%05b(0x%04B)%=(%l,%3c%V)%3p%%\ of\ %L\ lines%a[%P]
+endif
+
+" set tab line
+function! MyTabLabel(n)
+	let buflist = tabpagebuflist(a:n)
+	let winnr = tabpagewinnr(a:n)
+	return printf('%5.20S', bufname(buflist[winnr - 1]))
+endfunction
+function! MyTabLine()
+	let s = ''
+	for i in range(tabpagenr('$'))
+		if i + 1 == tabpagenr() | let s .= '%#TabLineSel#' | else | let s .= '%#TabLine#' | endif
+		let s .= '%' . (i + 1) . 'T'
+		let s .= ' [%{MyTabLabel(' . (i + 1) . ')}] '
+	endfor
+	let s .= '%#TabLineFill#%T'
+	if tabpagenr('$') > 1 | let s .= '%=%#TabLine#%999Xclose' | endif
+	return s
+endfunction
+setglobal tabline=%!MyTabLine()
+
+if has('autocmd')
+
+	" enable view
+	augroup MkViewLoadView
+		autocmd!
+		autocmd BufWinLeave ?* silent! mkview
+		autocmd BufWinEnter ?* silent! loadview
+	augroup END
+
+	" open quickfix window automatically
+	augroup QuickFixCmd
+		autocmd!
+		autocmd QuickFixCmdPost *grep* cwindow
+	augroup END
+
+	" highlight my favorite keywords
+	if has('syntax')
+		augroup MyHighLights
+			autocmd!
+			autocmd WinEnter * runtime after/highlights.vim
+		augroup END
+	endif
 endif
 
 if has('eval')
@@ -223,40 +266,6 @@ let &directory = s:runtimepath_cache . "//"
 if &viminfo !~# ',n' | let &viminfo .= ',n' . s:runtimepath_cache . '/viminfo' | endif
 let &viewdir = s:runtimepath_cache . '/view'
 
-function! MyTabLine()
-	let s = ''
-	for i in range(tabpagenr('$'))
-		if i + 1 == tabpagenr() | let s .= '%#TabLineSel#' | else | let s .= '%#TabLine#' | endif
-		let s .= '%' . (i + 1) . 'T'
-		let s .= ' [%{MyTabLabel(' . (i + 1) . ')}] '
-	endfor
-	let s .= '%#TabLineFill#%T'
-	if tabpagenr('$') > 1 | let s .= '%=%#TabLine#%999Xclose' | endif
-	return s
-endfunction
-function! MyTabLabel(n)
-	let buflist = tabpagebuflist(a:n)
-	let winnr = tabpagewinnr(a:n)
-	return printf('%5.20S', bufname(buflist[winnr - 1]))
-endfunction
-set tabline=%!MyTabLine()
-if has('autocmd')
-	augroup MkViewLoadView
-		autocmd!
-		autocmd BufWinLeave ?* silent! mkview
-		autocmd BufWinEnter ?* silent! loadview
-	augroup END
-	augroup QuickFixCmd
-		autocmd!
-		autocmd QuickFixCmdPost *grep* cwindow
-	augroup END
-	if has('syntax')
-		augroup MyHighLights
-			autocmd!
-			autocmd WinEnter * runtime after/highlights.vim
-		augroup END
-	endif
-endif
 runtime vim-quickhl.vim
 runtime vim-gitgutter.vim
 runtime vim-lsp.vim
