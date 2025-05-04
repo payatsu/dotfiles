@@ -81,6 +81,10 @@ setglobal incsearch
 setglobal hlsearch
 map  :nohlsearch
 
+" when completing a word in insert mode from the tags file, show both the tag name and a tidied-up form of the search pattern (if there is one) as possible matches
+setglobal showfulltag
+setglobal tags=./tags;,./TAGS;,tags;,TAGS;
+
 " modify split window behavior
 setglobal splitbelow
 setglobal splitright
@@ -162,8 +166,6 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-set showfulltag
-set tags=./.tags;,./.TAGS;,./tags;,./TAGS;,.tags;,.TAGS;,tags;,TAGS;
 set path=.,,/usr/local/include,/usr/include
 set clipboard=unnamed,unnamedplus
 set virtualedit=block
