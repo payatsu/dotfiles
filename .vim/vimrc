@@ -75,6 +75,10 @@ setglobal incsearch
 setglobal hlsearch
 map  :nohlsearch
 
+" modify split window behavior
+setglobal splitbelow
+setglobal splitright
+
 " disable undo file
 setglobal noundofile
 
@@ -152,8 +156,6 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-set splitbelow
-set splitright
 set smarttab
 set cindent
 set showfulltag
