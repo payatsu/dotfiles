@@ -70,7 +70,7 @@ setglobal hlsearch
 map  :nohlsearch
 
 " disable undo file
-set noundofile
+setglobal noundofile
 
 " disable backup file
 setglobal nobackup
@@ -83,18 +83,18 @@ setglobal matchtime=1
 setglobal helplang=ja
 
 " highlight the text line of the cursor
-set cursorline
+setglobal cursorline
 
 " don't wrap
-set nowrap
+setglobal nowrap
 
 " enable modeline feature
-set modeline
+setglobal modeline
 
 " define bases for CTRL-A and CTRL-X
-set nrformats=alpha,hex,bin
+setglobal nrformats=alpha,hex,bin
 if has('patch-9.1.0537')
-	set nrformats+=blank
+	setglobal nrformats+=blank
 endif
 
 " disable bell for all events
