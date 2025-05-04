@@ -3,6 +3,9 @@ source ~/.exrc
 " compatible option should be modified (set/reset) at the very start of vimrc
 setglobal nocompatible
 
+" enable syntax highlighting
+syntax on
+
 " don't set window title
 setglobal notitle
 
@@ -129,6 +132,10 @@ endif
 " column width indicating folds
 setglobal foldcolumn=2
 
+" enable mouse
+setglobal mouse+=ar
+setglobal mousemodel=popup_setpos
+
 " maximum number of tab pages to be opened by the -p command line argument or the ":tab all" command
 setglobal tabpagemax=50
 
@@ -217,8 +224,6 @@ function! MyTabLabel(n)
 	return printf('%5.20S', bufname(buflist[winnr - 1]))
 endfunction
 set tabline=%!MyTabLine()
-if has('mouse') | set mouse+=ar nomousehide mousemodel=popup_setpos | endif
-if has('syntax') | syntax on | endif
 if has('filetype') | filetype plugin indent on | endif
 if has('insert_expand') | set completeopt=menu,preview,longest | endif
 if has('windows') && has('folding') | set fillchars=diff:\  | endif

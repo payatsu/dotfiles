@@ -5,6 +5,7 @@ catch /E185:/
 endtry
 
 setglobal browsedir=buffer
+setglobal nomousehide
 
 highlight DiffAdd    guifg=black guibg=lightblue
 highlight DiffChange guifg=black guibg=lightyellow
