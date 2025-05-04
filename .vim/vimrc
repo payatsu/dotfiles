@@ -58,6 +58,9 @@ set noundofile
 setglobal nobackup
 setglobal nowritebackup
 
+" time to show the matching paren, when 'showmatch' is set
+setglobal matchtime=1
+
 " preferred language for help
 setglobal helplang=ja
 
@@ -128,9 +131,6 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-set browsedir=buffer
-set matchtime=1
-set updatetime=100
 set list
 set listchars=eol:↲,extends:»,precedes:«,nbsp:%
 if has('patch-7.4.710') | set listchars+=space:␣ | endif

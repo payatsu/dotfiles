@@ -3,6 +3,9 @@ try
 catch /E185:/
 	colorscheme evening
 endtry
+
+setglobal browsedir=buffer
+
 highlight DiffAdd    guifg=black guibg=lightblue
 highlight DiffChange guifg=black guibg=lightyellow
 highlight DiffDelete guifg=black guibg=lightred
