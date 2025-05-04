@@ -50,6 +50,9 @@ set nowrap
 " enable modeline feature
 set modeline
 
+" define bases for CTRL-A and CTRL-X
+set nrformats=alpha,hex,bin,blank
+
 " disable bell for all events
 if exists('+belloff')
 	setglobal belloff=all
@@ -105,8 +108,6 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-set nrformats=alpha,hex
-if ('patch-7.4.1027') | set nrformats+=bin | endif
 set ignorecase
 set smartcase
 set incsearch
