@@ -12,6 +12,15 @@ setglobal ruler
 " show (partial) command in the last line of the screen
 setglobal showcmd
 
+" show always('2') status line
+setglobal laststatus=2
+
+" highlight the text line of the cursor
+setglobal cursorline
+
+" don't wrap
+setglobal nowrap
+
 " show punctuation marks
 setglobal list
 setglobal listchars=eol:↲,space:␣,extends:»,precedes:«,nbsp:%
@@ -37,9 +46,6 @@ if has('patch-8.2.4463')
 	setglobal wildoptions+=fuzzy
 endif
 setglobal wildmode=longest,full
-
-" show always('2') status line
-setglobal laststatus=2
 
 " a history of ":" commands and a history of previous search patterns is remembered
 setglobal history=10000
@@ -81,12 +87,6 @@ setglobal matchtime=1
 
 " preferred language for help
 setglobal helplang=ja
-
-" highlight the text line of the cursor
-setglobal cursorline
-
-" don't wrap
-setglobal nowrap
 
 " enable modeline feature
 setglobal modeline
