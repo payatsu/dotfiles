@@ -13,15 +13,15 @@ setglobal ruler
 setglobal showcmd
 
 " show punctuation marks
-set list
-set listchars=eol:↲,space:␣,extends:»,precedes:«,nbsp:%
+setglobal list
+setglobal listchars=eol:↲,space:␣,extends:»,precedes:«,nbsp:%
 if has('patch-8.2.5066')
-	set listchars+=leadmultispace:¦␣␣␣
+	setglobal listchars+=leadmultispace:¦␣␣␣
 endif
 if has('patch-8.1.0759')
-	set listchars+=tab:¦･»
+	setglobal listchars+=tab:¦･»
 else
-	set listchars+=tab:･»
+	setglobal listchars+=tab:･»
 endif
 
 " shorten some types of messages
