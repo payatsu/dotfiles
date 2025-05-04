@@ -41,6 +41,9 @@ set nowrap
 " enable modeline feature
 set modeline
 
+" modify backspace behavior in Insert mode
+setglobal backspace=indent,eol,start
+
 " disable bell for all events
 if exists('+belloff')
 	setglobal belloff=all
@@ -96,7 +99,6 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-set backspace=indent,eol,start
 set hidden
 set helplang=ja,en
 set nrformats=alpha,hex
