@@ -9,6 +9,9 @@ syntax on
 " enable filetype detection with plugin and indent
 filetype plugin indent on
 
+" use highlight-guifg and highlight-guibg attributes in the terminal (thus using 24-bit color)
+setglobal termguicolors
+
 " don't set window title
 setglobal notitle
 
