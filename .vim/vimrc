@@ -108,6 +108,23 @@ set noundofile
 setglobal nobackup
 setglobal nowritebackup
 
+let s:runtimepath_first = split(&runtimepath, ',')[0]
+let s:runtimepath_cache = s:runtimepath_first . '/.cache/' . (has('nvim') ? 'nvim' : 'vim')
+
+" ensure the directory exists
+if !isdirectory(s:runtimepath_cache)
+	call mkdir(s:runtimepath_cache, "p")
+endif
+
+" list of directory names for the swap file
+let &g:directory = s:runtimepath_cache . "//"
+
+" the file name used for viminfo
+let &g:viminfofile = s:runtimepath_cache . '/viminfo'
+
+" name of the directory where to store files for :mkview
+let &g:viewdir = s:runtimepath_cache . '/view'
+
 " time to show the matching paren, when 'showmatch' is set
 setglobal matchtime=1
 
@@ -219,8 +236,6 @@ if has('autocmd')
 endif
 
 if has('eval')
-	let s:runtimepath_first = split(&runtimepath, ',')[0]
-	let s:runtimepath_cache = s:runtimepath_first . '/.cache/' . (has('nvim') ? 'nvim' : 'vim')
 	let s:runtimepath_dein = s:runtimepath_cache . '/repos/github.com/Shougo/dein.vim'
 	if &runtimepath !~# s:runtimepath_dein | execute 'set runtimepath+=' . s:runtimepath_dein | endif
 	try
@@ -265,10 +280,6 @@ if has('eval')
 	catch /E475.*/
 	endtry
 endif
-if !isdirectory(s:runtimepath_cache) | call mkdir(s:runtimepath_cache, "p") | endif
-let &directory = s:runtimepath_cache . "//"
-if &viminfo !~# ',n' | let &viminfo .= ',n' . s:runtimepath_cache . '/viminfo' | endif
-let &viewdir = s:runtimepath_cache . '/view'
 
 runtime vim-quickhl.vim
 runtime vim-lsp.vim
