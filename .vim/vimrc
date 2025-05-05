@@ -271,7 +271,6 @@ if &viminfo !~# ',n' | let &viminfo .= ',n' . s:runtimepath_cache . '/viminfo' |
 let &viewdir = s:runtimepath_cache . '/view'
 
 runtime vim-quickhl.vim
-runtime vim-gitgutter.vim
 runtime vim-lsp.vim
 runtime vim-vsnip.vim
 runtime lightline.vim

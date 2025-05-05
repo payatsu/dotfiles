@@ -23,11 +23,11 @@ if executable('pylsp')
 endif
 
 if executable('gopls')
-    autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'gopls',
-        \ 'cmd': {server_info->['gopls', '-remote=auto']},
-        \ 'allowlist': ['go', 'gomod', 'gohtmltmpl', 'gotexttmpl'],
-        \ })
+	autocmd User lsp_setup call lsp#register_server({
+		\ 'name': 'gopls',
+		\ 'cmd': {server_info->['gopls', '-remote=auto']},
+		\ 'allowlist': ['go', 'gomod', 'gohtmltmpl', 'gotexttmpl'],
+		\ })
 endif
 
 function! s:on_lsp_buffer_enabled() abort
