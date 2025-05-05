@@ -159,6 +159,9 @@ set foldcolumn=2
 setglobal mouse+=ar
 setglobal mousemodel=popup_setpos
 
+" name of the terminal type for which mouse codes are to be recognized
+setglobal ttymouse=sgr
+
 " maximum number of tab pages to be opened by the -p command line argument or the ":tab all" command
 setglobal tabpagemax=50
 
