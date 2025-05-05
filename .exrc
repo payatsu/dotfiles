@@ -7,11 +7,11 @@ set showmatch
 " if in Insert, Replace or Visual mode put a message on the last line
 set showmode
 
-" number of spaces that a <Tab> in the file counts for
-set tabstop=4
-
 " number of spaces to use for each step of (auto)indent
 set shiftwidth=4
+
+" use the appropriate number of spaces to insert a <Tab>
+set expandtab
 
 " sets the character encoding used inside Vim
 set encoding=utf-8
