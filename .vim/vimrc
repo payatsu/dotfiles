@@ -75,6 +75,11 @@ setglobal nostartofline
 " allow buffers to become hidden when it is abandoned
 setglobal hidden
 
+" shorten key receive timeout
+setglobal notimeout
+setglobal ttimeout
+setglobal timeoutlen=10
+
 " modify backspace behavior in Insert mode
 setglobal backspace=indent,eol,start
 
