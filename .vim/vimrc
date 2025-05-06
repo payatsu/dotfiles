@@ -30,6 +30,9 @@ set cursorline
 " don't wrap
 set nowrap
 
+" every wrapped line will continue visually indented (same amount of space as the beginning of that line)
+set breakindent
+
 " show punctuation marks
 set list
 setglobal listchars=eol:↲,space:␣,extends:»,precedes:«,nbsp:%
