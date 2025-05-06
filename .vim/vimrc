@@ -32,6 +32,8 @@ set nowrap
 
 " every wrapped line will continue visually indented (same amount of space as the beginning of that line)
 set breakindent
+set breakindentopt=shift:2,sbr
+setglobal showbreak=>
 
 " show punctuation marks
 set list
