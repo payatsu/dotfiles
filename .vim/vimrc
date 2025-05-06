@@ -45,6 +45,9 @@ else
 	setglobal listchars+=tab:･»
 endif
 
+" characters to fill the statuslines, vertical separators and special lines in the window
+setglobal fillchars=vert:\ 
+
 " shorten some types of messages
 setglobal shortmess+=mrwI
 
