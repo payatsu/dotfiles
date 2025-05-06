@@ -56,6 +56,10 @@ if has('patch-8.2.4463')
 endif
 setglobal wildmode=longest,full
 
+" when a file has been detected to have been changed outside of Vim and
+" it has not been changed inside of Vim, automatically read it again
+setglobal autoread
+
 " a history of ":" commands and a history of previous search patterns is remembered
 setglobal history=10000
 
