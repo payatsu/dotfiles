@@ -84,6 +84,9 @@ setglobal smarttab
 " enable automatic C program indenting
 set cindent
 
+" copy the structure of the existing lines indent when autoindenting a new line
+set copyindent
+
 " ignore case in search patterns, command-line completions, and so on
 setglobal ignorecase
 
