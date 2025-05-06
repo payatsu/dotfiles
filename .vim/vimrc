@@ -122,9 +122,6 @@ setglobal virtualedit=block
 setglobal splitbelow
 setglobal splitright
 
-" disable undo file
-set noundofile
-
 " disable backup file
 setglobal nobackup
 setglobal nowritebackup
@@ -139,6 +136,12 @@ endif
 
 " list of directory names for the swap file
 let &g:directory = s:runtimepath_cache . "//"
+
+" disable undo file
+set undofile
+
+" list of directory names for undo files, separated with commas
+let &g:undodir = s:runtimepath_cache . "//"
 
 " the file name used for viminfo
 let &g:viminfofile = s:runtimepath_cache . '/viminfo'
