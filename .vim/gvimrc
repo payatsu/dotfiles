@@ -1,7 +1,7 @@
 try
-	colorscheme molokai
+    colorscheme molokai
 catch /E185:/
-	colorscheme evening
+    colorscheme evening
 endtry
 
 setglobal browsedir=buffer
@@ -12,37 +12,37 @@ highlight DiffChange guifg=black guibg=lightyellow
 highlight DiffDelete guifg=black guibg=lightred
 highlight DiffText   guifg=black guibg=violet
 " function! GuiTabLabel()
-" 	let label = ''
-" 	let bufnrlist = tabpagebuflist(v:lnum)
-" 	for bufnr in bufnrlist
-" 		if getbufvar(bufnr, "&modified")
-" 			let label = '[+]'
-" 			break
-" 		endif
-" 	endfor
-" 	if label != '' | let label .= ' ' | endif
-" 	return label . bufname(bufnrlist[tabpagewinnr(v:lnum) - 1])
+"     let label = ''
+"     let bufnrlist = tabpagebuflist(v:lnum)
+"     for bufnr in bufnrlist
+"         if getbufvar(bufnr, "&modified")
+"             let label = '[+]'
+"             break
+"         endif
+"     endfor
+"     if label != '' | let label .= ' ' | endif
+"     return label . bufname(bufnrlist[tabpagewinnr(v:lnum) - 1])
 " endfunction
 " set guitablabel=%{GuiTabLabel()}
 set guitablabel=[%n]\ %-10.30F
 set guioptions+=aci
 let g:guifonts='Ricty:h14,MS_Gothic:h14'
 if has('win32')
-	set guioptions-=mrLT
-	if !has('nvim') | set renderoptions=type:directx,renmode:5 | endif
-	augroup SetGuiFonts
-		autocmd!
-		autocmd GUIEnter *     let &guifont = g:guifonts
-"		autocmd GUIEnter *.tmp let &guifont = 'うずらフォント:h14,' . g:guifonts
-	augroup END
-	augroup SetTransparency
-		autocmd!
-		autocmd FocusGained * set transparency=230
-		autocmd FocusLost   * set transparency=204
-	augroup END
+    set guioptions-=mrLT
+    if !has('nvim') | set renderoptions=type:directx,renmode:5 | endif
+    augroup SetGuiFonts
+        autocmd!
+        autocmd GUIEnter *     let &guifont = g:guifonts
+"        autocmd GUIEnter *.tmp let &guifont = 'うずらフォント:h14,' . g:guifonts
+    augroup END
+    augroup SetTransparency
+        autocmd!
+        autocmd FocusGained * set transparency=230
+        autocmd FocusLost   * set transparency=204
+    augroup END
 else
-	set guioptions-=mrLtT
-	let &guifont = substitute(g:guifonts, ':h', '\ ', 'g')
+    set guioptions-=mrLtT
+    let &guifont = substitute(g:guifonts, ':h', '\ ', 'g')
 endif
 set columns=120
 set lines=30

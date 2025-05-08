@@ -23,7 +23,7 @@ prepend ${HOME}/.local/bin PATH
 prepend ${HOME}/.go GOPATH
 export GOPATH
 for p in `echo ${GOPATH} | tr : ' '`; do
-	append ${p}/bin PATH
+    append ${p}/bin PATH
 done
 prepend ${HOME}/.cargo/bin PATH
 

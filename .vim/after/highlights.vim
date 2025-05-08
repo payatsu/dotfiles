@@ -1,5 +1,5 @@
 if exists('w:my_highlights_already_loaded')
-	finish
+    finish
 endif
 
 highlight Todo term=standout cterm=bold ctermfg=Gray ctermbg=Yellow gui=bold guifg=Gray30 guibg=Yellow
