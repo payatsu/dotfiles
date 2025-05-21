@@ -2,7 +2,7 @@
 
 [ -f ${HOME}/.sh/.profile.local.pre ] && . ${HOME}/.sh/.profile.local.pre
 
-. ${HOME}/.sh/.functions
+. ${HOME}/.sh/functions.sh
 
 ulimit -c unlimited
 which ${ZSH_VERSION:+-p} vim > /dev/null 2>&1 && export EDITOR=vim || export EDITOR=vi

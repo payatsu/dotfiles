@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BASHDOTDIR=${HOME}/.bash
-. ${HOME}/.sh/.functions
+. ${HOME}/.sh/functions
 [ -f ${BASHDOTDIR}/.bashrc.local.pre ] && . ${BASHDOTDIR}/.bashrc.local.pre
 . ${BASHDOTDIR}/.misc
 . ${HOME}/.sh/term.sh
