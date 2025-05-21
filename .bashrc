@@ -3,7 +3,7 @@
 BASHDOTDIR=${HOME}/.bash
 . ${HOME}/.sh/functions
 [ -f ${BASHDOTDIR}/.bashrc.local.pre ] && . ${BASHDOTDIR}/.bashrc.local.pre
-. ${BASHDOTDIR}/.misc
+. ${BASHDOTDIR}/misc.bash
 . ${HOME}/.sh/term.sh
 . ${BASHDOTDIR}/.prompt
 . ${HOME}/.sh/aliases.sh
