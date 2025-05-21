@@ -5,6 +5,6 @@ BASHDOTDIR=${HOME}/.bash
 [ -f ${BASHDOTDIR}/.bashrc.local.pre ] && . ${BASHDOTDIR}/.bashrc.local.pre
 . ${BASHDOTDIR}/misc.bash
 . ${HOME}/.sh/term.sh
-. ${BASHDOTDIR}/.prompt
+. ${BASHDOTDIR}/prompt.bash
 . ${HOME}/.sh/aliases.sh
 [ -f ${BASHDOTDIR}/.bashrc.local.post ] && . ${BASHDOTDIR}/.bashrc.local.post || true
