@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 setopt auto_cd
 setopt auto_pushd
 setopt chase_dots
@@ -35,7 +33,11 @@ HISTFILE=${ZDOTDIR}/.zsh_history
 HISTSIZE=100000
 SAVEHIST=500000
 WORDCHARS=''
+
 zle_highlight=(isearch:underline,bold region:standout,fg=blue special:bold,underline,fg=red suffix:bold paste:bold,fg=green)
+
 [ -r /etc/zsh_command_not_found ] && . /etc/zsh_command_not_found
+
 alias run-help > /dev/null 2>&1 && unalias run-help
+
 add-zsh-hook chpwd chpwd_recent_dirs
