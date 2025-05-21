@@ -1,7 +1,5 @@
-#!/bin/zsh
-
 ZDOTDIR=${HOME}/.zsh
-if [[ -o rcs ]]; then
+
+if [[ -o RCS ]]; then
     . ${HOME}/.sh/.functions
 fi
-[ -f ${ZDOTDIR}/.zshenv.local ] && . ${ZDOTDIR}/.zshenv.local || true
