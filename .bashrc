@@ -1,6 +1,6 @@
 BASHDOTDIR=${HOME}/.bash
 
-. ${HOME}/.sh/functions
+. ${HOME}/.sh/functions.sh
 
 for f in ${BASHDOTDIR}/*.bash; do
     . ${f}
