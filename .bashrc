@@ -6,5 +6,5 @@ BASHDOTDIR=${HOME}/.bash
 . ${BASHDOTDIR}/.misc
 . ${HOME}/.sh/.term
 . ${BASHDOTDIR}/.prompt
-. ${HOME}/.sh/.aliases
+. ${HOME}/.sh/aliases.sh
 [ -f ${BASHDOTDIR}/.bashrc.local.post ] && . ${BASHDOTDIR}/.bashrc.local.post || true

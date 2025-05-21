@@ -1,6 +1,5 @@
-#!/bin/zsh
+. ${HOME}/.sh/aliases.sh
 
-. ${HOME}/.sh/.aliases
 # alias ctags='ctags --declarations --defines --globals --members --typedefs --typedefs-and-c++'
 alias history='history -i'
 alias -s txt=view
