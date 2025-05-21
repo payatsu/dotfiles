@@ -1,0 +1,1 @@
+. ${HOME}/.sh/aliases.sh

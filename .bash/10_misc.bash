@@ -1,5 +1,3 @@
-#!/bin/bash
-
 HISTCONTROL=ignoredups
 HISTFILE=${BASHDOTDIR}/.bash_history
 HISTFILESIZE=500000
