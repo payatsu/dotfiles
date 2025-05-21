@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ${HOME}/.sh/.prompt
+. ${HOME}/.sh/prompt.sh
 bold=`tput bold`
 reset=`tput sgr0`
 red=`tput setaf 1`
