@@ -2,7 +2,7 @@
 
 colors=(red green blue cyan magenta yellow)
 
-hostname_color=${colors[((0x`hostname | shasum - | grep -oe '[[:xdigit:]] '` % ${#colors} + 1))]}
+hostname_color=${colors[((0x`hostname | sha256sum - | grep -oe '[[:xdigit:]] '` % ${#colors} + 1))]}
 
 vcs_info='%B%10<..<${vcs_info_msg_0_/${HOME}/~}%<<%b(${vcs_info_msg_1_}):%B%F{green}${vcs_info_msg_2_}%f%b:%B%10<..<${vcs_info_msg_3_}%<<%b[${vcs_info_msg_4_:- ${ambiguous_padding}}${vcs_info_msg_5_:- ${ambiguous_padding}}]${vcs_info_msg_6_}${vcs_info_msg_7_}'
 custom_prompt='%B%n%b@%B%8>..>%F{${hostname_color}}%m%f%>>%b[%B%(?,%F{green}${ok}%f,%F{red}${ng}%f${bell})%b](%B%F{magenta}${his}%f%b:%B%h%b/%B%F{cyan}${job}%f%b:%B%1(j.%U%F{red}.)%j%1(j.%f%u.)%b/%B%F{yellow}${lvl}%f%b:%B%L%b):%(V"'${vcs_info}'"%B%20<..<%~%<<%b)%B${mps}%b
