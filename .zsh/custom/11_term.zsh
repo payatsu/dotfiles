@@ -1,7 +1,7 @@
-#!/bin/zsh
+. ${HOME}/.sh/term.sh
 
-. ${HOME}/.sh/.term
 [ "${EMACS}" = t ] && unsetopt zle
+
 set_window_title()
 {
     [ "${set_window_title}" = deactivated ] && return
@@ -16,6 +16,7 @@ set_window_title()
 }
 add-zsh-hook preexec set_window_title
 add-zsh-hook precmd set_window_title
+
 title()
 {
     case ${1} in

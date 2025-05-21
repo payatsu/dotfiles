@@ -4,7 +4,7 @@ BASHDOTDIR=${HOME}/.bash
 . ${HOME}/.sh/.functions
 [ -f ${BASHDOTDIR}/.bashrc.local.pre ] && . ${BASHDOTDIR}/.bashrc.local.pre
 . ${BASHDOTDIR}/.misc
-. ${HOME}/.sh/.term
+. ${HOME}/.sh/term.sh
 . ${BASHDOTDIR}/.prompt
 . ${HOME}/.sh/aliases.sh
 [ -f ${BASHDOTDIR}/.bashrc.local.post ] && . ${BASHDOTDIR}/.bashrc.local.post || true
