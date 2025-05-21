@@ -1,6 +1,4 @@
-#!/bin/zsh
-
-[ -f ${ZDOTDIR}/.zshrc.local.pre ] && . ${ZDOTDIR}/.zshrc.local.pre
+[ -f ${ZDOTDIR}/custom/zshrc.local.pre ] && . ${ZDOTDIR}/custom/zshrc.local.pre
 
 autoload -Uz compinit; compinit
 autoload -Uz add-zsh-hook
@@ -18,4 +16,4 @@ for f in ${ZDOTDIR}/custom/*.zsh; do
 done
 unset f
 
-[ -f ${ZDOTDIR}/.zshrc.local.post ] && . ${ZDOTDIR}/.zshrc.local.post || true
+[ -f ${ZDOTDIR}/custom/zshrc.local.post ] && . ${ZDOTDIR}/custom/zshrc.local.post || true
