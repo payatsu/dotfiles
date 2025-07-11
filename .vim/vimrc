@@ -139,6 +139,9 @@ endif
 " list of directory names for the swap file
 let &g:directory = s:runtimepath_cache . "//"
 
+" if this many milliseconds nothing is typed the swap file will be written to disk
+setglobal updatetime=1000
+
 " disable undo file
 set undofile
 
