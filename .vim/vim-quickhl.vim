@@ -23,5 +23,7 @@ let g:quickhl_manual_colors = [
     \ "cterm=bold ctermfg=7  ctermbg=45  gui=bold guifg=#ffffff guibg=#cc0099",
     \ "cterm=bold ctermfg=7  ctermbg=16  gui=bold guifg=#ffffff guibg=#99cc00",
     \ "cterm=bold ctermfg=7  ctermbg=50  gui=bold guifg=#ffffff guibg=#0099cc",
-    \ "cterm=bold ctermfg=7  ctermbg=56  gui=bold guifg=#000000 guibg=#a0b0c0",
+    \ "cterm=bold ctermfg=7  ctermbg=56  gui=bold guifg=#333333 guibg=#ffcc00",
+    \ "cterm=bold ctermfg=7  ctermbg=56  gui=bold guifg=#333333 guibg=#00ffcc",
+    \ "cterm=bold ctermfg=7  ctermbg=56  gui=bold guifg=#333333 guibg=#cc00ff",
     \ ]
