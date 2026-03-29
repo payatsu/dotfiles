@@ -51,7 +51,7 @@ endif
 setglobal fillchars=vert:\ 
 
 " shorten some types of messages
-setglobal shortmess+=mrwI
+setglobal shortmess=aoOtTI
 
 " enhance command-line completion
 setglobal wildmenu
