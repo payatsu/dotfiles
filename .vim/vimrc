@@ -186,7 +186,9 @@ setglobal mouse+=ar
 setglobal mousemodel=popup_setpos
 
 " name of the terminal type for which mouse codes are to be recognized
-setglobal ttymouse=sgr
+if !has('nvim')
+    setglobal ttymouse=sgr
+endif
 
 " maximum number of tab pages to be opened by the -p command line argument or the ":tab all" command
 setglobal tabpagemax=50
